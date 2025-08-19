@@ -34,9 +34,19 @@
     "href": "index.html#how-to-use",
     "title": "pysureau",
     "section": "How to use",
-    "text": "How to use\n\n\n\n\n\n    %%{init:{'themeVariables': {'primaryBorderColor': '#00758f'}}}%%\n    flowchart TD;\n        compute_theta_at_given_p_soil_camp--&gt;create_vegetation_parameters;\n        create_stand_parameters--&gt;create_vegetation_parameters;\n        create_modeling_options--&gt;create_vegetation_parameters;\n        convert_f_to_v--&gt;create_soil_paramters;\n        convert_f_to_v--&gt;create_vegetation_parameters;\n        read_vegetation_file--&gt;create_vegetation_parameters;\n\n        \n        create_soil_paramters--&gt;create_vegetation_parameters;\n        \n        create_modeling_options--&gt;create_climate_data;\n        create_simulation_parameters--&gt;create_climate_data;\n        \n\n        create_modeling_options--&gt;create_soil_paramters;\n        read_soil_file--&gt;create_soil_paramters;\n        compute_theta_at_given_p_soil_camp--&gt;create_soil_paramters;\n        compute_theta_at_given_psoil--&gt;create_soil_paramters;\n        compute_theta_at_given_psoil--&gt;create_vegetation_parameters;\n        \n        \n\n        \n\n        %% Blue color boxes -----------------------------------------------------\n\n        %%style create_climate_data fill:#00758f\n        %%style create_modeling_options fill:#00758f\n        %%style create_simulation_parameters fill:#00758f, lineColor:#00758f\n        %%style create_soil_paramters fill:#00758f\n\n\n        %% Red color boxes ------------------------------------------------------\n        %%style compute_theta_at_given_psoil fill:#880808",
+    "text": "How to use\n\nRun pysureau_init(“path/to/folder”)",
     "crumbs": [
       "pysureau"
+    ]
+  },
+  {
+    "objectID": "pysureau_utils.html",
+    "href": "pysureau_utils.html",
+    "title": "pysureau utils functions",
+    "section": "",
+    "text": "source\n\npysureau_init\n\n pysureau_init (path:Optional[str]=None)\n\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\npath\nOptional\nNone\nPath where the pysureau folders and files will be stored\n\n\n\n\nExample: \n\npysureau_init(\"/tmp\")\n\npysureau project created at /tmp/pysureau_project_a50b521e-dce3-4c4f-8a5f-04304a83f93a\n\n\n\ndatetime.today().strftime('%d%m%y%H%M')\n\n'1908251727'",
+    "crumbs": [
+      "pysureau utils functions"
     ]
   }
 ]

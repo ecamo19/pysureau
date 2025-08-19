@@ -16,42 +16,4 @@ pip install pysureau
 
 ## How to use
 
-``` mermaid
-    %%{init:{'themeVariables': {'primaryBorderColor': '#00758f'}}}%%
-    flowchart TD;
-        compute_theta_at_given_p_soil_camp-->create_vegetation_parameters;
-        create_stand_parameters-->create_vegetation_parameters;
-        create_modeling_options-->create_vegetation_parameters;
-        convert_f_to_v-->create_soil_paramters;
-        convert_f_to_v-->create_vegetation_parameters;
-        read_vegetation_file-->create_vegetation_parameters;
-
-        
-        create_soil_paramters-->create_vegetation_parameters;
-        
-        create_modeling_options-->create_climate_data;
-        create_simulation_parameters-->create_climate_data;
-        
-
-        create_modeling_options-->create_soil_paramters;
-        read_soil_file-->create_soil_paramters;
-        compute_theta_at_given_p_soil_camp-->create_soil_paramters;
-        compute_theta_at_given_psoil-->create_soil_paramters;
-        compute_theta_at_given_psoil-->create_vegetation_parameters;
-        
-        
-
-        
-
-        %% Blue color boxes -----------------------------------------------------
-
-        %%style create_climate_data fill:#00758f
-        %%style create_modeling_options fill:#00758f
-        %%style create_simulation_parameters fill:#00758f, lineColor:#00758f
-        %%style create_soil_paramters fill:#00758f
-
-
-        %% Red color boxes ------------------------------------------------------
-        %%style compute_theta_at_given_psoil fill:#880808
-
-```
+1)  Run pysureau_init(“path/to/folder”)

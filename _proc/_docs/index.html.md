@@ -20,57 +20,5 @@ pip install pysureau
 
 ## How to use
 
-
-::::::{.cell layout-align="default"}
-
-:::::{.cell-output-display}
-
-::::{}
-`<figure class=''>`{=html}
-
-:::{}
-
-<pre class="mermaid mermaid-js">    %%{init:{&#39;themeVariables&#39;: {&#39;primaryBorderColor&#39;: &#39;#00758f&#39;}}}%%
-    flowchart TD;
-        compute_theta_at_given_p_soil_camp--&gt;create_vegetation_parameters;
-        create_stand_parameters--&gt;create_vegetation_parameters;
-        create_modeling_options--&gt;create_vegetation_parameters;
-        convert_f_to_v--&gt;create_soil_paramters;
-        convert_f_to_v--&gt;create_vegetation_parameters;
-        read_vegetation_file--&gt;create_vegetation_parameters;
-
-        
-        create_soil_paramters--&gt;create_vegetation_parameters;
-        
-        create_modeling_options--&gt;create_climate_data;
-        create_simulation_parameters--&gt;create_climate_data;
-        
-
-        create_modeling_options--&gt;create_soil_paramters;
-        read_soil_file--&gt;create_soil_paramters;
-        compute_theta_at_given_p_soil_camp--&gt;create_soil_paramters;
-        compute_theta_at_given_psoil--&gt;create_soil_paramters;
-        compute_theta_at_given_psoil--&gt;create_vegetation_parameters;
-        
-        
-
-        
-
-        %% Blue color boxes -----------------------------------------------------
-
-        %%style create_climate_data fill:#00758f
-        %%style create_modeling_options fill:#00758f
-        %%style create_simulation_parameters fill:#00758f, lineColor:#00758f
-        %%style create_soil_paramters fill:#00758f
-
-
-        %% Red color boxes ------------------------------------------------------
-        %%style compute_theta_at_given_psoil fill:#880808
-
-</pre>
-:::
-`</figure>`{=html}
-::::
-:::::
-::::::
+1) Run pysureau_init("path/to/folder")
 

@@ -11,6 +11,7 @@ nbdev = ">=2.4.5,<3"
 quarto = ">=1.7.33,<2"
 python = ">=3.10"
 jupyterlab = ">=4.4.6,<5"
+fastcore = ">=1.8.7,<2"
 
 [tasks]
 

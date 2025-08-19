@@ -5,4 +5,6 @@ d = { 'settings': { 'branch': 'master',
                 'doc_host': 'https://ecamo19.github.io',
                 'git_url': 'https://github.com/ecamo19/pysureau',
                 'lib_path': 'pysureau'},
-  'syms': {'pysureau.core': {'pysureau.core.foo': ('core.html#foo', 'pysureau/core.py')}}}
+  'syms': { 'pysureau.core': {'pysureau.core.foo': ('core.html#foo', 'pysureau/core.py')},
+            'pysureau.pysureau_utils': { 'pysureau.pysureau_utils.compute_k_soil_camp': ( 'pysureau_utils.html#compute_k_soil_camp',
+                                                                                          'pysureau/pysureau_utils.py')}}}

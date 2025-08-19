@@ -40,62 +40,52 @@ Dynamic: summary
 This file will become your README and also the index of your
 documentation.
 
-## Developer Guide
+## Install
 
-If you are new to using `nbdev` here are some useful pointers to get you
-started.
-
-### Install pysureau in Development mode
+[Code](https://cuddly-train-pg45gq96vww26wgv.github.dev/)
 
 ``` sh
-# make sure pysureau package is installed in development mode
-$ pip install -e .
-
-# make changes under nbs/ directory
-# ...
-
-# compile to have changes apply to pysureau
-$ nbdev_prepare
+pip install pysureau
 ```
-
-## Usage
-
-### Installation
-
-Install latest from the GitHub
-[repository](https://github.com/ecamo19/pysureau):
-
-``` sh
-$ pip install git+https://github.com/ecamo19/pysureau.git
-```
-
-or from [conda](https://anaconda.org/ecamo19/pysureau)
-
-``` sh
-$ conda install -c ecamo19 pysureau
-```
-
-or from [pypi](https://pypi.org/project/pysureau/)
-
-``` sh
-$ pip install pysureau
-```
-
-### Documentation
-
-Documentation can be found hosted on this GitHub
-[repository](https://github.com/ecamo19/pysureau)’s
-[pages](https://ecamo19.github.io/pysureau/). Additionally you can find
-package manager specific guidelines on
-[conda](https://anaconda.org/ecamo19/pysureau) and
-[pypi](https://pypi.org/project/pysureau/) respectively.
 
 ## How to use
 
-Fill me in please! Don’t forget code examples:
+``` mermaid
+    %%{init:{'themeVariables': {'primaryBorderColor': '#00758f'}}}%%
+    flowchart TD;
+        compute_theta_at_given_p_soil_camp-->create_vegetation_parameters;
+        create_stand_parameters-->create_vegetation_parameters;
+        create_modeling_options-->create_vegetation_parameters;
+        convert_f_to_v-->create_soil_paramters;
+        convert_f_to_v-->create_vegetation_parameters;
+        read_vegetation_file-->create_vegetation_parameters;
 
-``` python
-1+1
+        
+        create_soil_paramters-->create_vegetation_parameters;
+        
+        create_modeling_options-->create_climate_data;
+        create_simulation_parameters-->create_climate_data;
+        
+
+        create_modeling_options-->create_soil_paramters;
+        read_soil_file-->create_soil_paramters;
+        compute_theta_at_given_p_soil_camp-->create_soil_paramters;
+        compute_theta_at_given_psoil-->create_soil_paramters;
+        compute_theta_at_given_psoil-->create_vegetation_parameters;
+        
+        
+
+        
+
+        %% Blue color boxes -----------------------------------------------------
+
+        %%style create_climate_data fill:#00758f
+        %%style create_modeling_options fill:#00758f
+        %%style create_simulation_parameters fill:#00758f, lineColor:#00758f
+        %%style create_soil_paramters fill:#00758f
+
+
+        %% Red color boxes ------------------------------------------------------
+        %%style compute_theta_at_given_psoil fill:#880808
+
 ```
-
-    2

@@ -10,5 +10,9 @@ ruff = ">=0.12.9,<0.13"
 nbdev = ">=2.4.5,<3"
 quarto = ">=1.7.33,<2"
 python = ">=3.10"
+jupyterlab = ">=4.4.6,<5"
 
 [tasks]
+
+[pypi-dependencies]
+jupyterlab-quarto = ">=0.3.5, <0.4"

@@ -10,6 +10,8 @@ title: core
 
 ---
 
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/core.py#L9){target="_blank" style="float:right; font-size:smaller"}
+
 ### foo
 
 >      foo ()

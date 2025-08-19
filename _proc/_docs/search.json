@@ -4,9 +4,39 @@
     "href": "core.html",
     "title": "core",
     "section": "",
-    "text": "foo\n\n foo ()",
+    "text": "source\n\nfoo\n\n foo ()",
     "crumbs": [
       "core"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "pysureau",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation.",
+    "crumbs": [
+      "pysureau"
+    ]
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "pysureau",
+    "section": "Install",
+    "text": "Install\nCode\npip install pysureau",
+    "crumbs": [
+      "pysureau"
+    ]
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "pysureau",
+    "section": "How to use",
+    "text": "How to use\n\n\n\n\n\n    %%{init:{'themeVariables': {'primaryBorderColor': '#00758f'}}}%%\n    flowchart TD;\n        compute_theta_at_given_p_soil_camp--&gt;create_vegetation_parameters;\n        create_stand_parameters--&gt;create_vegetation_parameters;\n        create_modeling_options--&gt;create_vegetation_parameters;\n        convert_f_to_v--&gt;create_soil_paramters;\n        convert_f_to_v--&gt;create_vegetation_parameters;\n        read_vegetation_file--&gt;create_vegetation_parameters;\n\n        \n        create_soil_paramters--&gt;create_vegetation_parameters;\n        \n        create_modeling_options--&gt;create_climate_data;\n        create_simulation_parameters--&gt;create_climate_data;\n        \n\n        create_modeling_options--&gt;create_soil_paramters;\n        read_soil_file--&gt;create_soil_paramters;\n        compute_theta_at_given_p_soil_camp--&gt;create_soil_paramters;\n        compute_theta_at_given_psoil--&gt;create_soil_paramters;\n        compute_theta_at_given_psoil--&gt;create_vegetation_parameters;\n        \n        \n\n        \n\n        %% Blue color boxes -----------------------------------------------------\n\n        %%style create_climate_data fill:#00758f\n        %%style create_modeling_options fill:#00758f\n        %%style create_simulation_parameters fill:#00758f, lineColor:#00758f\n        %%style create_soil_paramters fill:#00758f\n\n\n        %% Red color boxes ------------------------------------------------------\n        %%style compute_theta_at_given_psoil fill:#880808",
+    "crumbs": [
+      "pysureau"
     ]
   }
 ]

@@ -9,7 +9,7 @@ __all__ = ['compute_b', 'compute_b_gc', 'compute_k_soil', 'compute_k_soil_camp',
 import os
 import operator
 import numpy as np
-#import pandas as pd
+import pandas as pd
 from math import pi
 import pandera as pa
 from typing import Dict

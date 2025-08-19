@@ -7,3 +7,4 @@
 .ipynb_checkpoints
 .ruff_cache
 .vscode
+**/__pycache__/

@@ -7,7 +7,7 @@ __all__ = ['pysureau_init']
 import os
 from pathlib import Path
 from typing import Union
-import uuid
+import shortuuid
 
 # %% ../nbs/00_pysureau_utils.ipynb 4
 def pysureau_init(path: Union[str, None] = None # Path where the pysureau folders and files will be stored 
@@ -25,28 +25,42 @@ def pysureau_init(path: Union[str, None] = None # Path where the pysureau folder
     # Create folder structure ---------------------------------------------------
     
     # Get random number to name main folders
-    random_uuid = uuid.uuid4()
+    random_uuid = shortuuid.uuid()
     
     if path is None:
 
-        # Get user's home directory
-        local_home_dir = Path.home()
-        
-        # Create path with random uuid
-        project_path = os.path.join(local_home_dir, f'pysureau_project_{random_uuid}')
+        # Define path with random uuid at the home directory
+        project_path = os.path.join(Path.home(), f'pysureau_project_{random_uuid}')
 	    
-        # Create main
+        # Define paths to subderectories
+        path_to_params_folder = os.path.join(project_path, '1_parameter_files')
+        path_to_model_outputs_folder = os.path.join(project_path, '2_model_outputs')
+        path_to_logfiles_folder = os.path.join(project_path, '3_log_files')
+        
+        # Create main and subdirectories with it is corresponding files
         os.mkdir(project_path)
+        os.mkdir(path_to_params_folder)
+        os.mkdir(path_to_model_outputs_folder)
+        os.mkdir(path_to_logfiles_folder)
         
         print(f'pysureau project created at {project_path}')
         
-            
     elif os.path.exists(path):
-    
+        
+        # Define path with random uuid at the user's chosen path
         project_path = os.path.join(path, f'pysureau_project_{random_uuid}')
-    
+
+        # Define paths to subderectories
+        path_to_params_folder = os.path.join(project_path, '1_parameter_files')
+        path_to_model_outputs_folder = os.path.join(project_path, '2_model_outputs')
+        path_to_logfiles_folder = os.path.join(project_path, '3_log_files')
+        
+        # Create main and subdirectories with it is corresponding files
         os.mkdir(project_path)
-    
+        os.mkdir(path_to_params_folder)
+        os.mkdir(path_to_model_outputs_folder)
+        os.mkdir(path_to_logfiles_folder)
+        
         print(f'pysureau project created at {project_path}')
         
     else:

@@ -1,0 +1,16 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+settings.ini
+setup.py
+pysureau/__init__.py
+pysureau/_modidx.py
+pysureau/core.py
+pysureau.egg-info/PKG-INFO
+pysureau.egg-info/SOURCES.txt
+pysureau.egg-info/dependency_links.txt
+pysureau.egg-info/entry_points.txt
+pysureau.egg-info/not-zip-safe
+pysureau.egg-info/requires.txt
+pysureau.egg-info/top_level.txt

@@ -1,0 +1,48 @@
+extend-include = ["*.ipynb"]
+line-length = 81
+indent-width = 4
+
+[lint]
+# 1. Enable flake8-bugbear (`B`) rules, in addition to the defaults.
+select = ["E2","E4", "E7", "E9", "F", "B"]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+
+[format]
+# Like Black, use double quotes for strings.
+quote-style = "single"
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]

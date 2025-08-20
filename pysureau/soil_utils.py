@@ -16,8 +16,7 @@ from typing import Dict
 from pathlib import Path
 from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
-#from sureau_ecos_py.create_modeling_options import create_modeling_options
-#from sureau_ecos_py.data_and_parameter_validators import SoilDataValidator
+from . import pysureau_utils
 
 # %% ../nbs/00_soil_utils.ipynb 4
 def compute_b(
@@ -158,47 +157,47 @@ def create_empty_soil_parameter_files(path:Path # Path to the folder where the p
     path = Path(path)
     if os.path.exists(path):
         
-            
         # Soil parameters for van Genuchten pedo transfer function 
-        soil_params_vg = {'parameter_name': ['rfc_1', 
-                                            'rfc_2', 
-                                            'rfc_3',
-                                            "soil_depth_1",
-                                            "soil_depth_2",
-                                            "soil_depth_3",
-                                            'psoil_at_field_capacity',
-                                            "g_soil_0",
-                                            "pedo_transfer_formulation",
-                                            "offset_psoil",
-                                            "psie",
-                                            "alpha_vg",
-                                            "n_vg",
-                                            "i_vg",
-                                            "ksat_vg",
-                                            "saturation_capacity_vg",
-                                            "residual_capacity_vg"
-                                            ],
-                            # Create list of len 17 filled with 0's 
-                            'parameter_value': ["NA"]*17}  
+        soil_params_vg = dict(zip(["rfc_1", 
+                                    "rfc_2", 
+                                    "rfc_3",
+                                    "soil_depth_1",
+                                    "soil_depth_2",
+                                    "soil_depth_3",
+                                    'psoil_at_field_capacity',
+                                    "g_soil_0",
+                                    "pedo_transfer_formulation",
+                                    "offset_psoil",
+                                    "psie",
+                                    "alpha_vg",
+                                    "n_vg",
+                                    "i_vg",
+                                    "ksat_vg",
+                                    "saturation_capacity_vg",
+                                    "residual_capacity_vg"],
+                                   
+                             # Create list of len 17 filled with 0's 
+                             ["NA"] * 17))  
 
         # Soil parameters for Campbell pedo transfer funtion
-        soil_params_campbell = {'parameter_name': ['rfc_1', 
-                                                    'rfc_2', 
-                                                    'rfc_3',
-                                                    "soil_depth_1",
-                                                    "soil_depth_2",
-                                                    "soil_depth_3",
-                                                    'psoil_at_field_capacity',
-                                                    "g_soil_0",
-                                                    "offset_psoil",
-                                                    "pedo_transfer_formulation",
-                                                    "psie",
-                                                    "b_camp",
-                                                    "saturation_capacity_campbell",
-                                                    "ksat_campbell"
-                                                    ],
+        soil_params_campbell = dict(zip(["rfc_1", 
+                                         "rfc_2", 
+                                         "rfc_3",
+                                         "soil_depth_1",
+                                         "soil_depth_2",
+                                         "soil_depth_3",
+                                         'psoil_at_field_capacity',
+                                         "g_soil_0",
+                                         "offset_psoil",
+                                         "pedo_transfer_formulation",
+                                         "psie",
+                                         "b_camp",
+                                         "saturation_capacity_campbell",
+                                         "ksat_campbell"],
+                                        
                             # Create list of len 17 filled with 0's 
-                            'parameter_value': ["NA"]*14} 
+                             ["NA"] * 14))
+
         
             # Write to CSV files
             #dict_to_csv(soil_params_campbell, "test")
@@ -212,7 +211,7 @@ def create_empty_soil_parameter_files(path:Path # Path to the folder where the p
         raise ValueError("Failed creating empty parameter files")
      
 
-# %% ../nbs/00_soil_utils.ipynb 21
+# %% ../nbs/00_soil_utils.ipynb 22
 def read_soil_file(
     file_path:Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
@@ -338,7 +337,7 @@ def read_soil_file(
     return defaultdict(list, soil_data_dict_ordered)
 
 
-# %% ../nbs/00_soil_utils.ipynb 24
+# %% ../nbs/00_soil_utils.ipynb 25
 def convert_vwc_to_sws(
     vwc_x:float, # Volumetric Water Content m3.m-3
     layer_thickness:float, # Soil layer thickness in meters?
@@ -348,7 +347,7 @@ def convert_vwc_to_sws(
     
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/00_soil_utils.ipynb 26
+# %% ../nbs/00_soil_utils.ipynb 27
 def convert_sws_to_vwc(
     sws_x:float, # Soil Water Stock (mm)
     layer_thickness:float, # Soil layer thickness in meters?

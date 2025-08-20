@@ -131,8 +131,8 @@ def dict_to_csv(dictionary: Dict, # Dictionary
         writer.writerow(['parameter_name', 'parameter_value'])
         
         # Write data rows
-        for param, value in zip(dictionary['parameter_name'], dictionary['parameter_value']):
-            writer.writerow([param, value])
+        for each_param_name, each_param_value in dictionary.items():
+            writer.writerow([each_param_name, each_param_value])
     
     print(f"CSV file saved as {filename}")
 

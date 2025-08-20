@@ -8,6 +8,7 @@ pysureau/__init__.py
 pysureau/_modidx.py
 pysureau/core.py
 pysureau/pysureau_utils.py
+pysureau/soil_utils.py
 pysureau.egg-info/PKG-INFO
 pysureau.egg-info/SOURCES.txt
 pysureau.egg-info/dependency_links.txt

@@ -12,7 +12,7 @@ import numpy as np
 from math import pi
 import pandera as pa
 from typing import Dict
-from pathlib import Path
+from pathlib import Path, PosixPath
 
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict

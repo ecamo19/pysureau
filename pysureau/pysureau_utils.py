@@ -7,7 +7,7 @@ __all__ = ['dict_to_csv']
 import os
 import csv
 from typing import Dict
-from pathlib import Path
+from pathlib import Path, PosixPath
 from pandera.typing import DataFrame
 
 # %% ../nbs/00_pysureau_utils.ipynb 4

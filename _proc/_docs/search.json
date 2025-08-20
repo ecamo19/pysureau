@@ -64,7 +64,7 @@
     "href": "pysureau_init.html",
     "title": "pysureau init",
     "section": "",
-    "text": "source\n\npysureau_init\n\n pysureau_init (path:Optional[str]=None)\n\nFunction for creating the project’s main folder structure alongside with the necessary parameter files\n\n#pysureau_init(path = '/tmp')",
+    "text": "source\n\npysureau_init\n\n pysureau_init (path:Optional[str]=None)\n\nFunction for creating the project’s main folder structure alongside with the necessary parameter files\n\npysureau_init(path = '/tmp')\n\n\n---------------------------------------------------------------------------\nNameError                                 Traceback (most recent call last)\nCell In[4], line 1\n----&gt; 1 pysureau_init(path = '/tmp')\n\nCell In[3], line 73, in pysureau_init(path)\n     70 os.mkdir(path_to_params_folder)\n     72 # Create empty parameter files for soil\n---&gt; 73 create_empty_soil_parameter_files(path=path_to_params_folder)\n     75 # Create empty parameter files for climate\n     76 \n     77 # Create empty parameter files for veg\n     79 os.mkdir(path_to_model_outputs_folder)\n\nFile ~/Documents/projects/modelling/sureau/pysureau/pysureau/soil_utils.py:153, in create_empty_soil_parameter_files(path)\n    150 \"Function for creating the CSV templates necessary for the soil parameters\"\n    152 # Assert parameters ---------------------------------------------------------\n--&gt; 153 assert isinstance(path, str) | isinstance(path, PosixPath), (\n    154     f'Input path must be a str, not a {type(path).__name__}'\n    155 )\n    157 # Convert string to Path if provided ----------------------------------------\n    158 path = Path(path)\n\nNameError: name 'PosixPath' is not defined",
     "crumbs": [
       "pysureau init"
     ]

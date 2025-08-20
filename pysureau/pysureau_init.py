@@ -7,8 +7,8 @@ __all__ = ['pysureau_init']
 import os
 import csv
 import shortuuid
-from typing import Dict
-from typing import Union
+from typing import Dict, Union
+from pathlib import PosixPath
 from pathlib import Path
 from pandera.typing import DataFrame
 from .soil_utils import create_empty_soil_parameter_files

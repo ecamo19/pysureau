@@ -16,7 +16,7 @@ from pathlib import Path
 
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
-#rom pysureau.pysureau_utils import dict_to_csv
+from .pysureau_utils import dict_to_csv
 
 # %% ../nbs/01_soil_utils.ipynb 4
 def compute_b(

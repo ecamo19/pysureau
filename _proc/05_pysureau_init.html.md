@@ -10,7 +10,7 @@ title: pysureau init
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L17){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L19){target="_blank" style="float:right; font-size:smaller"}
 
 ### pysureau_init
 
@@ -30,10 +30,10 @@ title: pysureau init
 ```{=html}
 <pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
 <span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">pysureau_init</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
 
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 73</span>, in <span class="ansi-cyan-fg">pysureau_init</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[7]</span><span class="ansi-green-fg">, line 73</span>, in <span class="ansi-cyan-fg">pysureau_init</span><span class="ansi-blue-fg">(path)</span>
 <span class="ansi-green-fg">     70</span> os.mkdir(path_to_params_folder)
 <span class="ansi-green-fg">     72</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for soil </span>
 <span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">73</span> <span class="ansi-yellow-bg">create_empty_soil_parameter_files</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">path_to_params_folder</span><span class="ansi-yellow-bg">)</span>

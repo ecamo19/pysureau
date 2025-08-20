@@ -12,6 +12,8 @@ from typing import Union
 from pathlib import Path
 from pandera.typing import DataFrame
 from .soil_utils import create_empty_soil_parameter_files
+from .pysureau_utils import dict_to_csv
+
 
 # %% ../nbs/05_pysureau_init.ipynb 4
 def pysureau_init(

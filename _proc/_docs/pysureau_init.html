@@ -223,33 +223,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Function for creating the project’s main folder structure alongside with the necessary parameter files</em></p>
 <div id="cell-3" class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pysureau_init(path <span class="op">=</span> <span class="st">'/tmp'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-error">
-<div class="ansi-escaped-output">
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">pysureau_init</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 73</span>, in <span class="ansi-cyan-fg">pysureau_init</span><span class="ansi-blue-fg">(path)</span>
-<span class="ansi-green-fg">     70</span> os.mkdir(path_to_params_folder)
-<span class="ansi-green-fg">     72</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for soil</span>
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">73</span> <span class="ansi-yellow-bg">create_empty_soil_parameter_files</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg">path_to_params_folder</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     75</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for climate</span>
-<span class="ansi-green-fg">     76</span> 
-<span class="ansi-green-fg">     77</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for veg</span>
-<span class="ansi-green-fg">     79</span> os.mkdir(path_to_model_outputs_folder)
-
-<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/projects/modelling/sureau/pysureau/pysureau/soil_utils.py:153</span>, in <span class="ansi-cyan-fg">create_empty_soil_parameter_files</span><span class="ansi-blue-fg">(path)</span>
-<span class="ansi-green-fg">    150</span> <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Function for creating the CSV templates necessary for the soil parameters</span><span class="ansi-yellow-fg">"</span>
-<span class="ansi-green-fg">    152</span> <span style="font-style:italic;color:rgb(95,135,135)"># Assert parameters ---------------------------------------------------------</span>
-<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">153</span> <span style="font-weight:bold;color:rgb(0,135,0)">assert</span> <span style="color:rgb(0,135,0)">isinstance</span>(path, <span style="color:rgb(0,135,0)">str</span>) | <span style="color:rgb(0,135,0)">isinstance</span>(path, <span class="ansi-yellow-bg">PosixPath</span>), (
-<span class="ansi-green-fg">    154</span>     <span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">Input path must be a str, not a </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">type</span>(path).<span class="ansi-blue-fg">__name__</span><span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">'</span>
-<span class="ansi-green-fg">    155</span> )
-<span class="ansi-green-fg">    157</span> <span style="font-style:italic;color:rgb(95,135,135)"># Convert string to Path if provided ----------------------------------------</span>
-<span class="ansi-green-fg">    158</span> path = Path(path)
-
-<span class="ansi-red-fg">NameError</span>: name 'PosixPath' is not defined</pre>
-</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CSV file saved as /tmp/pysureau_project_J3ZNeKfAb8EvMfgSCn3pVe/1_parameter_files/soil_parameters_vg.csv
+CSV file saved as /tmp/pysureau_project_J3ZNeKfAb8EvMfgSCn3pVe/1_parameter_files/soil_parameters_campbell.csv
+pysureau project created at /tmp/pysureau_project_J3ZNeKfAb8EvMfgSCn3pVe</code></pre>
 </div>
 </div>
 

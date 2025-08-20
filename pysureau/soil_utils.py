@@ -9,7 +9,7 @@ __all__ = ['compute_b', 'compute_b_gc', 'compute_k_soil', 'compute_k_soil_camp',
 import os
 import operator
 import numpy as np
-import pandas as pd
+import csv
 from math import pi
 import pandera as pa
 from typing import Dict
@@ -145,120 +145,74 @@ def compute_theta_at_given_p_soil_camp(
     return theta_sat * (psi_target / psie) ** (1 / b_camp)
 
 # %% ../nbs/00_soil_utils.ipynb 18
-def create_empty_soil_parameter_files(path:Path = None # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
-                                    ) -> DataFrame: # Return two csv files that will be used in the `read_soil_file()` function  
+def create_empty_soil_parameter_files(path:Path # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
+                                    ) -> Dict: # Return two dictionary files for user input
     
     'Function for creating the CSV templates necessary for the soil parameters'
     
     # Assert parameters ---------------------------------------------------------
-    assert isinstance(
-            path, str
-        ), 'path must be a str'
+    if path is not isinstance(path, str):
+        raise TypeError(f"path must be a string, not {type(path).__name__}") 
     
-    
-    # Path where files should be saved
-    if path is not None:
-        path = os.path.join(path, "sureau_parameter_files")
-    else:
-        path: None
+    # Convert string to Path if provided ----------------------------------------
+    path = Path(path)
+    if os.path.exists(path):
         
-    # Create random file names
-    filename_vg = f'{str(uuid.uuid4())[:8]}_soil_param_empty_file_vg'
-    filename_campbell = f'{str(uuid.uuid4())[:8]}_soil_param_empty_file_campbell'
-        
-    
-    # Create parameter files
-        
-    # Soil parameters for van Genuchten pedo transfer function 
-    soil_params_vg = {'parameter_name': ['rfc_1', 
-                                        'rfc_2', 
-                                        'rfc_3',
-                                        "soil_depth_1",
-                                        "soil_depth_2",
-                                        "soil_depth_3",
-                                        'psoil_at_field_capacity',
-                                        "g_soil_0",
-                                        "pedo_transfer_formulation",
-                                        "offset_psoil",
-                                        "psie"
-                                        "alpha_vg",
-                                        "n_vg",
-                                        "i_vg",
-                                        "ksat_vg",
-                                        "saturation_capacity_vg",
-                                        "residual_capacity_vg"
-                                        ],
-                        # Create list of len 17 filled with 0's 
-                        'parameter_value': ["NA"]*18}  
+            
+        # Soil parameters for van Genuchten pedo transfer function 
+        soil_params_vg = {'parameter_name': ['rfc_1', 
+                                            'rfc_2', 
+                                            'rfc_3',
+                                            "soil_depth_1",
+                                            "soil_depth_2",
+                                            "soil_depth_3",
+                                            'psoil_at_field_capacity',
+                                            "g_soil_0",
+                                            "pedo_transfer_formulation",
+                                            "offset_psoil",
+                                            "psie",
+                                            "alpha_vg",
+                                            "n_vg",
+                                            "i_vg",
+                                            "ksat_vg",
+                                            "saturation_capacity_vg",
+                                            "residual_capacity_vg"
+                                            ],
+                            # Create list of len 17 filled with 0's 
+                            'parameter_value': ["NA"]*17}  
 
-    # Soil parameters for Campbell pedo transfer funtion
-    soil_params_campbell = {'parameter_name': ['rfc_1', 
-                                                'rfc_2', 
-                                                'rfc_3',
-                                                "soil_depth_1",
-                                                "soil_depth_2",
-                                                "soil_depth_3",
-                                                'psoil_at_field_capacity',
-                                                "g_soil_0",
-                                                "offset_psoil",
-                                                "pedo_transfer_formulation",
-                                                "psie"
-                                                "b_camp",
-                                                "saturation_capacity_campbell",
-                                                "ksat_campbell"
-                                                ],
-                        # Create list of len 17 filled with 0's 
-                        'parameter_value': ["NA"]*15}
-    
-    # Transform objects to dataframe
-    soil_params_vg_df = pd.DataFrame(soil_params_vg)
-    soil_params_campbell_df = pd.DataFrame(soil_params_campbell)
-    
-    # Write param files
-    if path is not None and not os.path.exists(path):
+        # Soil parameters for Campbell pedo transfer funtion
+        soil_params_campbell = {'parameter_name': ['rfc_1', 
+                                                    'rfc_2', 
+                                                    'rfc_3',
+                                                    "soil_depth_1",
+                                                    "soil_depth_2",
+                                                    "soil_depth_3",
+                                                    'psoil_at_field_capacity',
+                                                    "g_soil_0",
+                                                    "offset_psoil",
+                                                    "pedo_transfer_formulation",
+                                                    "psie",
+                                                    "b_camp",
+                                                    "saturation_capacity_campbell",
+                                                    "ksat_campbell"
+                                                    ],
+                            # Create list of len 17 filled with 0's 
+                            'parameter_value': ["NA"]*14} 
         
-        print(f"Folder sureau_parameter_files not found. New folder created at {path}")
+            # Write to CSV files
+            #dict_to_csv_manual(soil_params_campbell, "test")
+            #soil_params_campbell.to_csv(f'{path}/{filename_vg}.csv', index = False)
         
-        # Create folder at path
-        os.mkdir(path)
-                 
-        # Write to CSV files
-        soil_params_vg_df.to_csv(f'{path}/{filename_vg}.csv', index = False)
+            #soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
         
-        soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
-        
-        return f"{filename_vg}.csv and {filename_campbell}.csv created"
-        
-    elif path is not None and os.path.exists(path):
-                
-        print(f"Folder sureau_parameter_files found at {path}")
-        
-        # Write to CSV files
-        soil_params_vg_df.to_csv(f'{path}/{filename_vg}.csv', index = False)
-        
-        soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
-        
-        return f"{filename_vg}.csv and {filename_campbell}.csv created"
-        
-    elif path is None:
-        
-        print(f" Path is equal None. Folder sureau_parameter_files not found. New folder created at {os.getcwd()}")
-        
-        path = os.path.join(os.getcwd(),"sureau_parameter_files")
-        os.mkdir(path)
-                
-        # Write to CSV files
-        soil_params_vg_df.to_csv(f'{path}/{filename_vg}.csv', index = False)
-        
-        soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
-        
-        return f"{filename_vg}.csv and {filename_campbell}.csv created"
-              
+            #return f"{filename_vg}.csv and {filename_campbell}.csv created"
+                      
     else:
         raise ValueError("Failed creating empty parameter files")
      
 
-# %% ../nbs/00_soil_utils.ipynb 21
+# %% ../nbs/00_soil_utils.ipynb 22
 def read_soil_file(
     file_path:Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
@@ -384,7 +338,7 @@ def read_soil_file(
     return defaultdict(list, soil_data_dict_ordered)
 
 
-# %% ../nbs/00_soil_utils.ipynb 24
+# %% ../nbs/00_soil_utils.ipynb 25
 def convert_vwc_to_sws(
     vwc_x:float, # Volumetric Water Content m3.m-3
     layer_thickness:float, # Soil layer thickness in meters?
@@ -394,7 +348,7 @@ def convert_vwc_to_sws(
     
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/00_soil_utils.ipynb 26
+# %% ../nbs/00_soil_utils.ipynb 27
 def convert_sws_to_vwc(
     sws_x:float, # Soil Water Stock (mm)
     layer_thickness:float, # Soil layer thickness in meters?

@@ -201,7 +201,7 @@ def create_empty_soil_parameter_files(path:Path # Path to the folder where the p
                             'parameter_value': ["NA"]*14} 
         
             # Write to CSV files
-            #dict_to_csv_manual(soil_params_campbell, "test")
+            #dict_to_csv(soil_params_campbell, "test")
             #soil_params_campbell.to_csv(f'{path}/{filename_vg}.csv', index = False)
         
             #soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
@@ -212,7 +212,7 @@ def create_empty_soil_parameter_files(path:Path # Path to the folder where the p
         raise ValueError("Failed creating empty parameter files")
      
 
-# %% ../nbs/00_soil_utils.ipynb 22
+# %% ../nbs/00_soil_utils.ipynb 21
 def read_soil_file(
     file_path:Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
@@ -338,7 +338,7 @@ def read_soil_file(
     return defaultdict(list, soil_data_dict_ordered)
 
 
-# %% ../nbs/00_soil_utils.ipynb 25
+# %% ../nbs/00_soil_utils.ipynb 24
 def convert_vwc_to_sws(
     vwc_x:float, # Volumetric Water Content m3.m-3
     layer_thickness:float, # Soil layer thickness in meters?
@@ -348,7 +348,7 @@ def convert_vwc_to_sws(
     
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/00_soil_utils.ipynb 27
+# %% ../nbs/00_soil_utils.ipynb 26
 def convert_sws_to_vwc(
     sws_x:float, # Soil Water Stock (mm)
     layer_thickness:float, # Soil layer thickness in meters?

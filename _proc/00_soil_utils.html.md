@@ -11,7 +11,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L21){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L22){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_b
 
@@ -27,7 +27,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L29){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L30){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_b_gc
 
@@ -45,7 +45,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L39){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L40){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_k_soil
 
@@ -64,7 +64,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L63){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L64){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_k_soil_camp
 
@@ -82,7 +82,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L72){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L73){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_p_soil
 
@@ -98,7 +98,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L83){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L84){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_p_soil_camp
 
@@ -115,7 +115,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L92){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L93){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_theta_at_given_p_soil
 
@@ -171,7 +171,7 @@ array([-5.99999970e+000, -6.51316634e+303])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L118){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L119){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_theta_at_given_p_soil_camp
 
@@ -224,7 +224,7 @@ array([0.25151288, 0.78572343])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L146){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L147){target="_blank" style="float:right; font-size:smaller"}
 
 ### create_empty_soil_parameter_files
 
@@ -240,7 +240,7 @@ array([0.25151288, 0.78572343])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L215){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L228){target="_blank" style="float:right; font-size:smaller"}
 
 ### read_soil_file
 
@@ -294,7 +294,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L341){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L368){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vwc_to_sws
 
@@ -325,7 +325,7 @@ convert_vwc_to_sws(1, layer_thickness=1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L351){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L378){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_sws_to_vwc
 

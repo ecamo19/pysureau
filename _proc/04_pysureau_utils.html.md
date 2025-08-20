@@ -10,7 +10,7 @@ title: pysureau utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L16){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L17){target="_blank" style="float:right; font-size:smaller"}
 
 ### pysureau_init
 
@@ -21,7 +21,7 @@ title: pysureau utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L92){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L101){target="_blank" style="float:right; font-size:smaller"}
 
 ### dict_to_csv
 
@@ -35,5 +35,44 @@ title: pysureau utils functions
 | filename | str | Filename |
 | path | Path | Path where the csv file will be stored |
 | **Returns** | **DataFrame** |  |
+
+
+::: {#cell-4 .cell}
+``` {.python .cell-code}
+#pysureau_init(path = '/tmp')
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">pysureau_init</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[8]</span><span class="ansi-green-fg">, line 71</span>, in <span class="ansi-cyan-fg">pysureau_init</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-green-fg">     68</span> os.mkdir(path_to_params_folder)
+<span class="ansi-green-fg">     70</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for soil </span>
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">71</span> <span class="ansi-yellow-bg">create_empty_soil_parameter_files</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">path_to_params_folder</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">     73</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for climate </span>
+<span class="ansi-green-fg">     74</span> 
+<span class="ansi-green-fg">     75</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for veg</span>
+<span class="ansi-green-fg">     77</span> os.mkdir(path_to_model_outputs_folder)
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/projects/modelling/sureau/pysureau/pysureau/soil_utils.py:153</span>, in <span class="ansi-cyan-fg">create_empty_soil_parameter_files</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-green-fg">    150</span> <span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Function for creating the CSV templates necessary for the soil parameters</span><span class="ansi-yellow-fg">"</span>
+<span class="ansi-green-fg">    152</span> <span style="font-style:italic;color:rgb(95,135,135)"># Assert parameters ---------------------------------------------------------</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">153</span> <span style="font-weight:bold;color:rgb(0,135,0)">if</span> path <span style="font-weight:bold;color:rgb(175,0,255)">is</span> <span style="font-weight:bold;color:rgb(175,0,255)">not</span> <span style="color:rgb(0,135,0)">isinstance</span>(path, <span style="color:rgb(0,135,0)">str</span>):
+<span class="ansi-green-fg">    154</span>     <span style="font-weight:bold;color:rgb(0,135,0)">raise</span> <span style="font-weight:bold;color:rgb(215,95,95)">TypeError</span>(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">path must be a string, not </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span><span style="color:rgb(0,135,0)">type</span>(path).<span class="ansi-blue-fg">__name__</span><span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg">'</span>)
+<span class="ansi-green-fg">    156</span> <span style="font-style:italic;color:rgb(95,135,135)"># Convert string to Path if provided ----------------------------------------</span>
+
+<span class="ansi-red-fg">TypeError</span>: path must be a string, not str</pre>
+```
+:::
+
+:::
+:::
+
 
 

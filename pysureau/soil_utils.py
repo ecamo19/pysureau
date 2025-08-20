@@ -10,6 +10,7 @@ import os
 import operator
 import numpy as np
 from math import pi
+import pandas as pd
 import pandera as pa
 from typing import Dict
 from pathlib import Path, PosixPath
@@ -158,55 +159,41 @@ def create_empty_soil_parameter_files(
     path = Path(path)
     if os.path.exists(path):
         # Soil parameters for van Genuchten pedo transfer function
-        soil_params_vg = dict(
-            zip(
-                [
-                    'rfc_1',
-                    'rfc_2',
-                    'rfc_3',
-                    'soil_depth_1',
-                    'soil_depth_2',
-                    'soil_depth_3',
-                    'psoil_at_field_capacity',
-                    'g_soil_0',
-                    'pedo_transfer_formulation',
-                    'offset_psoil',
-                    'psie',
-                    'alpha_vg',
-                    'n_vg',
-                    'i_vg',
-                    'ksat_vg',
-                    'saturation_capacity_vg',
-                    'residual_capacity_vg',
-                ],
-                # Create list of len 17 filled with 0's
-                ['NA'] * 17,
-            )
-        )
-
+        soil_params_vg = {'rfc_1' : "NA",
+                          'rfc_2' : "NA",
+                          'rfc_3' : "NA",
+                          'soil_depth_1' : "NA",
+                          'soil_depth_2' : "NA",
+                          'soil_depth_3' : "NA",
+                          'psie' : "NA",
+                          'n_vg' : "NA",
+                          'i_vg' : "NA",
+                          'ksat_vg' : "NA",
+                          'g_soil_0' : "NA",
+                          'alpha_vg' : "NA",
+                          'offset_psoil' : "NA",
+                          'residual_capacity_vg' : "NA",
+                          'saturation_capacity_vg' : "NA",
+                          'psoil_at_field_capacity' : "NA",
+                          'pedo_transfer_formulation' : "NA",
+                          'soil_formulation' : 'vg'}
+               
         # Soil parameters for Campbell pedo transfer funtion
-        soil_params_campbell = dict(
-            zip(
-                [
-                    'rfc_1',
-                    'rfc_2',
-                    'rfc_3',
-                    'soil_depth_1',
-                    'soil_depth_2',
-                    'soil_depth_3',
-                    'psoil_at_field_capacity',
-                    'g_soil_0',
-                    'offset_psoil',
-                    'pedo_transfer_formulation',
-                    'psie',
-                    'b_camp',
-                    'saturation_capacity_campbell',
-                    'ksat_campbell',
-                ],
-                # Create list of len 17 filled with 0's
-                ['NA'] * 14,
-            )
-        )
+        soil_params_campbell = {'rfc_1':"NA",
+                                'rfc_2':"NA",
+                                'rfc_3':"NA",
+                                'soil_depth_1':"NA",
+                                'soil_depth_2':"NA",
+                                'soil_depth_3':"NA",
+                                'psie':"NA",
+                                'b_camp':"NA",
+                                'g_soil_0':"NA",
+                                'offset_psoil':"NA",
+                                'ksat_campbell':"NA",
+                                'psoil_at_field_capacity':"NA",
+                                'pedo_transfer_formulation':"NA",
+                                'saturation_capacity_campbell':"NA",
+                                'soil_formulation' : 'campbell'}
 
         # Write to CSV files
         dict_to_csv(
@@ -229,7 +216,8 @@ def read_soil_file(
     file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
 ) -> Dict:  # Dictionary with soil parameters
-    "Function for reading a data frame containing information about soil characteristics"
+    
+    "Function for reading a CSV file containing soil parameters information"
 
     # Assert parameters ---------------------------------------------------------
 
@@ -242,25 +230,18 @@ def read_soil_file(
 
     # Read and validate dataframe -----------------------------------------------
 
-    # Read
-    soil_data = pd.read_csv(file_path, header=0, sep=sep)
-
-    # Validate, raise error if soil data don't follow the SoilDataValidator Schema
-    try:
-        SoilDataValidator.validate(soil_data)
-    except pa.errors.SchemaError as error:
-        # Print which column  are missing"
-        print(error)
-
+    # Read CSV
+    soil_data = pd.read_csv(file_path,
+                            
+                            # Do not read header  
+                            skiprows = 1, 
+   
+                            sep = sep)
+    
     # Transform dataframe into dictionary ---------------------------------------
-
-    # Set parameter_name column as index. This is done for facilatating
-    # manipulation
-    soil_data_dict = soil_data.set_index('parameter_name').to_dict(
-        into=OrderedDict
-    )
-    soil_data_dict_ordered = soil_data_dict['parameter_value']
-
+    soil_data.to_dict(into = OrderedDict)
+    
+    
     # Loop over dictionary to transform the data types.
     # If this is not done all values will be considered str
 
@@ -293,7 +274,27 @@ def read_soil_file(
             soil_data_dict_ordered[each_key] = float(
                 soil_data_dict_ordered[each_key]
             )
-
+    
+    # Validate, raise error if soil data don't follow the SoilDataValidator Schema
+    if soil_data["soil_formulation"] == "campbell":
+        
+        try:
+            SoilParameterValidatorCampbell.model_validate(soil_data)
+            
+        except pa.errors.SchemaError as error:
+            # Print which column  are missing"
+            print(error)
+            
+    else:
+        
+        try:
+            SoilParameterValidatorVg.model_validate(soil_data)
+        
+        except pa.errors.SchemaError as error:
+            
+            # Print which column  are missing"
+            print(error)  
+        
     # Setting common parameters for WB_soil (regardless of the options) ---------
     if soil_data_dict_ordered['pedo_transfer_formulation'] == 'vg':
         # 14 params
@@ -364,7 +365,7 @@ def read_soil_file(
     # Return
     return defaultdict(list, soil_data_dict_ordered)
 
-# %% ../nbs/01_soil_utils.ipynb 22
+# %% ../nbs/01_soil_utils.ipynb 25
 def convert_vwc_to_sws(
     vwc_x: float,  # Volumetric Water Content m3.m-3
     layer_thickness: float,  # Soil layer thickness in meters?
@@ -374,7 +375,7 @@ def convert_vwc_to_sws(
 
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/01_soil_utils.ipynb 24
+# %% ../nbs/01_soil_utils.ipynb 27
 def convert_sws_to_vwc(
     sws_x: float,  # Soil Water Stock (mm)
     layer_thickness: float,  # Soil layer thickness in meters?

@@ -5,43 +5,41 @@
 
 ------------------------------------------------------------------------
 
-<a
-href="https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L13"
-target="_blank" style="float:right; font-size:smaller">source</a>
+### dict_to_csv
 
-### pysureau_init
+>  dict_to_csv (dictionary:Dict, filename:str, path:pathlib._local.Path)
 
->  pysureau_init (path:Optional[str]=None)
+*Function for converting a dictionary that contains parameters into a
+CSV file*
 
 <table>
-<colgroup>
-<col style="width: 6%" />
-<col style="width: 25%" />
-<col style="width: 34%" />
-<col style="width: 34%" />
-</colgroup>
 <thead>
 <tr>
 <th></th>
 <th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
 <th><strong>Details</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>dictionary</td>
+<td>Dict</td>
+<td>Dictionary</td>
+</tr>
+<tr>
+<td>filename</td>
+<td>str</td>
+<td>Filename</td>
+</tr>
+<tr>
 <td>path</td>
-<td>Optional</td>
-<td>None</td>
-<td>Path where the pysureau folders and files will be stored</td>
+<td>Path</td>
+<td>Path where the csv file will be stored</td>
+</tr>
+<tr>
+<td><strong>Returns</strong></td>
+<td><strong>DataFrame</strong></td>
+<td></td>
 </tr>
 </tbody>
 </table>
-
-#### **Example: **
-
-``` python
-pysureau_init("/tmp")
-```
-
-    pysureau project created at /tmp/pysureau_project_a50b521e-dce3-4c4f-8a5f-04304a83f93a

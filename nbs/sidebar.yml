@@ -2,5 +2,6 @@ website:
   sidebar:
     contents:
       - index.ipynb
-      - 00_soil_utils.ipynb
-      - 04_pysureau_utils.ipynb
+      - 00_pysureau_utils.ipynb
+      - 01_soil_utils.ipynb
+      - 05_pysureau_init.ipynb

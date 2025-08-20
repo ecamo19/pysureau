@@ -10,29 +10,17 @@ title: pysureau utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L13){target="_blank" style="float:right; font-size:smaller"}
+### dict_to_csv
 
-### pysureau_init
+>      dict_to_csv (dictionary:Dict, filename:str, path:pathlib._local.Path)
 
->      pysureau_init (path:Optional[str]=None)
+*Function for converting a dictionary that contains parameters into a CSV file*
 
-|    | **Type** | **Default** | **Details** |
-| -- | -------- | ----------- | ----------- |
-| path | Optional | None | Path where the pysureau folders and files will be stored |
-
-
-#### __Example: __ 
-
-::: {#cell-4 .cell}
-``` {.python .cell-code}
-pysureau_init("/tmp")
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-pysureau project created at /tmp/pysureau_project_a50b521e-dce3-4c4f-8a5f-04304a83f93a
-```
-:::
-:::
+|    | **Type** | **Details** |
+| -- | -------- | ----------- |
+| dictionary | Dict | Dictionary |
+| filename | str | Filename |
+| path | Path | Path where the csv file will be stored |
+| **Returns** | **DataFrame** |  |
 
 

@@ -8,7 +8,7 @@
 
 <meta name="description" content="AUTHORS: Erick Calderon-Morales">
 
-<title>pysureau utils functions – pysureau</title>
+<title>pysureau init – pysureau</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -71,10 +106,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="pysureau utils functions – pysureau">
+<meta property="og:title" content="pysureau init – pysureau">
 <meta property="og:description" content="AUTHORS: Erick Calderon-Morales">
 <meta property="og:site_name" content="pysureau">
-<meta name="twitter:title" content="pysureau utils functions – pysureau">
+<meta name="twitter:title" content="pysureau init – pysureau">
 <meta name="twitter:description" content="AUTHORS: Erick Calderon-Morales">
 <meta name="twitter:card" content="summary">
 </head>
@@ -100,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pysureau_utils.html">pysureau utils functions</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./pysureau_init.html">pysureau init</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -120,7 +155,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pysureau_utils.html" class="sidebar-item-text sidebar-link active">
+  <a href="./pysureau_utils.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">pysureau utils functions</span></a>
   </div>
 </li>
@@ -132,7 +167,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pysureau_init.html" class="sidebar-item-text sidebar-link">
+  <a href="./pysureau_init.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">pysureau init</span></a>
   </div>
 </li>
@@ -146,16 +181,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dict_to_csv" id="toc-dict_to_csv" class="nav-link active" data-scroll-target="#dict_to_csv">dict_to_csv</a></li>
+  <li><a href="#pysureau_init" id="toc-pysureau_init" class="nav-link active" data-scroll-target="#pysureau_init">pysureau_init</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/ecamo19/pysureau/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="pysureau_utils.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ecamo19/pysureau/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="pysureau_init.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">pysureau utils functions</h1>
+<h1 class="title">pysureau init</h1>
 </div>
 
 <div>
@@ -179,43 +214,54 @@ ul.task-list li input[type="checkbox"] {
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
 <hr>
-<section id="dict_to_csv" class="level3">
-<h3 class="anchored" data-anchor-id="dict_to_csv">dict_to_csv</h3>
+<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L17" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="pysureau_init" class="level3">
+<h3 class="anchored" data-anchor-id="pysureau_init">pysureau_init</h3>
 <blockquote class="blockquote">
-<pre><code> dict_to_csv (dictionary:Dict, filename:str, path:pathlib._local.Path)</code></pre>
+<pre><code> pysureau_init (path:Optional[str]=None)</code></pre>
 </blockquote>
-<p><em>Function for converting a dictionary that contains parameters into a CSV file</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>dictionary</td>
-<td>Dict</td>
-<td>Dictionary</td>
-</tr>
-<tr class="even">
-<td>filename</td>
-<td>str</td>
-<td>Filename</td>
-</tr>
-<tr class="odd">
-<td>path</td>
-<td>Path</td>
-<td>Path where the csv file will be stored</td>
-</tr>
-<tr class="even">
-<td><strong>Returns</strong></td>
-<td><strong>DataFrame</strong></td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p><em>Function for creating the project’s main folder structure alongside with the necessary parameter files</em></p>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#pysureau_init(path = '/tmp')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-error">
+<div class="ansi-escaped-output">
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">pysureau_init</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 73</span>, in <span class="ansi-cyan-fg">pysureau_init</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-green-fg">     70</span> os.mkdir(path_to_params_folder)
+<span class="ansi-green-fg">     72</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for soil </span>
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">73</span> <span class="ansi-yellow-bg">create_empty_soil_parameter_files</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">path</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">=</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">path_to_params_folder</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">     75</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for climate </span>
+<span class="ansi-green-fg">     76</span> 
+<span class="ansi-green-fg">     77</span> <span style="font-style:italic;color:rgb(95,135,135)"># Create empty parameter files for veg</span>
+<span class="ansi-green-fg">     79</span> os.mkdir(path_to_model_outputs_folder)
+
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">~/Documents/projects/modelling/sureau/pysureau/pysureau/soil_utils.py:212</span>, in <span class="ansi-cyan-fg">create_empty_soil_parameter_files</span><span class="ansi-blue-fg">(path)</span>
+<span class="ansi-green-fg">    188</span>     soil_params_campbell = <span style="color:rgb(0,135,0)">dict</span>(
+<span class="ansi-green-fg">    189</span>         <span style="color:rgb(0,135,0)">zip</span>(
+<span class="ansi-green-fg">    190</span>             [
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    208</span>         )
+<span class="ansi-green-fg">    209</span>     )
+<span class="ansi-green-fg">    211</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Write to CSV files</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">212</span>     <span class="ansi-yellow-bg">dict_to_csv</span>(
+<span class="ansi-green-fg">    213</span>         dictionary=soil_params_vg,
+<span class="ansi-green-fg">    214</span>         path=path,
+<span class="ansi-green-fg">    215</span>         filename=<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">soil_parameters_vg.csv</span><span class="ansi-yellow-fg">'</span>,
+<span class="ansi-green-fg">    216</span>     )
+<span class="ansi-green-fg">    218</span>     dict_to_csv(
+<span class="ansi-green-fg">    219</span>         dictionary=soil_params_campbell,
+<span class="ansi-green-fg">    220</span>         path=path,
+<span class="ansi-green-fg">    221</span>         filename=<span class="ansi-yellow-fg">'</span><span class="ansi-yellow-fg">soil_parameters_campbell.csv</span><span class="ansi-yellow-fg">'</span>,
+<span class="ansi-green-fg">    222</span>     )
+<span class="ansi-green-fg">    224</span> <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+
+<span class="ansi-red-fg">NameError</span>: name 'dict_to_csv' is not defined</pre>
+</div>
+</div>
+</div>
 
 
 </section>

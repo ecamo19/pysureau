@@ -14,7 +14,6 @@ from pandera.typing import DataFrame
 from .soil_utils import create_empty_soil_parameter_files
 from .pysureau_utils import dict_to_csv
 
-
 # %% ../nbs/05_pysureau_init.ipynb 4
 def pysureau_init(
     path: Union[
@@ -58,13 +57,13 @@ def pysureau_init(
         os.mkdir(project_path)
         os.mkdir(path_to_params_folder)
 
-        # Create empty parameter files for soil 
-        create_empty_soil_parameter_files(path = path_to_params_folder)
-        
-        # Create empty parameter files for climate 
-        
+        # Create empty parameter files for soil
+        create_empty_soil_parameter_files(path=path_to_params_folder)
+
+        # Create empty parameter files for climate
+
         # Create empty parameter files for veg
-        
+
         os.mkdir(path_to_model_outputs_folder)
         os.mkdir(path_to_logfiles_folder)
 
@@ -86,13 +85,13 @@ def pysureau_init(
 
         os.mkdir(path_to_params_folder)
 
-        # Create empty parameter files for soil 
-        create_empty_soil_parameter_files(path = path_to_params_folder)
-        
-        # Create empty parameter files for climate 
-        
+        # Create empty parameter files for soil
+        create_empty_soil_parameter_files(path=path_to_params_folder)
+
+        # Create empty parameter files for climate
+
         # Create empty parameter files for veg
-        
+
         os.mkdir(path_to_model_outputs_folder)
         os.mkdir(path_to_logfiles_folder)
 

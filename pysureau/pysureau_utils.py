@@ -29,10 +29,9 @@ def dict_to_csv(
         f'filename must by of class str not {type(filename).__name__}'
     )
 
-    if path is not None and not isinstance(path, str):
-        raise TypeError(
-            f'path must be a string or None, not {type(path).__name__}'
-        )
+    assert isinstance(path, str) | isinstance(path, PosixPath), (
+        f'Input path must be a str, not a {type(path).__name__}'
+    )
 
     # Convert string to Path if provided ----------------------------------------
     if os.path.exists(path):

@@ -150,9 +150,9 @@ def create_empty_soil_parameter_files(
     "Function for creating the CSV templates necessary for the soil parameters"
 
     # Assert parameters ---------------------------------------------------------
-    assert (
-        isinstance(path, str)
-        ), f'Input path must be a str, not a {type(path).__name__}'
+    assert isinstance(path, str) | isinstance(path, PosixPath), (
+        f'Input path must be a str, not a {type(path).__name__}'
+    )
 
     # Convert string to Path if provided ----------------------------------------
     path = Path(path)

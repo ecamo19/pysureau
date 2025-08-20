@@ -9,14 +9,13 @@ __all__ = ['compute_b', 'compute_b_gc', 'compute_k_soil', 'compute_k_soil_camp',
 import os
 import operator
 import numpy as np
-import csv
 from math import pi
 import pandera as pa
 from typing import Dict
 from pathlib import Path
-from pandera.typing import Series, DataFrame
+#from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
-from . import pysureau_utils
+from .pysureau_utils import dict_to_csv
 
 # %% ../nbs/00_soil_utils.ipynb 4
 def compute_b(
@@ -199,19 +198,20 @@ def create_empty_soil_parameter_files(path:Path # Path to the folder where the p
                              ["NA"] * 14))
 
         
-            # Write to CSV files
-            #dict_to_csv(soil_params_campbell, "test")
-            #soil_params_campbell.to_csv(f'{path}/{filename_vg}.csv', index = False)
-        
-            #soil_params_campbell_df.to_csv(f'{path}/{filename_campbell}.csv', index = False)
-        
-            #return f"{filename_vg}.csv and {filename_campbell}.csv created"
-                      
+        # Write to CSV files
+        dict_to_csv(dictionary = soil_params_vg, 
+                    path = path, 
+                    filename = "soil_parameters_vg.csv")
+            
+        dict_to_csv(dictionary = soil_params_campbell, 
+                    path = path, 
+                    filename = "soil_parameters_campbell.csv")
+                          
     else:
         raise ValueError("Failed creating empty parameter files")
      
 
-# %% ../nbs/00_soil_utils.ipynb 22
+# %% ../nbs/00_soil_utils.ipynb 19
 def read_soil_file(
     file_path:Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
@@ -337,7 +337,7 @@ def read_soil_file(
     return defaultdict(list, soil_data_dict_ordered)
 
 
-# %% ../nbs/00_soil_utils.ipynb 25
+# %% ../nbs/00_soil_utils.ipynb 22
 def convert_vwc_to_sws(
     vwc_x:float, # Volumetric Water Content m3.m-3
     layer_thickness:float, # Soil layer thickness in meters?
@@ -347,7 +347,7 @@ def convert_vwc_to_sws(
     
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/00_soil_utils.ipynb 27
+# %% ../nbs/00_soil_utils.ipynb 24
 def convert_sws_to_vwc(
     sws_x:float, # Soil Water Stock (mm)
     layer_thickness:float, # Soil layer thickness in meters?

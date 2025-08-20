@@ -13,15 +13,16 @@ from math import pi
 import pandera as pa
 from typing import Dict
 from pathlib import Path
-#from pandera.typing import Series, DataFrame
+
+# from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
-from .pysureau_utils import dict_to_csv
+#from pysureau.pysureau_utils import *
 
 # %% ../nbs/00_soil_utils.ipynb 4
 def compute_b(
     lv: float,  # length of fine root per unit volume
 ) -> float:
-    'Calculate b used to compute the B of the Gardnar-Cowen model'
+    "Calculate b used to compute the B of the Gardnar-Cowen model"
 
     return 1 / np.sqrt(pi * lv)
 
@@ -31,7 +32,7 @@ def compute_b_gc(
     b: float,  # Unknown parameter definition
     root_radius: float,  # Calculated using the `compute_b` function
 ) -> float:
-    'Calculate B Gardner cowen thhe scaling factor for soil conductance'
+    "Calculate B Gardner cowen thhe scaling factor for soil conductance"
 
     return la * 2 * pi / np.log(b / root_radius)
 
@@ -143,182 +144,207 @@ def compute_theta_at_given_p_soil_camp(
     return theta_sat * (psi_target / psie) ** (1 / b_camp)
 
 # %% ../nbs/00_soil_utils.ipynb 18
-def create_empty_soil_parameter_files(path:Path # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
-                                    ) -> Dict: # Return two dictionary files for user input
-    
-    'Function for creating the CSV templates necessary for the soil parameters'
-    
+def create_empty_soil_parameter_files(
+    path: Path,  # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
+) -> Dict:  # Return two dictionary files for user input
+    "Function for creating the CSV templates necessary for the soil parameters"
+
     # Assert parameters ---------------------------------------------------------
-    if path is not isinstance(path, str):
-        raise TypeError(f"path must be a string, not {type(path).__name__}") 
-    
+    assert (
+        isinstance(path, str)
+        ), f'Input path must be a str, not a {type(path).__name__}'
+
     # Convert string to Path if provided ----------------------------------------
     path = Path(path)
     if os.path.exists(path):
-        
-        # Soil parameters for van Genuchten pedo transfer function 
-        soil_params_vg = dict(zip(["rfc_1", 
-                                    "rfc_2", 
-                                    "rfc_3",
-                                    "soil_depth_1",
-                                    "soil_depth_2",
-                                    "soil_depth_3",
-                                    'psoil_at_field_capacity',
-                                    "g_soil_0",
-                                    "pedo_transfer_formulation",
-                                    "offset_psoil",
-                                    "psie",
-                                    "alpha_vg",
-                                    "n_vg",
-                                    "i_vg",
-                                    "ksat_vg",
-                                    "saturation_capacity_vg",
-                                    "residual_capacity_vg"],
-                                   
-                             # Create list of len 17 filled with 0's 
-                             ["NA"] * 17))  
+        # Soil parameters for van Genuchten pedo transfer function
+        soil_params_vg = dict(
+            zip(
+                [
+                    'rfc_1',
+                    'rfc_2',
+                    'rfc_3',
+                    'soil_depth_1',
+                    'soil_depth_2',
+                    'soil_depth_3',
+                    'psoil_at_field_capacity',
+                    'g_soil_0',
+                    'pedo_transfer_formulation',
+                    'offset_psoil',
+                    'psie',
+                    'alpha_vg',
+                    'n_vg',
+                    'i_vg',
+                    'ksat_vg',
+                    'saturation_capacity_vg',
+                    'residual_capacity_vg',
+                ],
+                # Create list of len 17 filled with 0's
+                ['NA'] * 17,
+            )
+        )
 
         # Soil parameters for Campbell pedo transfer funtion
-        soil_params_campbell = dict(zip(["rfc_1", 
-                                         "rfc_2", 
-                                         "rfc_3",
-                                         "soil_depth_1",
-                                         "soil_depth_2",
-                                         "soil_depth_3",
-                                         'psoil_at_field_capacity',
-                                         "g_soil_0",
-                                         "offset_psoil",
-                                         "pedo_transfer_formulation",
-                                         "psie",
-                                         "b_camp",
-                                         "saturation_capacity_campbell",
-                                         "ksat_campbell"],
-                                        
-                            # Create list of len 17 filled with 0's 
-                             ["NA"] * 14))
+        soil_params_campbell = dict(
+            zip(
+                [
+                    'rfc_1',
+                    'rfc_2',
+                    'rfc_3',
+                    'soil_depth_1',
+                    'soil_depth_2',
+                    'soil_depth_3',
+                    'psoil_at_field_capacity',
+                    'g_soil_0',
+                    'offset_psoil',
+                    'pedo_transfer_formulation',
+                    'psie',
+                    'b_camp',
+                    'saturation_capacity_campbell',
+                    'ksat_campbell',
+                ],
+                # Create list of len 17 filled with 0's
+                ['NA'] * 14,
+            )
+        )
 
-        
         # Write to CSV files
-        dict_to_csv(dictionary = soil_params_vg, 
-                    path = path, 
-                    filename = "soil_parameters_vg.csv")
-            
-        dict_to_csv(dictionary = soil_params_campbell, 
-                    path = path, 
-                    filename = "soil_parameters_campbell.csv")
-                          
+        dict_to_csv(
+            dictionary=soil_params_vg,
+            path=path,
+            filename='soil_parameters_vg.csv',
+        )
+
+        dict_to_csv(
+            dictionary=soil_params_campbell,
+            path=path,
+            filename='soil_parameters_campbell.csv',
+        )
+
     else:
-        raise ValueError("Failed creating empty parameter files")
-     
+        raise ValueError('Failed creating empty parameter files')
 
 # %% ../nbs/00_soil_utils.ipynb 19
 def read_soil_file(
-    file_path:Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
-) -> Dict: # Dictionary with soil parameters
-    'Function for reading a data frame containing information about soil characteristics'
+) -> Dict:  # Dictionary with soil parameters
+    "Function for reading a data frame containing information about soil characteristics"
 
     # Assert parameters ---------------------------------------------------------
 
     # Make sure that sureau_parameter_files folder exist
 
     # Make sure the file_path exist
-    assert os.path.exists(file_path 
-    ), f'sureau_parameter_files folder not found at {file_path}. Save soil parameter files within sureau_parameter_files'
+    assert os.path.exists(file_path), (
+        f'sureau_parameter_files folder not found at {file_path}. Save soil parameter files within sureau_parameter_files'
+    )
 
     # Read and validate dataframe -----------------------------------------------
-    
+
     # Read
-    soil_data = pd.read_csv(file_path, header=0, sep=sep)    
-   
+    soil_data = pd.read_csv(file_path, header=0, sep=sep)
 
     # Validate, raise error if soil data don't follow the SoilDataValidator Schema
     try:
         SoilDataValidator.validate(soil_data)
     except pa.errors.SchemaError as error:
         # Print which column  are missing"
-        print(error)  
-        
-                
+        print(error)
+
     # Transform dataframe into dictionary ---------------------------------------
-    
-    # Set parameter_name column as index. This is done for facilatating 
+
+    # Set parameter_name column as index. This is done for facilatating
     # manipulation
-    soil_data_dict = soil_data.set_index("parameter_name").to_dict(into=OrderedDict)
+    soil_data_dict = soil_data.set_index('parameter_name').to_dict(
+        into=OrderedDict
+    )
     soil_data_dict_ordered = soil_data_dict['parameter_value']
 
-    # Loop over dictionary to transform the data types. 
-    # If this is not done all values will be considered str 
-    
+    # Loop over dictionary to transform the data types.
+    # If this is not done all values will be considered str
+
     # Loop over all keys
     for each_key in soil_data_dict_ordered.keys():
-        
-        # If value is 'vg' or 'campbell' then transform to str 
-        if soil_data_dict_ordered[each_key] == "vg" or soil_data_dict_ordered[each_key] == "campbell": 
-                soil_data_dict_ordered[each_key] = str(soil_data_dict_ordered[each_key])
-        
-        # If key start with rfc (rock fragment content must be integers since are 
+        # If value is 'vg' or 'campbell' then transform to str
+        if (
+            soil_data_dict_ordered[each_key] == 'vg'
+            or soil_data_dict_ordered[each_key] == 'campbell'
+        ):
+            soil_data_dict_ordered[each_key] = str(
+                soil_data_dict_ordered[each_key]
+            )
+
+        # If key start with rfc (rock fragment content must be integers since are
         # values between 0-100%)
-        elif each_key.startswith("rfc"):
-                soil_data_dict_ordered[each_key] = int(soil_data_dict_ordered[each_key])
-        
-        # This is done for avoiding converting 0 to 0.0                
+        elif each_key.startswith('rfc'):
+            soil_data_dict_ordered[each_key] = int(
+                soil_data_dict_ordered[each_key]
+            )
+
+        # This is done for avoiding converting 0 to 0.0
         elif soil_data_dict_ordered[each_key] == 0:
-            soil_data_dict_ordered[each_key] = int(soil_data_dict_ordered[each_key])
-        
+            soil_data_dict_ordered[each_key] = int(
+                soil_data_dict_ordered[each_key]
+            )
+
         # Transform to float
-        else:   
-                soil_data_dict_ordered[each_key] = float(soil_data_dict_ordered[each_key])        
-              
+        else:
+            soil_data_dict_ordered[each_key] = float(
+                soil_data_dict_ordered[each_key]
+            )
+
     # Setting common parameters for WB_soil (regardless of the options) ---------
     if soil_data_dict_ordered['pedo_transfer_formulation'] == 'vg':
-        
         # 14 params
         params = np.array(
-           ['rfc_1', 
-            'rfc_2', 
-            'rfc_3',
-            "soil_depth_1",
-            "soil_depth_2",
-            "soil_depth_3",
-            'psoil_at_field_capacity',
-            "g_soil_0",
-            "pedo_transfer_formulation",
-            "offset_psoil",
-            "psie",
-            "alpha_vg",
-            "n_vg",
-            "i_vg",
-            "ksat_vg",
-            "saturation_capacity_vg",
-            "residual_capacity_vg"
+            [
+                'rfc_1',
+                'rfc_2',
+                'rfc_3',
+                'soil_depth_1',
+                'soil_depth_2',
+                'soil_depth_3',
+                'psoil_at_field_capacity',
+                'g_soil_0',
+                'pedo_transfer_formulation',
+                'offset_psoil',
+                'psie',
+                'alpha_vg',
+                'n_vg',
+                'i_vg',
+                'ksat_vg',
+                'saturation_capacity_vg',
+                'residual_capacity_vg',
             ],
             dtype=object,
         )
-        
+
     elif soil_data_dict_ordered['pedo_transfer_formulation'] == 'campbell':
         # 12 params
         params = np.array(
-            ['rfc_1', 
-            'rfc_2', 
-            'rfc_3',
-            "soil_depth_1",
-            "soil_depth_2",
-            "soil_depth_3",
-            'psoil_at_field_capacity',
-            "g_soil_0",
-            "offset_psoil",
-            "pedo_transfer_formulation",
-            "psie"
-            "b_camp",
-            "saturation_capacity_campbell",
-            "ksat_campbell"
+            [
+                'rfc_1',
+                'rfc_2',
+                'rfc_3',
+                'soil_depth_1',
+                'soil_depth_2',
+                'soil_depth_3',
+                'psoil_at_field_capacity',
+                'g_soil_0',
+                'offset_psoil',
+                'pedo_transfer_formulation',
+                'psieb_camp',
+                'saturation_capacity_campbell',
+                'ksat_campbell',
             ],
             dtype=object,
-        )        
+        )
     else:
-        raise ValueError(f'Option {soil_data_dict_ordered["pedo_transfer_formulation"]} not recognized. Set pedo_transfer_function to either "vg" or "campbell" Use "" ')
-    
+        raise ValueError(
+            f'Option {soil_data_dict_ordered["pedo_transfer_formulation"]} not recognized. Set pedo_transfer_function to either "vg" or "campbell" Use "" '
+        )
+
     ## Make sure that no parameters are missing (12 or 14) -----------------------
     for each_parameter in params:
         # Raise error if a parameter is missing from params
@@ -328,31 +354,32 @@ def read_soil_file(
             )
 
     # Make sure there are no duplicate parameters -------------------------------
-    if len(soil_data_dict_ordered.keys()) is not len(set(soil_data_dict_ordered.keys())):
+    if len(soil_data_dict_ordered.keys()) is not len(
+        set(soil_data_dict_ordered.keys())
+    ):
         raise ValueError(
             'Parameter might be repeated several times in input soil parameter file'
         )
 
-    # Return 
+    # Return
     return defaultdict(list, soil_data_dict_ordered)
-
 
 # %% ../nbs/00_soil_utils.ipynb 22
 def convert_vwc_to_sws(
-    vwc_x:float, # Volumetric Water Content m3.m-3
-    layer_thickness:float, # Soil layer thickness in meters?
-    rfc:int = 0 # Rock Fragment Content (%)
-    ) -> float: # Soil Water Stock (mm)
-    'Convert soil volumetric water content (m3.m-3) to water stock height (quantity as height in mm per m2 soil) by accounting for the respective layer thickness and rock fragment content. The volume of the water quantity per square metre results in the corresponding water stock height (m3 water per m2 soil as height in mm)'
-    
+    vwc_x: float,  # Volumetric Water Content m3.m-3
+    layer_thickness: float,  # Soil layer thickness in meters?
+    rfc: int = 0,  # Rock Fragment Content (%)
+) -> float:  # Soil Water Stock (mm)
+    "Convert soil volumetric water content (m3.m-3) to water stock height (quantity as height in mm per m2 soil) by accounting for the respective layer thickness and rock fragment content. The volume of the water quantity per square metre results in the corresponding water stock height (m3 water per m2 soil as height in mm)"
+
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
 # %% ../nbs/00_soil_utils.ipynb 24
 def convert_sws_to_vwc(
-    sws_x:float, # Soil Water Stock (mm)
-    layer_thickness:float, # Soil layer thickness in meters?
-    rfc:int = 0 # Rock Fragment Content (%) 
-    ) -> float: # Volumetric Water Content m3.m-3
-    'Convert soil water stock (quantity as height in mm per m2 soil) to volumetric water content (m3.m-3) by accounting for the respective layer thickness and rock fragment content'
-    
+    sws_x: float,  # Soil Water Stock (mm)
+    layer_thickness: float,  # Soil layer thickness in meters?
+    rfc: int = 0,  # Rock Fragment Content (%)
+) -> float:  # Volumetric Water Content m3.m-3
+    "Convert soil water stock (quantity as height in mm per m2 soil) to volumetric water content (m3.m-3) by accounting for the respective layer thickness and rock fragment content"
+
     return sws_x / ((1 - (rfc / 100)) * layer_thickness * 1000)

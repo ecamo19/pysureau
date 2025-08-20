@@ -1,7 +1,7 @@
 ---
 description: 'AUTHORS: Erick Calderon Morales'
 output-file: parameter_validators.html
-title: Data and parameter validators
+title: Parameter validators
 
 ---
 

@@ -21,7 +21,7 @@ title: pysureau init
 
 ::: {#cell-3 .cell}
 ``` {.python .cell-code}
-pysureau_init(path = '/tmp')
+pysureau_init(path='/tmp')
 ```
 
 ::: {.cell-output .cell-output-stdout}

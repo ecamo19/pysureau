@@ -18,6 +18,7 @@ from pathlib import Path, PosixPath
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
 from .pysureau_utils import dict_to_csv
+#from pysureau.parameter_validators import *
 
 # %% ../nbs/01_soil_utils.ipynb 4
 def compute_b(
@@ -159,41 +160,45 @@ def create_empty_soil_parameter_files(
     path = Path(path)
     if os.path.exists(path):
         # Soil parameters for van Genuchten pedo transfer function
-        soil_params_vg = {'rfc_1' : "NA",
-                          'rfc_2' : "NA",
-                          'rfc_3' : "NA",
-                          'soil_depth_1' : "NA",
-                          'soil_depth_2' : "NA",
-                          'soil_depth_3' : "NA",
-                          'psie' : "NA",
-                          'n_vg' : "NA",
-                          'i_vg' : "NA",
-                          'ksat_vg' : "NA",
-                          'g_soil_0' : "NA",
-                          'alpha_vg' : "NA",
-                          'offset_psoil' : "NA",
-                          'residual_capacity_vg' : "NA",
-                          'saturation_capacity_vg' : "NA",
-                          'psoil_at_field_capacity' : "NA",
-                          'pedo_transfer_formulation' : "NA",
-                          'soil_formulation' : 'vg'}
-               
+        soil_params_vg = {
+            'rfc_1': 'NA',
+            'rfc_2': 'NA',
+            'rfc_3': 'NA',
+            'soil_depth_1': 'NA',
+            'soil_depth_2': 'NA',
+            'soil_depth_3': 'NA',
+            'psie': 'NA',
+            'n_vg': 'NA',
+            'i_vg': 'NA',
+            'ksat_vg': 'NA',
+            'g_soil_0': 'NA',
+            'alpha_vg': 'NA',
+            'offset_psoil': 'NA',
+            'residual_capacity_vg': 'NA',
+            'saturation_capacity_vg': 'NA',
+            'psoil_at_field_capacity': 'NA',
+            'pedo_transfer_formulation': 'NA',
+            'soil_formulation': 'vg',
+        }
+
         # Soil parameters for Campbell pedo transfer funtion
-        soil_params_campbell = {'rfc_1':"NA",
-                                'rfc_2':"NA",
-                                'rfc_3':"NA",
-                                'soil_depth_1':"NA",
-                                'soil_depth_2':"NA",
-                                'soil_depth_3':"NA",
-                                'psie':"NA",
-                                'b_camp':"NA",
-                                'g_soil_0':"NA",
-                                'offset_psoil':"NA",
-                                'ksat_campbell':"NA",
-                                'psoil_at_field_capacity':"NA",
-                                'pedo_transfer_formulation':"NA",
-                                'saturation_capacity_campbell':"NA",
-                                'soil_formulation' : 'campbell'}
+        soil_params_campbell = {
+            'rfc_1': 'NA',
+            'rfc_2': 'NA',
+            'rfc_3': 'NA',
+            'soil_depth_1': 'NA',
+            'soil_depth_2': 'NA',
+            'soil_depth_3': 'NA',
+            'psie': 'NA',
+            'b_camp': 'NA',
+            'g_soil_0': 'NA',
+            'offset_psoil': 'NA',
+            'ksat_campbell': 'NA',
+            'psoil_at_field_capacity': 'NA',
+            'pedo_transfer_formulation': 'NA',
+            'saturation_capacity_campbell': 'NA',
+            'soil_formulation': 'campbell',
+        }
 
         # Write to CSV files
         dict_to_csv(
@@ -216,7 +221,6 @@ def read_soil_file(
     file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ',',  # CSV file separator can be ',' or ';'
 ) -> Dict:  # Dictionary with soil parameters
-    
     "Function for reading a CSV file containing soil parameters information"
 
     # Assert parameters ---------------------------------------------------------
@@ -231,17 +235,16 @@ def read_soil_file(
     # Read and validate dataframe -----------------------------------------------
 
     # Read CSV
-    soil_data = pd.read_csv(file_path,
-                            
-                            # Do not read header  
-                            skiprows = 1, 
-   
-                            sep = sep)
-    
+    soil_data = pd.read_csv(
+        file_path,
+        # Do not read header
+        skiprows=1,
+        sep=sep,
+    )
+
     # Transform dataframe into dictionary ---------------------------------------
-    soil_data.to_dict(into = OrderedDict)
-    
-    
+    soil_data.to_dict(into=OrderedDict)
+
     # Loop over dictionary to transform the data types.
     # If this is not done all values will be considered str
 
@@ -274,27 +277,24 @@ def read_soil_file(
             soil_data_dict_ordered[each_key] = float(
                 soil_data_dict_ordered[each_key]
             )
-    
+
     # Validate, raise error if soil data don't follow the SoilDataValidator Schema
-    if soil_data["soil_formulation"] == "campbell":
-        
+    if soil_data['soil_formulation'] == 'campbell':
         try:
             SoilParameterValidatorCampbell.model_validate(soil_data)
-            
+
         except pa.errors.SchemaError as error:
             # Print which column  are missing"
             print(error)
-            
+
     else:
-        
         try:
             SoilParameterValidatorVg.model_validate(soil_data)
-        
+
         except pa.errors.SchemaError as error:
-            
             # Print which column  are missing"
-            print(error)  
-        
+            print(error)
+
     # Setting common parameters for WB_soil (regardless of the options) ---------
     if soil_data_dict_ordered['pedo_transfer_formulation'] == 'vg':
         # 14 params

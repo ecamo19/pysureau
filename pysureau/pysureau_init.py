@@ -58,18 +58,17 @@ def pysureau_init(
         os.mkdir(path_to_params_folder)
         os.mkdir(path_to_model_outputs_folder)
         os.mkdir(path_to_logfiles_folder)
-        
+
         # Create empty parameter files for soil
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
         # Create empty parameter files for climate
 
         # EDIT HERE
-        
+
         # Create empty parameter files for veg
 
         # EDIT HERE
-        
 
         print(f'pysureau project created at {project_path}')
 
@@ -94,7 +93,7 @@ def pysureau_init(
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
         # Create empty parameter files for climate
-        
+
         # EDIT HERE
 
         # Create empty parameter files for veg

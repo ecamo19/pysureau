@@ -11,7 +11,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L23){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L24){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_b
 
@@ -27,7 +27,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L31){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L32){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_b_gc
 
@@ -45,7 +45,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L41){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L42){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_k_soil
 
@@ -64,7 +64,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L65){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L66){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_k_soil_camp
 
@@ -82,7 +82,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L74){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L75){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_p_soil
 
@@ -98,7 +98,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L85){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L86){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_p_soil_camp
 
@@ -115,7 +115,7 @@ title: Soil utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L94){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L95){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_theta_at_given_p_soil
 
@@ -171,7 +171,7 @@ array([-5.99999970e+000, -6.51316634e+303])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L120){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L121){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_theta_at_given_p_soil_camp
 
@@ -224,7 +224,7 @@ array([0.25151288, 0.78572343])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L148){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L149){target="_blank" style="float:right; font-size:smaller"}
 
 ### create_empty_soil_parameter_files
 
@@ -240,7 +240,7 @@ array([0.25151288, 0.78572343])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L215){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L220){target="_blank" style="float:right; font-size:smaller"}
 
 ### read_soil_file
 
@@ -257,123 +257,22 @@ array([0.25151288, 0.78572343])
 
 ::: {#cell-18 .cell}
 ``` {.python .cell-code}
-#soil_data = pd.read_csv('/tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv', skiprows=1, sep = ";")
+# soil_data = pd.read_csv('/tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv', skiprows=1, sep = ";")
 ```
 :::
 
 
 ::: {#cell-19 .cell}
 ``` {.python .cell-code}
-#soil_data
+# soil_data
 ```
-
-::: {.cell-output .cell-output-display}
-```{=html}
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>rfc_1,NA</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>rfc_2,NA</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>rfc_3,NA</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>soil_depth_1,NA</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>soil_depth_2,NA</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>soil_depth_3,NA</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>psoil_at_field_capacity,NA</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>g_soil_0,NA</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>offset_psoil,NA</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>pedo_transfer_formulation,NA</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>psie,NA</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>b_camp,NA</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>saturation_capacity_campbell,NA</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>ksat_campbell,NA</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-```
-:::
 :::
 
 
 ::: {#cell-20 .cell}
 ``` {.python .cell-code}
-#soil_data_dict_ordered = soil_data_dict['parameter_value']
+# soil_data_dict_ordered = soil_data_dict['parameter_value']
 ```
-
-::: {.cell-output .cell-output-display}
-```
-OrderedDict([('rfc_1,NA',
-              OrderedDict([(0, 'rfc_2,NA'),
-                           (1, 'rfc_3,NA'),
-                           (2, 'soil_depth_1,NA'),
-                           (3, 'soil_depth_2,NA'),
-                           (4, 'soil_depth_3,NA'),
-                           (5, 'psoil_at_field_capacity,NA'),
-                           (6, 'g_soil_0,NA'),
-                           (7, 'offset_psoil,NA'),
-                           (8, 'pedo_transfer_formulation,NA'),
-                           (9, 'psie,NA'),
-                           (10, 'b_camp,NA'),
-                           (11, 'saturation_capacity_campbell,NA'),
-                           (12, 'ksat_campbell,NA')]))])
-```
-:::
 :::
 
 
@@ -381,7 +280,7 @@ OrderedDict([('rfc_1,NA',
 
 ::: {#cell-22 .cell}
 ``` {.python .cell-code}
-#read_soil_file('/tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv')
+# read_soil_file('/tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv')
 ```
 :::
 

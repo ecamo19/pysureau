@@ -7,6 +7,7 @@ setup.py
 pysureau/__init__.py
 pysureau/_modidx.py
 pysureau/core.py
+pysureau/data_and_parameter_validators.py
 pysureau/pysureau_init.py
 pysureau/pysureau_utils.py
 pysureau/soil_utils.py

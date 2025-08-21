@@ -2,22 +2,22 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ecamo19.github.io/pysureau/pysureau_utils.html</loc>
-    <lastmod>2025-08-20T08:39:50.880Z</lastmod>
+    <lastmod>2025-08-21T08:34:44.676Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ecamo19.github.io/pysureau/plant_utils.html</loc>
+    <lastmod>2025-08-21T08:34:44.773Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/soil_utils.html</loc>
-    <lastmod>2025-08-21T05:56:28.475Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ecamo19.github.io/pysureau/index.html</loc>
-    <lastmod>2025-08-20T08:39:50.567Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ecamo19.github.io/pysureau/pysureau_init.html</loc>
-    <lastmod>2025-08-20T12:05:03.067Z</lastmod>
+    <lastmod>2025-08-21T08:34:44.671Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/parameter_validators.html</loc>
-    <lastmod>2025-08-21T05:15:49.721Z</lastmod>
+    <lastmod>2025-08-21T08:34:44.668Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ecamo19.github.io/pysureau/pysureau_init.html</loc>
+    <lastmod>2025-08-21T08:34:44.662Z</lastmod>
   </url>
 </urlset>

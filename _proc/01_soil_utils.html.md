@@ -255,39 +255,9 @@ array([0.25151288, 0.78572343])
 | **Returns** | **Dict** |  | **Dictionary with soil parameters** |
 
 
-::: {#cell-18 .cell execution_count=34}
-``` {.python .cell-code}
-read_soil_file(
-    '/tmp/pysureau_project_QfA4dpMfetRxuWoYMM9Q5x/1_parameter_files/soil_parameters_campbell.csv'
-)
-```
-
-::: {.cell-output .cell-output-display execution_count=34}
-```
-defaultdict(list,
-            {'rfc_1': 1.2,
-             'rfc_2': 2.9,
-             'rfc_3': 97.0,
-             'soil_depth_1': 34.0,
-             'soil_depth_2': 33.33,
-             'soil_depth_3': 33.333,
-             'psie': -1.5,
-             'b_camp': 60.0,
-             'g_soil_0': 50.0,
-             'offset_psoil': 54.0,
-             'ksat_campbell': 0.66,
-             'psoil_at_field_capacity': -0.5,
-             'pedo_transfer_formulation': 'campbell',
-             'saturation_capacity_campbell': 30.0,
-             'soil_formulation': 'campbell'})
-```
-:::
-:::
-
-
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L358){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L348){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vwc_to_sws
 
@@ -303,7 +273,7 @@ defaultdict(list,
 | **Returns** | **float** |  | **Soil Water Stock (mm)** |
 
 
-::: {#cell-20 .cell}
+::: {#cell-19 .cell}
 ``` {.python .cell-code}
 convert_vwc_to_sws(1, layer_thickness=1)
 ```
@@ -318,7 +288,7 @@ convert_vwc_to_sws(1, layer_thickness=1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L368){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L358){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_sws_to_vwc
 
@@ -334,7 +304,7 @@ convert_vwc_to_sws(1, layer_thickness=1)
 | **Returns** | **float** |  | **Volumetric Water Content m3.m-3** |
 
 
-::: {#cell-22 .cell}
+::: {#cell-21 .cell}
 ``` {.python .cell-code}
 convert_sws_to_vwc(1000, layer_thickness=1)
 ```

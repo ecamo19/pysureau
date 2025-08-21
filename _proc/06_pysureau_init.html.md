@@ -10,7 +10,7 @@ title: pysureau init
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L18){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L19){target="_blank" style="float:right; font-size:smaller"}
 
 ### pysureau_init
 

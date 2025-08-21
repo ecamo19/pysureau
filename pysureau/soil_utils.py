@@ -344,7 +344,7 @@ def read_soil_file(
     # Return
     return defaultdict(list, soil_data_dict)
 
-# %% ../nbs/01_soil_utils.ipynb 21
+# %% ../nbs/01_soil_utils.ipynb 20
 def convert_vwc_to_sws(
     vwc_x: float,  # Volumetric Water Content m3.m-3
     layer_thickness: float,  # Soil layer thickness in meters?
@@ -354,7 +354,7 @@ def convert_vwc_to_sws(
 
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/01_soil_utils.ipynb 23
+# %% ../nbs/01_soil_utils.ipynb 22
 def convert_sws_to_vwc(
     sws_x: float,  # Soil Water Stock (mm)
     layer_thickness: float,  # Soil layer thickness in meters?

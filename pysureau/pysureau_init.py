@@ -12,6 +12,7 @@ from pathlib import PosixPath
 from pathlib import Path
 from pandera.typing import DataFrame
 from .soil_utils import create_empty_soil_parameter_files
+from .plant_utils import create_empty_vegetation_parameter_file
 from .pysureau_utils import dict_to_csv
 
 # %% ../nbs/06_pysureau_init.ipynb 4
@@ -62,11 +63,13 @@ def pysureau_init(
         # Create empty parameter files for soil
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
+        # Create empty parameter files for veg
+        create_empty_vegetation_parameter_file(path=path_to_params_folder)
+        
         # Create empty parameter files for climate
 
         # EDIT HERE
 
-        # Create empty parameter files for veg
 
         # EDIT HERE
 
@@ -92,12 +95,10 @@ def pysureau_init(
         # Create empty parameter files for soil
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
-        # Create empty parameter files for climate
-
-        # EDIT HERE
-
         # Create empty parameter files for veg
-
+        create_empty_vegetation_parameter_file(path=path_to_params_folder)
+        
+        # Create empty parameter files for climate
         # EDIT HERES
 
         print(f'pysureau project created at {project_path}')

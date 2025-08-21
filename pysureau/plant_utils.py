@@ -5,7 +5,7 @@ __all__ = ['rs_comp', 'turgor_comp', 'compute_turgor_from_psi', 'osmo_comp', 'ps
            'plc_comp', 'plc_prime_comp', 'gs_curve', 'compute_gmin', 'compute_emin', 'compute_dfmc',
            'distribute_conductances', 'compute_g_crown', 'convert_flux_from_mmolm2s_to_mm',
            'convert_flux_from_mm_to_mmolm2s', 'calculate_ebound_mm_granier', 'calculate_ebound_granier',
-           'compute_tleaf', 'read_vegetation_file', 'k_series_sum']
+           'compute_tleaf', 'create_empty_vegetation_parameter_file', 'read_vegetation_file', 'k_series_sum']
 
 # %% ../nbs/02_plant_utils.ipynb 3
 import os
@@ -13,13 +13,13 @@ import warnings
 import collections
 import numpy as np
 import pandas as pd
-import pandera as pa
-from typing import Dict
-from typing import List
-from pathlib import Path
-from pandera.typing import Series
-from sureau_ecos_py.create_modeling_options import create_modeling_options
-from sureau_ecos_py.data_and_parameter_validators import PlantDataValidator
+#import pandera as pa
+from typing import Dict, List
+#from pandera.typing import Series
+from pathlib import Path, PosixPath
+from .pysureau_utils import dict_to_csv
+#from sureau_ecos_py.create_modeling_options import create_modeling_options
+#from sureau_ecos_py.data_and_parameter_validators import PlantDataValidator
 
 # %% ../nbs/02_plant_utils.ipynb 4
 def rs_comp(
@@ -703,7 +703,88 @@ def compute_tleaf(
 
     return vecres
 
-# %% ../nbs/02_plant_utils.ipynb 36
+# %% ../nbs/02_plant_utils.ipynb 35
+def create_empty_vegetation_parameter_file(
+    
+    path: Path,  # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
+) -> Dict:  # Return two dictionary files for user input
+    
+    "Function for creating the CSV templates necessary for the vegetation parameters"
+
+    # Assert parameters ---------------------------------------------------------
+    assert isinstance(path, str) | isinstance(path, PosixPath), (
+        f'Input path must be a str, not a {type(path).__name__}'
+    )
+
+    # Convert string to Path if provided ----------------------------------------
+    path = Path(path)
+    if os.path.exists(path):
+        # Soil parameters for van Genuchten pedo transfer function
+        vegetation_params = {
+            'apo_frac_leaf': 'NA',
+            'apo_frac_stem': 'NA',
+            'beta_root_profile': 'NA',
+            'c_lapo_init': 'NA',
+            'c_sapo_init': 'NA',
+            'canopy_storage_param': 'NA',
+            'day_start': 'NA',
+            'day_end': 'NA',
+            'epsilon_sym_leaf': 'NA',
+            'epsilon_sym_stem': 'NA',
+            'f_crit': 'NA',
+            'foliage': 'NA',
+            'f_root_to_leaf': 'NA',
+            'f_trb_to_Leaf': 'NA',
+            'g_crown0': 'NA',
+            "group": 'NA',
+            'gmin_s': 'NA',
+            'gmin20': 'NA',
+            'gs_max': 'NA',
+            'gs_night': 'NA',
+            'jarvis_par': 'NA',
+            'k': 'NA',
+            'k_plant_init': 'NA',
+            'k_ssym_init': 'NA',
+            'leaf_angle':'NA',
+            'leaf_size':'NA',
+            'life_form':'NA',
+            'lmdc': 'NA',
+            'lma': 'NA',
+            'nb_day_lai': 'NA',
+            'p12_gs': 'NA',
+            'p50_vc_leaf': 'NA',
+            'p50_vc_stem': 'NA',
+            'p88_gs': 'NA',
+            'pi_full_turgor_leaf': 'NA',
+            'pi_full_turgor_stem': 'NA',
+            'psi_close': 'NA',
+            'psi_start_closing': 'NA',
+            'pt_coeff': 'NA',
+            'q10_1_gmin': 'NA',
+            'q10_2_gmin': 'NA',
+            'root_radius': 'NA',
+            'slope_vc_leaf': 'NA',
+            'slope_vc_stem': 'NA',
+            'species': 'NA',
+            'sym_frac_stem': 'NA',
+            't_base': 'NA',
+            't_gs_optim': 'NA',
+            't_gs_sens': 'NA',
+            't_phase_gmin': 'NA',
+            'turgor_pressure_at_gs_max': 'NA',
+            'vol_stem': 'NA'
+        }
+        # Write to CSV files
+        dict_to_csv(
+            dictionary = vegetation_params,
+            path = path,
+            filename = 'vegetation_parameters.csv',
+        )
+
+    else:
+        raise ValueError('Failed creating empty vegetation parameter file')
+
+# %% ../nbs/02_plant_utils.ipynb 37
 def read_vegetation_file(
     file_path: Path,  # Path to a csv file containing parameter values i.e path/to/file_name.csv
     modeling_options: Dict,  # Dictionary created using the `create_modeling_options` function
@@ -850,7 +931,7 @@ def read_vegetation_file(
 
     return vegetation_parameters
 
-# %% ../nbs/02_plant_utils.ipynb 41
+# %% ../nbs/02_plant_utils.ipynb 42
 def k_series_sum(k1: float, k2: float) -> float:
     'Function to sum 2 conductances in series'
 

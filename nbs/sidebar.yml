@@ -1,0 +1,8 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_pysureau_utils.ipynb
+      - 01_soil_utils.ipynb
+      - 06_pysureau_init.ipynb
+      - 07_parameter_validators.ipynb

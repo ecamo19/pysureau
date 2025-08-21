@@ -931,7 +931,7 @@ def read_vegetation_file(
 
     return vegetation_parameters
 
-# %% ../nbs/02_plant_utils.ipynb 42
+# %% ../nbs/02_plant_utils.ipynb 41
 def k_series_sum(k1: float, k2: float) -> float:
     'Function to sum 2 conductances in series'
 

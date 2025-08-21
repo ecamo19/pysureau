@@ -199,12 +199,12 @@ def create_empty_soil_parameter_files(
             'offset_psoil': 'NA',
             'ksat_campbell': 'NA',
             'psoil_at_field_capacity': 'NA',
-            'pedo_transfer_formulation': 'NA',
             'saturation_capacity_campbell': 'NA',
+            'pedo_transfer_formulation': 'NA',
             'soil_formulation': 'campbell',
         }
 
-        # Write to CSV files
+        # Write CSV files
         dict_to_csv(
             dictionary=soil_params_vg,
             path=path,

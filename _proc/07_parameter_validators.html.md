@@ -22,8 +22,8 @@ title: Parameter validators
 >                                      b_camp:float, g_soil_0:float,
 >                                      offset_psoil:float, ksat_campbell:float,
 >                                      psoil_at_field_capacity:float,
->                                      pedo_transfer_formulation:float,
->                                      saturation_capacity_campbell:str,
+>                                      saturation_capacity_campbell:float,
+>                                      pedo_transfer_formulation:str,
 >                                      soil_formulation:str)
 
 *!!! abstract "Usage Documentation"

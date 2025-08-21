@@ -19,7 +19,10 @@ from pydantic import BaseModel, ValidationError
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
 from .pysureau_utils import dict_to_csv
-from .parameter_validators import SoilParameterValidatorCampbell, SoilParameterValidatorVg
+from pysureau.parameter_validators import (
+    SoilParameterValidatorCampbell,
+    SoilParameterValidatorVg,
+)
 
 # %% ../nbs/01_soil_utils.ipynb 4
 def compute_b(
@@ -236,35 +239,35 @@ def read_soil_file(
     # Read and validate dataframe -----------------------------------------------
 
     # Read CSV
-    soil_data = pd.read_csv(file_path, sep = sep, header = 0)
+    soil_data = pd.read_csv(file_path, sep=sep, header=0)
 
     # Validate the column names of soil data are parameter_name, parameter_value
-    # To correctly transform the the CSV file as dict later 
+    # To correctly transform the the CSV file as dict later
     if soil_data.columns.tolist() != ['parameter_name', 'parameter_value']:
-        raise ValueError('Column names in soil parameter file must be called parameter_name and parameter_value')
-      
+        raise ValueError(
+            'Column names in soil parameter file must be called parameter_name and parameter_value'
+        )
+
     # Transform dataframe into dictionary ---------------------------------------
-    soil_data_dict = soil_data.set_index("parameter_name").to_dict()['parameter_value']
+    soil_data_dict = soil_data.set_index('parameter_name').to_dict()[
+        'parameter_value'
+    ]
 
     # Loop over dictionary to transform the data types --------------------------
     # If this is not done all values will be considered str
 
-    # Loop over all keys 
+    # Loop over all keys
     for each_key in soil_data_dict.keys():
         # If value is 'vg' or 'campbell' then transform to str
         if (
             soil_data_dict[each_key] == 'vg'
             or soil_data_dict[each_key] == 'campbell'
         ):
-            soil_data_dict[each_key] = str(
-                soil_data_dict[each_key]
-            )
+            soil_data_dict[each_key] = str(soil_data_dict[each_key])
 
         # Transform parameters values float
         else:
-            soil_data_dict[each_key] = float(
-                soil_data_dict[each_key]
-            )
+            soil_data_dict[each_key] = float(soil_data_dict[each_key])
 
     # Validate, raise error if soil data don't follow the Schema ----------------
     if soil_data_dict['soil_formulation'] == 'campbell':
@@ -335,7 +338,7 @@ def read_soil_file(
         )
 
     ## Make sure that no parameters are missing (12 or 14) ----------------------
-    #for each_parameter in params:
+    # for each_parameter in params:
     #    # Raise error if a parameter is missing from params
     #    if each_parameter not in soil_data_dict_ordered.keys():
     #        raise ValueError(
@@ -343,9 +346,7 @@ def read_soil_file(
     #        )
 
     # Make sure there are no duplicate parameters -------------------------------
-    if len(soil_data_dict.keys()) is not len(
-        set(soil_data_dict.keys())
-    ):
+    if len(soil_data_dict.keys()) is not len(set(soil_data_dict.keys())):
         raise ValueError(
             'Parameter might be repeated several times in input soil parameter file'
         )

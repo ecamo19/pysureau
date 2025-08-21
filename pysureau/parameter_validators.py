@@ -16,7 +16,7 @@ from pandera.typing import DataFrame, Series
 # %% ../nbs/07_parameter_validators.ipynb 5
 # This class was created for validating the input dataframe
 # If the data don't follow the structure specified the function will fail
-#class SoilDataValidator(pa.SchemaModel):
+# class SoilDataValidator(pa.SchemaModel):
 #    'Schema for validating the input soil parameter file'
 #
 #    parameter_name: Series = pa.Field(description='Column containing parameter names')

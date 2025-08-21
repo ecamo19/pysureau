@@ -14,11 +14,12 @@ import pandas as pd
 import pandera as pa
 from typing import Dict
 from pathlib import Path, PosixPath
+from pydantic import BaseModel, ValidationError
 
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
 from .pysureau_utils import dict_to_csv
-#from pysureau.parameter_validators import *
+from .parameter_validators import SoilParameterValidatorCampbell, SoilParameterValidatorVg
 
 # %% ../nbs/01_soil_utils.ipynb 4
 def compute_b(
@@ -235,55 +236,42 @@ def read_soil_file(
     # Read and validate dataframe -----------------------------------------------
 
     # Read CSV
-    soil_data = pd.read_csv(
-        file_path,
-        # Do not read header
-        skiprows=1,
-        sep=sep,
-    )
+    soil_data = pd.read_csv(file_path, sep = sep, header = 0)
 
+    # Validate the column names of soil data are parameter_name, parameter_value
+    # To correctly transform the the CSV file as dict later 
+    if soil_data.columns.tolist() != ['parameter_name', 'parameter_value']:
+        raise ValueError('Column names in soil parameter file must be called parameter_name and parameter_value')
+      
     # Transform dataframe into dictionary ---------------------------------------
-    soil_data.to_dict(into=OrderedDict)
+    soil_data_dict = soil_data.set_index("parameter_name").to_dict()['parameter_value']
 
-    # Loop over dictionary to transform the data types.
+    # Loop over dictionary to transform the data types --------------------------
     # If this is not done all values will be considered str
 
-    # Loop over all keys
-    for each_key in soil_data_dict_ordered.keys():
+    # Loop over all keys 
+    for each_key in soil_data_dict.keys():
         # If value is 'vg' or 'campbell' then transform to str
         if (
-            soil_data_dict_ordered[each_key] == 'vg'
-            or soil_data_dict_ordered[each_key] == 'campbell'
+            soil_data_dict[each_key] == 'vg'
+            or soil_data_dict[each_key] == 'campbell'
         ):
-            soil_data_dict_ordered[each_key] = str(
-                soil_data_dict_ordered[each_key]
+            soil_data_dict[each_key] = str(
+                soil_data_dict[each_key]
             )
 
-        # If key start with rfc (rock fragment content must be integers since are
-        # values between 0-100%)
-        elif each_key.startswith('rfc'):
-            soil_data_dict_ordered[each_key] = int(
-                soil_data_dict_ordered[each_key]
-            )
-
-        # This is done for avoiding converting 0 to 0.0
-        elif soil_data_dict_ordered[each_key] == 0:
-            soil_data_dict_ordered[each_key] = int(
-                soil_data_dict_ordered[each_key]
-            )
-
-        # Transform to float
+        # Transform parameters values float
         else:
-            soil_data_dict_ordered[each_key] = float(
-                soil_data_dict_ordered[each_key]
+            soil_data_dict[each_key] = float(
+                soil_data_dict[each_key]
             )
 
-    # Validate, raise error if soil data don't follow the SoilDataValidator Schema
-    if soil_data['soil_formulation'] == 'campbell':
+    # Validate, raise error if soil data don't follow the Schema ----------------
+    if soil_data_dict['soil_formulation'] == 'campbell':
         try:
             SoilParameterValidatorCampbell.model_validate(soil_data)
 
-        except pa.errors.SchemaError as error:
+        except ValidationError as error:
             # Print which column  are missing"
             print(error)
 
@@ -291,12 +279,12 @@ def read_soil_file(
         try:
             SoilParameterValidatorVg.model_validate(soil_data)
 
-        except pa.errors.SchemaError as error:
+        except ValidationError as error:
             # Print which column  are missing"
             print(error)
 
     # Setting common parameters for WB_soil (regardless of the options) ---------
-    if soil_data_dict_ordered['pedo_transfer_formulation'] == 'vg':
+    if soil_data_dict['pedo_transfer_formulation'] == 'vg':
         # 14 params
         params = np.array(
             [
@@ -321,7 +309,7 @@ def read_soil_file(
             dtype=object,
         )
 
-    elif soil_data_dict_ordered['pedo_transfer_formulation'] == 'campbell':
+    elif soil_data_dict['pedo_transfer_formulation'] == 'campbell':
         # 12 params
         params = np.array(
             [
@@ -343,29 +331,29 @@ def read_soil_file(
         )
     else:
         raise ValueError(
-            f'Option {soil_data_dict_ordered["pedo_transfer_formulation"]} not recognized. Set pedo_transfer_function to either "vg" or "campbell" Use "" '
+            f'Option {soil_data_dict["pedo_transfer_formulation"]} not recognized. Set pedo_transfer_function to either "vg" or "campbell"'
         )
 
-    ## Make sure that no parameters are missing (12 or 14) -----------------------
-    for each_parameter in params:
-        # Raise error if a parameter is missing from params
-        if each_parameter not in soil_data_dict_ordered.keys():
-            raise ValueError(
-                f'{each_parameter} not provided in input soil parameter CSV file, check presence or spelling\n'
-            )
+    ## Make sure that no parameters are missing (12 or 14) ----------------------
+    #for each_parameter in params:
+    #    # Raise error if a parameter is missing from params
+    #    if each_parameter not in soil_data_dict_ordered.keys():
+    #        raise ValueError(
+    #            f'{each_parameter} not provided in input soil parameter CSV file, check presence or spelling\n'
+    #        )
 
     # Make sure there are no duplicate parameters -------------------------------
-    if len(soil_data_dict_ordered.keys()) is not len(
-        set(soil_data_dict_ordered.keys())
+    if len(soil_data_dict.keys()) is not len(
+        set(soil_data_dict.keys())
     ):
         raise ValueError(
             'Parameter might be repeated several times in input soil parameter file'
         )
 
     # Return
-    return defaultdict(list, soil_data_dict_ordered)
+    return defaultdict(list, soil_data_dict)
 
-# %% ../nbs/01_soil_utils.ipynb 25
+# %% ../nbs/01_soil_utils.ipynb 24
 def convert_vwc_to_sws(
     vwc_x: float,  # Volumetric Water Content m3.m-3
     layer_thickness: float,  # Soil layer thickness in meters?
@@ -375,7 +363,7 @@ def convert_vwc_to_sws(
 
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/01_soil_utils.ipynb 27
+# %% ../nbs/01_soil_utils.ipynb 26
 def convert_sws_to_vwc(
     sws_x: float,  # Soil Water Stock (mm)
     layer_thickness: float,  # Soil layer thickness in meters?

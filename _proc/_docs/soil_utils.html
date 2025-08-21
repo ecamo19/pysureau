@@ -698,25 +698,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-18" class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># soil_data = pd.read_csv('/tmp/pysureau_project_QfA4dpMfetRxuWoYMM9Q5x/1_parameter_files/soil_parameters_campbell.csv',</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                        sep = ",",</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co">#                        header=0</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co">#                        )</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-18" class="cell" data-execution_count="34">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>read_soil_file(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'/tmp/pysureau_project_QfA4dpMfetRxuWoYMM9Q5x/1_parameter_files/soil_parameters_campbell.csv'</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="34">
+<pre><code>defaultdict(list,
+            {'rfc_1': 1.2,
+             'rfc_2': 2.9,
+             'rfc_3': 97.0,
+             'soil_depth_1': 34.0,
+             'soil_depth_2': 33.33,
+             'soil_depth_3': 33.333,
+             'psie': -1.5,
+             'b_camp': 60.0,
+             'g_soil_0': 50.0,
+             'offset_psoil': 54.0,
+             'ksat_campbell': 0.66,
+             'psoil_at_field_capacity': -0.5,
+             'pedo_transfer_formulation': 'campbell',
+             'saturation_capacity_campbell': 30.0,
+             'soil_formulation': 'campbell'})</code></pre>
 </div>
-<div id="cell-19" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read_soil_file('/tmp/pysureau_project_QfA4dpMfetRxuWoYMM9Q5x/1_parameter_files/soil_parameters_campbell.csv',</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#                        sep = ",")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<section id="example-read-csv-file-with-soil-parameters" class="level4">
-<h4 class="anchored" data-anchor-id="example-read-csv-file-with-soil-parameters"><strong>Example: Read CSV file with Soil parameters</strong></h4>
-<div id="cell-21" class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># read_soil_file('/tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv')</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L358" target="_blank" style="float:right; font-size:smaller">source</a></p>
-</section>
 </section>
 <section id="convert_vwc_to_sws" class="level3">
 <h3 class="anchored" data-anchor-id="convert_vwc_to_sws">convert_vwc_to_sws</h3>
@@ -760,8 +766,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-23" class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>convert_vwc_to_sws(<span class="dv">1</span>, layer_thickness<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-20" class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>convert_vwc_to_sws(<span class="dv">1</span>, layer_thickness<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>1000.0</code></pre>
 </div>
@@ -811,8 +817,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>convert_sws_to_vwc(<span class="dv">1000</span>, layer_thickness<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>convert_sws_to_vwc(<span class="dv">1000</span>, layer_thickness<span class="op">=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>1.0</code></pre>
 </div>

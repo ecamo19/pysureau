@@ -272,19 +272,17 @@ def read_soil_file(
     # Validate, raise error if soil data don't follow the Schema ----------------
     if soil_data_dict['soil_formulation'] == 'campbell':
         try:
-            SoilParameterValidatorCampbell.model_validate(soil_data)
+            SoilParameterValidatorCampbell.model_validate(soil_data_dict)
 
         except ValidationError as error:
-            # Print which column  are missing"
-            print(error)
+            raise (error)
 
     else:
         try:
-            SoilParameterValidatorVg.model_validate(soil_data)
+            SoilParameterValidatorVg.model_validate(soil_data_dict)
 
         except ValidationError as error:
-            # Print which column  are missing"
-            print(error)
+            raise (error)
 
     # Setting common parameters for WB_soil (regardless of the options) ---------
     if soil_data_dict['pedo_transfer_formulation'] == 'vg':
@@ -337,14 +335,6 @@ def read_soil_file(
             f'Option {soil_data_dict["pedo_transfer_formulation"]} not recognized. Set pedo_transfer_function to either "vg" or "campbell"'
         )
 
-    ## Make sure that no parameters are missing (12 or 14) ----------------------
-    # for each_parameter in params:
-    #    # Raise error if a parameter is missing from params
-    #    if each_parameter not in soil_data_dict_ordered.keys():
-    #        raise ValueError(
-    #            f'{each_parameter} not provided in input soil parameter CSV file, check presence or spelling\n'
-    #        )
-
     # Make sure there are no duplicate parameters -------------------------------
     if len(soil_data_dict.keys()) is not len(set(soil_data_dict.keys())):
         raise ValueError(
@@ -354,7 +344,7 @@ def read_soil_file(
     # Return
     return defaultdict(list, soil_data_dict)
 
-# %% ../nbs/01_soil_utils.ipynb 24
+# %% ../nbs/01_soil_utils.ipynb 21
 def convert_vwc_to_sws(
     vwc_x: float,  # Volumetric Water Content m3.m-3
     layer_thickness: float,  # Soil layer thickness in meters?
@@ -364,7 +354,7 @@ def convert_vwc_to_sws(
 
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/01_soil_utils.ipynb 26
+# %% ../nbs/01_soil_utils.ipynb 23
 def convert_sws_to_vwc(
     sws_x: float,  # Soil Water Stock (mm)
     layer_thickness: float,  # Soil layer thickness in meters?

@@ -13,13 +13,13 @@ import warnings
 import collections
 import numpy as np
 import pandas as pd
-#import pandera as pa
+
+# import pandera as pa
 from typing import Dict, List
-#from pandera.typing import Series
+
+# from pandera.typing import Series
 from pathlib import Path, PosixPath
 from .pysureau_utils import dict_to_csv
-#from sureau_ecos_py.create_modeling_options import create_modeling_options
-#from sureau_ecos_py.data_and_parameter_validators import PlantDataValidator
 
 # %% ../nbs/02_plant_utils.ipynb 4
 def rs_comp(
@@ -27,7 +27,7 @@ def rs_comp(
     e_symp: float,  # Modulus of elastoicoty of the Symplasm (MPa/%)
     psi: float,  # Unknown parameter definition
 ) -> float:
-    'Compute Rs from pmin (resolution from Bartlet et al 2012 EcolLett and email Herve Cochard 19/06/2015)'
+    "Compute Rs from pmin (resolution from Bartlet et al 2012 EcolLett and email Herve Cochard 19/06/2015)"
     return max(
         # Firts term
         (
@@ -45,7 +45,7 @@ def turgor_comp(
     e_symp: float,  # Modulus of elastoicoty of the Symplasm (MPa/%)
     r_stemp: float,  # Unknown parameter definition
 ) -> float:
-    'Turgor pressure'
+    "Turgor pressure"
     return -pi_ft - e_symp * r_stemp
 
 # %% ../nbs/02_plant_utils.ipynb 6
@@ -54,12 +54,12 @@ def compute_turgor_from_psi(
     e_symp: float,  # Modulus of elastoicoty of the Symplasm (MPa/%)
     psi: List,  # List of Water potential of the organ (MPa)
 ) -> np.array:
-    'Computes Turgor pressure from Pressure-Volume curves parameters and water potential'
+    "Computes Turgor pressure from Pressure-Volume curves parameters and water potential"
 
     # Make sure psi is a list
-    assert isinstance(
-        psi, List
-    ), f'psi must be a List with float values (i.e [1] or [1,2,..]) not a {type(psi)}'
+    assert isinstance(psi, List), (
+        f'psi must be a List with float values (i.e [1] or [1,2,..]) not a {type(psi)}'
+    )
 
     # Compute symplasm relative water deficit (rwd) from each psi value
 
@@ -96,7 +96,7 @@ def osmo_comp(
     pi_ft: float,  # Osmotic potential at full turgor (MPa)
     r_stemp: float,  # Unknown parameter definition
 ) -> float:
-    'Compute osmotic potential'
+    "Compute osmotic potential"
     return pi_ft / (1 - r_stemp)
 
 # %% ../nbs/02_plant_utils.ipynb 12
@@ -105,7 +105,7 @@ def psi_total_symp_comp(
     e_symp: float,  # Modulus of elastoicoty of the Symplasm (MPa/%)
     r_stemp: float,  # Unknown parameter definition
 ) -> float:
-    'Compute Total potential'
+    "Compute Total potential"
     turgor = turgor_comp(pi_ft=pi_ft, e_symp=e_symp, r_stemp=r_stemp)
 
     osmo = osmo_comp(pi_ft=pi_ft, r_stemp=r_stemp)
@@ -119,7 +119,7 @@ def stomatal_regulation_turgor(
     e_max: float,  # Unknown parameter definition
     e_cuti: float,  # Residual Transpiration
 ) -> np.array:
-    'This function computes stomatal regulation if stomatal closure is limited (linearly) by turgor pressure'
+    "This function computes stomatal regulation if stomatal closure is limited (linearly) by turgor pressure"
 
     # Create np.array for storing values
     stomatal_reg_array = np.zeros(0, dtype=float)
@@ -144,7 +144,7 @@ def plc_comp(
     slope: float,  # Unknown parameter definition
     p50: float,  # Unknown parameter definition
 ) -> float:
-    'Compute Percentage loss of conductivity'
+    "Compute Percentage loss of conductivity"
 
     return 100 / (1 + np.exp(slope / 25 * (psi - p50)))
 
@@ -153,7 +153,7 @@ def plc_prime_comp(
     plc: float,  # Computed using the `plc_comp` function
     slope: float,  # Unknown parameter definition
 ) -> float:
-    'This function computes PLC Prime from PLC current value'
+    "This function computes PLC Prime from PLC current value"
 
     return -slope / 25 * plc / 100 * (1 - plc / 100)
 
@@ -175,16 +175,15 @@ def gs_curve(
         'turgor',
     ],
 ) -> float:
-    'To obtain plots of the gs regulation curve'
+    "To obtain plots of the gs regulation curve"
 
-    assert (
-        stomatal_reg_formulation
-        in [
-            'sigmoid',
-            'piecewise_linear',
-            'turgor',
-        ]
-    ), f'{stomatal_reg_formulation} not a valid option, choose "sigmoid", "piecewise_linear" or "turgor" '
+    assert stomatal_reg_formulation in [
+        'sigmoid',
+        'piecewise_linear',
+        'turgor',
+    ], (
+        f'{stomatal_reg_formulation} not a valid option, choose "sigmoid", "piecewise_linear" or "turgor" '
+    )
 
     assert transpiration_model in [
         'jarvis',
@@ -247,7 +246,7 @@ def compute_gmin(
     q10_2: float,  # Q10 values for g_cuti = f(T) above T_phase
     gmin_temp_off=False,  # Unknown parameter definition
 ) -> float:
-    'Calculate minimum conductance (gmin) following Cochard et al. (2019). Equantion 31 and 32 from SurEau-Ecos paper'
+    "Calculate minimum conductance (gmin) following Cochard et al. (2019). Equantion 31 and 32 from SurEau-Ecos paper"
 
     print('original R code have a ambiguous gmin_temp_off specification')
     if gmin_temp_off is False:
@@ -275,7 +274,7 @@ def compute_emin(
     g_crown: float,  # Conductance of the tree crown. Calculated using `compute_g_crown` function
     air_pressure: float = 101.3,  # Surface air pressure (kPa)
 ) -> float:
-    'Calculate minimum transpiration (emin)'
+    "Calculate minimum transpiration (emin)"
 
     gmin_tot = 1 / (1 / gmin + 1 / g_bl + 1 / g_crown)
     return gmin_tot * (vpd / air_pressure)
@@ -287,7 +286,7 @@ def compute_dfmc(
     fm1=52.91,  # Maximum fuel moisture content (% dry weight)
     m=0.64,  # Rate of decay
 ) -> float:  # Fuel moisture content (% dry weight)
-    'Compute dead fuel moisture content from VPD following De Dios et al. (2015)'
+    "Compute dead fuel moisture content from VPD following De Dios et al. (2015)"
     return fm0 + fm1 * np.exp(-m * vpd)
 
 # %% ../nbs/02_plant_utils.ipynb 22
@@ -296,7 +295,7 @@ def distribute_conductances(
     ri: float,  # Root distribution within the soil layers.
     frac_leaf_sym: float = 0.4,  # Proportion of k_plant_init assigned to the leaf (apoplasm to symplasm pathway)
 ) -> Dict:
-    'Calcultate hydraulic conductances in the different portions of the plant (trunk, leaf and root) according to predetermined rules'
+    "Calcultate hydraulic conductances in the different portions of the plant (trunk, leaf and root) according to predetermined rules"
 
     frac_rt = (2 / 3) * (1 - frac_leaf_sym)
 
@@ -325,7 +324,7 @@ def compute_g_crown(
     g_crown0: float,  # Reference tree crown conductance
     wind_speed: float,  # Unknown parameter definition
 ) -> float:
-    'Calcultate g_crown'
+    "Calcultate g_crown"
 
     # to avoid very high conductance values
     wind_speed = max(0.1, wind_speed)
@@ -338,7 +337,7 @@ def convert_flux_from_mmolm2s_to_mm(
     time_step: float,  # Time step (in hours)
     lai: float,  # Leaf area index of the stand (m2leaf.m-2soil)
 ) -> float:
-    'Convert an instantaneous flux in mmol.m-2Leaf.s-1 to a amount in mm (L.m2soil) over a defined time period'
+    "Convert an instantaneous flux in mmol.m-2Leaf.s-1 to a amount in mm (L.m2soil) over a defined time period"
     return x * (lai * time_step * 3600 * 18) / 10**6
 
 # %% ../nbs/02_plant_utils.ipynb 27
@@ -347,7 +346,7 @@ def convert_flux_from_mm_to_mmolm2s(
     time_step: float,  # Time step (in hours)
     lai: float,  # Leaf area index of the stand (m2leaf.m-2soil)
 ) -> float:
-    'Convert flux in L.m-2soil to an instantaneous flux in mmol/m-2leaf.s-1 over a defined time period'
+    "Convert flux in L.m-2soil to an instantaneous flux in mmol/m-2leaf.s-1 over a defined time period"
     if lai > 0:
         return (10**6 * x) / (lai * time_step * 3600 * 18)
 
@@ -362,7 +361,7 @@ def calculate_ebound_mm_granier(
     b: float = 0.134,  # Unknown parameter definition
     c: float = 0,  # Unknown parameter definition
 ) -> float:
-    'No description found in R source code'
+    "No description found in R source code"
 
     # Get the maximum value
     # Example of np.maximum: np.maximum(5, [1,2,6]) == array([5, 5, 6])
@@ -374,7 +373,7 @@ def calculate_ebound_granier(
     lai: float,  # Leaf area index of the stand (m2leaf.m-2soil)
     time_step: float,  # Time step (in hours)
 ) -> float:
-    'No description found in R source code'
+    "No description found in R source code"
 
     # Assert parameters ---------------------------------------------------------
     # pet
@@ -392,9 +391,9 @@ def calculate_ebound_granier(
     ), 'lai missing. Parameter must be a float or integer value'
 
     # time_step
-    assert isinstance(time_step, int) | isinstance(
-        time_step, np.ndarray
-    ), 'nhours missing. Parameter must be a float or integer value'
+    assert isinstance(time_step, int) | isinstance(time_step, np.ndarray), (
+        'nhours missing. Parameter must be a float or integer value'
+    )
 
     ebound_mm = calculate_ebound_mm_granier(etp=pet, lai=lai)
 
@@ -418,32 +417,32 @@ def compute_tleaf(
     turn_off_eb: bool = False,  # Unknown parameter definition. Tleaf Energy balance?
     transpiration_model: str = ['jarvis', 'granier'],  # Transpiration model type
 ) -> Dict:  # Dictionary with parameters
-    'Compute leaf temperature and Vapour Pressure deficit'
+    "Compute leaf temperature and Vapour Pressure deficit"
 
     # Assert parameters ---------------------------------------------------------
 
     # t_air
-    assert (
-        -40 <= t_air <= 70
-    ), 'Unrealistic air temperature, value must be a value between -40 and 70'
+    assert -40 <= t_air <= 70, (
+        'Unrealistic air temperature, value must be a value between -40 and 70'
+    )
 
     # par
-    assert (
-        0 < par <= 2500
-    ), 'Unrealistic par, value must be a value between 0 and 2500'
+    assert 0 < par <= 2500, (
+        'Unrealistic par, value must be a value between 0 and 2500'
+    )
 
     # potential_par
-    assert (
-        0 < potential_par <= 2500
-    ), 'Unrealistic potential_par, value must be a value between 0 and 2500'
+    assert 0 < potential_par <= 2500, (
+        'Unrealistic potential_par, value must be a value between 0 and 2500'
+    )
 
     # gs
     assert 0 < gs <= 25, 'Unrealistic gs, value must be a value between 0 and 25'
 
     # g_cuti
-    assert (
-        0 < g_cuti <= 200
-    ), 'Unrealistic g_cuti, value must be a value between 0 and 200'
+    assert 0 < g_cuti <= 200, (
+        'Unrealistic g_cuti, value must be a value between 0 and 200'
+    )
 
     # e_inst
     assert 0 < e_inst, 'Unrealistic e_inst, value must be a value greater than 0'
@@ -452,18 +451,18 @@ def compute_tleaf(
     assert 0 > psi_leaf, 'Water potential values must be negative'
 
     # Leaf size
-    assert isinstance(leaf_size, float) | isinstance(
-        leaf_size, int
-    ), 'turn_off_eb must be boolean (True or False)'
+    assert isinstance(leaf_size, float) | isinstance(leaf_size, int), (
+        'turn_off_eb must be boolean (True or False)'
+    )
 
     # Relative humidity
-    assert (
-        0 <= relative_humidity <= 100
-    ), 'relative_humidity must be a value between 0 and 100'
+    assert 0 <= relative_humidity <= 100, (
+        'relative_humidity must be a value between 0 and 100'
+    )
 
-    assert isinstance(
-        turn_off_eb, bool
-    ), 'turn_off_eb must be boolean (True or False)'
+    assert isinstance(turn_off_eb, bool), (
+        'turn_off_eb must be boolean (True or False)'
+    )
 
     assert 0 <= leaf_angle <= 90, 'leaf_angle must be a value between 0 and 90'
 
@@ -705,10 +704,8 @@ def compute_tleaf(
 
 # %% ../nbs/02_plant_utils.ipynb 35
 def create_empty_vegetation_parameter_file(
-    
     path: Path,  # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
 ) -> Dict:  # Return two dictionary files for user input
-    
     "Function for creating the CSV templates necessary for the vegetation parameters"
 
     # Assert parameters ---------------------------------------------------------
@@ -736,7 +733,7 @@ def create_empty_vegetation_parameter_file(
             'f_root_to_leaf': 'NA',
             'f_trb_to_Leaf': 'NA',
             'g_crown0': 'NA',
-            "group": 'NA',
+            'group': 'NA',
             'gmin_s': 'NA',
             'gmin20': 'NA',
             'gs_max': 'NA',
@@ -745,9 +742,9 @@ def create_empty_vegetation_parameter_file(
             'k': 'NA',
             'k_plant_init': 'NA',
             'k_ssym_init': 'NA',
-            'leaf_angle':'NA',
-            'leaf_size':'NA',
-            'life_form':'NA',
+            'leaf_angle': 'NA',
+            'leaf_size': 'NA',
+            'life_form': 'NA',
             'lmdc': 'NA',
             'lma': 'NA',
             'nb_day_lai': 'NA',
@@ -773,13 +770,13 @@ def create_empty_vegetation_parameter_file(
             't_gs_sens': 'NA',
             't_phase_gmin': 'NA',
             'turgor_pressure_at_gs_max': 'NA',
-            'vol_stem': 'NA'
+            'vol_stem': 'NA',
         }
         # Write to CSV files
         dict_to_csv(
-            dictionary = vegetation_params,
-            path = path,
-            filename = 'vegetation_parameters.csv',
+            dictionary=vegetation_params,
+            path=path,
+            filename='vegetation_parameters.csv',
         )
 
     else:
@@ -791,19 +788,19 @@ def read_vegetation_file(
     modeling_options: Dict,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ';',  # CSV file separator can be ',' or ';'
 ) -> Dict:
-    'Function for reading a data frame containing information about vegetation characteristics'
+    "Function for reading a data frame containing information about vegetation characteristics"
 
     # Assert parameters ---------------------------------------------------------
 
     # Make sure that modeling_options is a dictionary
-    assert modeling_options is None or isinstance(
-        modeling_options, Dict
-    ), f'modeling_options must be a dictionary not a {type(modeling_options)}'
+    assert modeling_options is None or isinstance(modeling_options, Dict), (
+        f'modeling_options must be a dictionary not a {type(modeling_options)}'
+    )
 
     # Make sure the file_path exist
-    assert os.path.exists(
-        file_path
-    ), f'Path: {file_path} not found, check spelling or presence'
+    assert os.path.exists(file_path), (
+        f'Path: {file_path} not found, check spelling or presence'
+    )
 
     # Read CSV data frame -------------------------------------------------------
     vegetation_csv_data = pd.read_csv(file_path, header=0, sep=sep)
@@ -852,7 +849,6 @@ def read_vegetation_file(
             for each_cell in vegetation_csv_data.values.tolist()
         },
     )
-
 
     # Read modeling_options dictionary ------------------------------------------
 
@@ -930,16 +926,16 @@ def read_vegetation_file(
 
 # %% ../nbs/02_plant_utils.ipynb 41
 def k_series_sum(k1: float, k2: float) -> float:
-    'Function to sum 2 conductances in series'
+    "Function to sum 2 conductances in series"
 
     # Assert parameters ---------------------------------------------------------
-    assert isinstance(k1, float) or isinstance(
-        k1, int
-    ), 'k1 must be a numeric value'
+    assert isinstance(k1, float) or isinstance(k1, int), (
+        'k1 must be a numeric value'
+    )
 
-    assert isinstance(k1, float) or isinstance(
-        k2, int
-    ), 'k2 must be a numeric value'
+    assert isinstance(k1, float) or isinstance(k2, int), (
+        'k2 must be a numeric value'
+    )
 
     # Sum conductances ----------------------------------------------------------
     return 1 / (1 / k1 + 1 / k2)

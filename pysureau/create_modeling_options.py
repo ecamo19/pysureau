@@ -12,50 +12,58 @@ import collections
 import numpy as np
 from typing import Dict
 from pathlib import Path, PosixPath
+from .pysureau_utils import dict_to_csv
 
 # %% ../nbs/05_create_modeling_options.ipynb 5
 def create_empty_modeling_options_file(
     path: Path,  # Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory
 ) -> Dict:  # Return two dictionary file for user input
     "Function for creating the CSV templates necessary for the modeling options file"
-    
+
     # Assert parameters ---------------------------------------------------------
     assert isinstance(path, str) | isinstance(path, PosixPath), (
         f'Input path must be a str, not a {type(path).__name__}'
     )
-    
+
     # Convert string to Path if provided ----------------------------------------
     path = Path(path)
-    
+
     # Main
     if os.path.exists(path):
-        # Soil parameters for van Genuchten pedo transfer function
         modeling_options_params = {
-            'comp_options_for_evapo' : 'normal',       
-            'constant_climate' : False,
-            'custom_small_time_step_in_sec' : 600,
-            'defoliation' : False,
-            'eord' : 1,
-            'latitude' : 'NA',
-            'lcav' : 1,
+            'comp_options_for_evapo': 'normal',
+            'constant_climate': False,
+            'custom_small_time_step_in_sec': 600,
+            'defoliation': False,
+            'eord': 1,
+            'latitude': 'NA',
+            'lcav': 1,
             'longitude': 'NA',
             'numerical_scheme': 'implicit',
             'output_overwrite': False,
-            'output_path' : '/pysureau_project_EDITME/2_model_outputs',
-            'output_type' : 'simple',
-            'pet_formulation' : 'pt',
-            'print_prog' : True,
-            'resolution_output' : 'subdaily',
-            'rn_formulation' : 'linacre',
+            'output_path': '/pysureau_project_EDITME/2_model_outputs',
+            'output_type': 'simple',
+            'pet_formulation': 'pt',
+            'print_prog': True,
+            'resolution_output': 'subdaily',
+            'rn_formulation': 'linacre',
             'scav': 1,
-            'stomatal_reg_formulation':'sigmoid',
+            'stomatal_reg_formulation': 'sigmoid',
             'threshold_mortality': 90,
             'time_step_for_evapo': 1,
-            'transpiration_granier_arg_a':-0.006,
-            'transpiration_granier_arg_b':0.134,
-            'transpiration_granier_arg_c':0,
-            'transpiration_model':'jarvis',
-            'year_end':'',
-            'year_start':''            
+            'transpiration_granier_arg_a': -0.006,
+            'transpiration_granier_arg_b': 0.134,
+            'transpiration_granier_arg_c': 0,
+            'transpiration_model': 'jarvis',
+            'year_end': '',
+            'year_start': '',
         }
+        # Write to CSV files
+        dict_to_csv(
+            path=path,
+            filename='modeling_options.csv',
+            dictionary=modeling_options_params,
+        )
 
+    else:
+        raise ValueError('Failed creating empty modeling options file')

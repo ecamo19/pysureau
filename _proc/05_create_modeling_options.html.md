@@ -11,7 +11,7 @@ title: Create modeling options
 
 ::: {#cell-2 .cell}
 ``` {.python .cell-code}
-#def create_modeling_options(
+# def create_modeling_options(
 #   latitude:float, # Numerical value indicating the latitude of the stand
 #   longitude:float, # Numerical value indicating the longitude of the stand
 #   year_start:int, # Numeric indicating the start year for the simulation (must match the dates of the input climate data file)
@@ -23,7 +23,7 @@ title: Create modeling options
 #   output_overwrite: bool = False,  # Boolean indicating whether the output result file can be overwritten if it already exists
 #   defoliation: bool = False,  # Boolean indicating whether trees should loose leaves when`occurs.cavitation` occurs of the above part of plant. Defoliation starts only when PLC_Leaf > 10% .
 #   threshold_mortality: int = 90,  # Percentange value indicating the percentage loss of conductivity above which the plant is considered dead and simulation stops for the current year.
-#   transpiration_model: str = 'jarvis',  # Transpiration model type. Either  or 'granier' 
+#   transpiration_model: str = 'jarvis',  # Transpiration model type. Either  or 'granier'
 #   transpiration_granier_arg_a:float = -0.006, # Unknown parameter definition
 #   transpiration_granier_arg_b:float = 0.134, # Unknown parameter definition
 #   transpiration_granier_arg_c:float = 0, # Unknown parameter definition
@@ -35,13 +35,13 @@ title: Create modeling options
 #   lcav: int = 1,  # Boolean (0/1) to offset cavitation release from the apoplasm of leaves
 #   scav: int = 1,  # Boolean (0/1) to offset cavitation release from the apoplasm of stem
 #   eord: int = 1,  # Unknown parameter definition
-#   numerical_scheme: str = 'implicit',   # Method to be used, either "implicit", "semi-implicit" (Xu) or 'explicit' 
+#   numerical_scheme: str = 'implicit',   # Method to be used, either "implicit", "semi-implicit" (Xu) or 'explicit'
 #   stomatal_reg_formulation: str = 'sigmoid',  # Type of regulation to be used for stomatal response to leaf symplasmic water potential, either `sigmoid`, `piecewise_linear` or 'turgor'
 #   print_prog: bool = True,  # Print progress of simulation to console (T/F)?
 # -> Dict:
 #   'Create a dictionary containing modeling options that can be used as an input in run.SurEauR'#
 #   # Validate the function parameter types -------------------------------------
-#   
+#
 #   # Make sure output_path str
 #   assert isinstance(
 #       output_path, str
@@ -50,38 +50,38 @@ title: Create modeling options
 #       raise ValueError(
 #           f'Directory {output_path}, does not exist, check presence or spelling'
 #       )
-#   
+#
 #   assert isinstance(
 #       output_path, str
 #   ), f'output_path must be a string not a {type(output_path)}'
-#   
+#
 #   # Latitude
 #   assert (
 #       isinstance(latitude, float) | isinstance(latitude, int)
 #       and 95 >= latitude >= -95
 #   ), 'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
-#   
+#
 #   # Longitude
 #   assert (
 #       isinstance(longitude, float) | isinstance(longitude, int)
 #       and 180 >= longitude >= -180
 #   ), 'Provide longitude as coordinates points bewteen -180 and 180 i.e. longitude = 179.001'
-#   
+#
 #   # year_start
 #   assert (
 #       isinstance(year_start, int) and 3000 >= year_start > 0
 #   ), 'year_start must be a integer value between 0-3000'
-#   
+#
 #   # year_end
 #   assert (
 #       isinstance(year_end, int) and 3000 >= year_end > 0
 #   ), 'year_end must be a integer value between 0-3000'
-#   
+#
 #   # Compare end_year_simulation is larger than start_year_simulation
 #   assert (
 #       year_start <= year_end
 #   ), f'year_start ({year_start}) is larger than year_end ({year_end})'
-#   
+#
 #   # Time step
 #   assert time_step_for_evapo in [
 #       "variable",
@@ -90,7 +90,7 @@ title: Create modeling options
 #       4,
 #       6,
 #   ], 'time_step_for_evap must be set as 1, 2, 4, 6 or "variable"'
-#   
+#
 #   # Make sure that resolution output only has three options
 #   assert (
 #       resolution_output
@@ -100,20 +100,20 @@ title: Create modeling options
 #           'yearly',
 #       ]
 #   ), f'{resolution_output} not a valid option for resolution_output, select "subdaily", "daily" or "yearly"'
-#   
+#
 #   # Make sure that output_type only has four options
 #   assert (
 #       output_type
 #       in [
-#           "simple", 
-#           "diagnostic", 
-#           "LFMC", 
+#           "simple",
+#           "diagnostic",
+#           "LFMC",
 #           "forest_diback",
 #       ]
 #   ), f'{output_type} not a valid option for output_type, select "simple", "diagnostic", "LFMC" or "forest_diback"'#
 #   # output_overwrite
 #   assert isinstance(output_overwrite, bool), 'output_overwrite must be a boolean (True/False)'
-#   
+#
 #   assert isinstance(
 #       constant_climate, bool
 #   ), 'constant_climate must be a boolean (True/False)'#
@@ -168,7 +168,7 @@ title: Create modeling options
 #       time = np.arange(0, 24, time_step_for_evapo, dtype=int)#
 #   # Create comp_options -------------------------------------------------------
 #   comp_options = collections.defaultdict(list)
-#   
+#
 #   # Every 10min, 6min, 3min, 1min
 #   if comp_options_for_evapo == 'normal':
 #           # Add key value pairs to the comp_dictionary
@@ -207,9 +207,9 @@ title: Create modeling options
 #           comp_options['eord'] = eord
 #           comp_options['lcav'] = lcav
 #           comp_options['scav'] = scav#
-#   # every customSmallTimeStepInSec        
-#   if comp_options_for_evapo == 'custom':  
-#       
+#   # every customSmallTimeStepInSec
+#   if comp_options_for_evapo == 'custom':
+#
 #           comp_options['numerical_scheme'] = numerical_scheme#
 #           comp_options['nsmalltimesteps'] = (
 #               (time_step_for_evapo * 3600) / custom_small_time_step_in_sec
@@ -221,12 +221,12 @@ title: Create modeling options
 #           comp_options['eord'] = eord
 #           comp_options['lcav'] = lcav
 #           comp_options['scav'] = scav#
-#   # Create empty dictionary for storing modeling options ----------------------    
+#   # Create empty dictionary for storing modeling options ----------------------
 #   modeling_options = collections.defaultdict(list)
-#    
+#
 #   # Append parameters to dictionary
 #   modeling_options['year_start'] = year_start
-#   modeling_options['year_end'] = year_end 
+#   modeling_options['year_end'] = year_end
 #   modeling_options['resolution_output'] = resolution_output
 #   modeling_options['output_type'] = output_type
 #   modeling_options['constant_climate'] = constant_climate
@@ -243,15 +243,15 @@ title: Create modeling options
 #   modeling_options['transpiration_model'] = transpiration_model
 #   modeling_options['print_prog'] = print_prog
 #   modeling_options['stop_simulation_dead_plant'] = print_prog
-#   modeling_options['transpiration_granier_args'] = collections.defaultdict(list,{"a":transpiration_granier_arg_a, 
+#   modeling_options['transpiration_granier_args'] = collections.defaultdict(list,{"a":transpiration_granier_arg_a,
 #                                                                                  "b":transpiration_granier_arg_b,
 #                                                                                  "c":transpiration_granier_arg_c})
 #   # Create folder for storing output ------------------------------------------
 #   # Create random number for naming folder
 #   random_number = random.randint(1, 10000)
-#   
+#
 #   # Join path for storing output
-#   
+#
 #   output_path = os.path.join(output_path, f'sureau_output_{datetime.datetime.now().strftime("%Y_%m_%d")}_{random_number}')
 #   modeling_options['output_path'] = output_path #
 #   # New folder
@@ -274,7 +274,7 @@ title: Create modeling options
 #       raise ValueError(
 #           'Error creating folder in modeling_options function'
 #       )
-#       
+#
 #   return modeling_options
 ```
 :::
@@ -282,7 +282,7 @@ title: Create modeling options
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/create_modeling_options.py#L17){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/create_modeling_options.py#L18){target="_blank" style="float:right; font-size:smaller"}
 
 ### create_empty_modeling_options_file
 
@@ -294,139 +294,5 @@ title: Create modeling options
 | -- | -------- | ----------- |
 | path | Path | Path to the folder where the parameter files will be saved. If set to None then the files will be saved at the current working directory |
 | **Returns** | **Dict** | **Return two dictionary file for user input** |
-
-
-#### __Example: Create modeling options dictionary__
-
-::: {#cell-5 .cell}
-``` {.python .cell-code}
-#create_modeling_options(
-#    output_path = "/tmp",
-#    resolution_output= "daily",
-#    output_type= "simple",
-#    output_overwrite=True,   
-#    latitude = 90,
-#    longitude= 180,
-#    lcav=1,
-#    scav=1,
-#    eord=1,
-#    print_prog=True,
-#    year_start = 1991,
-#    year_end = 1992,
-#    custom_small_time_step_in_sec=600,
-#    time_step_for_evapo= 1,
-#    constant_climate=True,
-#    defoliation=True,
-#    threshold_mortality=51,
-#    pet_formulation='pt',
-#    rn_formulation='linear',
-#    comp_options_for_evapo='normal',
-#    stomatal_reg_formulation='turgor',
-#    transpiration_model='jarvis',
-#    numerical_scheme='implicit'
-#
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-Directory for storing output created at /tmp/sureau_output_2025_02_12_1322
-```
-:::
-
-::: {.cell-output .cell-output-display}
-```
-defaultdict(list,
-            {'year_start': 1991,
-             'year_end': 1992,
-             'resolution_output': 'daily',
-             'output_type': 'simple',
-             'constant_climate': True,
-             'pet_formulation': 'pt',
-             'rn_formulation': 'linear',
-             'time_step_for_evapo': 1,
-             'time': array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
-                    17, 18, 19, 20, 21, 22, 23]),
-             'latitude': 90,
-             'longitude': 180,
-             'comp_options': defaultdict(list,
-                         {'numerical_scheme': 'implicit',
-                          'nsmalltimesteps': array([ 6, 10, 20, 60]),
-                          'lsym': 1,
-                          'ssym': 1,
-                          'clapo': 1,
-                          'ctapo': 1,
-                          'eord': 1,
-                          'lcav': 1,
-                          'scav': 1}),
-             'stomatal_reg_formulation': 'turgor',
-             'defoliation': True,
-             'threshold_mortality': 51,
-             'transpiration_model': 'jarvis',
-             'print_prog': True,
-             'stop_simulation_dead_plant': True,
-             'transpiration_granier_args': defaultdict(list,
-                         {'a': -0.006, 'b': 0.134, 'c': 0}),
-             'output_path': '/tmp/sureau_output_2025_02_12_1322'})
-```
-:::
-:::
-
-
-::: {#cell-6 .cell}
-``` {.python .cell-code}
-#create_modeling_options(latitude = 1,
-#                        longitude = 1, 
-#                        output_path = "/tmp",
-#                        output_overwrite= True,
-#                        comp_options_for_evapo='normal',
-#                        output_type = "LFMC",
-#                        resolution_output = "daily",
-#                        year_start = 1000,
-#                        year_end = 1001,
-#                        time_step_for_evapo = 4)
-```
-
-::: {.cell-output .cell-output-stdout}
-```
-Directory for storing output created at /tmp/sureau_output_2025_02_12_3046
-```
-:::
-
-::: {.cell-output .cell-output-display}
-```
-defaultdict(list,
-            {'year_start': 1000,
-             'year_end': 1001,
-             'resolution_output': 'daily',
-             'output_type': 'LFMC',
-             'constant_climate': False,
-             'pet_formulation': 'pt',
-             'rn_formulation': 'linacre',
-             'time_step_for_evapo': 4,
-             'time': array([ 0,  4,  8, 12, 16, 20]),
-             'latitude': 1,
-             'longitude': 1,
-             'comp_options': defaultdict(list,
-                         {'numerical_scheme': 'implicit',
-                          'nsmalltimesteps': array([ 24,  40,  80, 240]),
-                          'lsym': 1,
-                          'ssym': 1,
-                          'clapo': 1,
-                          'ctapo': 1,
-                          'eord': 1,
-                          'lcav': 1,
-                          'scav': 1}),
-             'stomatal_reg_formulation': 'sigmoid',
-             'defoliation': False,
-             'threshold_mortality': 90,
-             'transpiration_model': 'jarvis',
-             'print_prog': True,
-             'stop_simulation_dead_plant': True,
-             'transpiration_granier_args': defaultdict(list,
-                         {'a': -0.006, 'b': 0.134, 'c': 0}),
-             'output_path': '/tmp/sureau_output_2025_02_12_3046'})
-```
-:::
-:::
 
 

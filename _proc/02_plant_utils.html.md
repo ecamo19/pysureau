@@ -243,7 +243,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L242){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L241){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_gmin
 
@@ -265,7 +265,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L271){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L270){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_emin
 
@@ -286,7 +286,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L284){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L283){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_dfmc
 
@@ -305,7 +305,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L294){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L293){target="_blank" style="float:right; font-size:smaller"}
 
 ### distribute_conductances
 
@@ -343,7 +343,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L324){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L323){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_g_crown
 
@@ -360,7 +360,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L336){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L335){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_flux_from_mmolm2s_to_mm
 
@@ -378,7 +378,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L345){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L344){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_flux_from_mm_to_mmolm2s
 
@@ -396,7 +396,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L358){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L357){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_ebound_mm_granier
 
@@ -417,7 +417,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L372){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L371){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_ebound_granier
 
@@ -450,7 +450,7 @@ calculate_ebound_granier(pet=1, lai=2, time_step=3)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L406){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L405){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_tleaf
 
@@ -517,7 +517,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L707){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L706){target="_blank" style="float:right; font-size:smaller"}
 
 ### create_empty_vegetation_parameter_file
 
@@ -535,7 +535,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L789){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L786){target="_blank" style="float:right; font-size:smaller"}
 
 ### read_vegetation_file
 
@@ -579,7 +579,7 @@ read_vegetation_file(
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L932){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L928){target="_blank" style="float:right; font-size:smaller"}
 
 ### k_series_sum
 

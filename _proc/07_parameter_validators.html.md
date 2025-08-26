@@ -1,5 +1,6 @@
 ---
-description: 'AUTHORS: Erick Calderon Morales'
+AUTHORS: Erick Calderon Morales
+description: null
 output-file: parameter_validators.html
 title: Parameter validators
 
@@ -105,6 +106,18 @@ Attributes:
         is set to `'allow'`.
     __pydantic_fields_set__: The names of fields explicitly set during instantiation.
     __pydantic_private__: Values of private attributes set on the model instance.*
+
+
+# Modeling options validator
+
+::: {#cell-6 .cell}
+``` {.python .cell-code}
+class ModelingOptionsParameterValidator(BaseModel):
+    eord: Literal[0, 1]
+    lcav: Literal[0, 1]
+    scav: Literal[0, 1]
+```
+:::
 
 
 # Climate data validator

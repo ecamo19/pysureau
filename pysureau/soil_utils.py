@@ -269,7 +269,7 @@ def read_soil_file(
         else:
             soil_data_dict[each_key] = float(soil_data_dict[each_key])
 
-    # Validate, raise error if soil data don't follow the Schema ----------------
+    # Validate, raise error if soil_data_dict don't follow the Schema -----------
     if soil_data_dict['soil_formulation'] == 'campbell':
         try:
             SoilParameterValidatorCampbell.model_validate(soil_data_dict)

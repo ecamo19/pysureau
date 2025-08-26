@@ -25,3 +25,291 @@ title: Modeling options utils
 | **Returns** | **Dict** | **Return two dictionary file for user input** |
 
 
+---
+
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/modeling_options_utils.py#L73){target="_blank" style="float:right; font-size:smaller"}
+
+### read_modeling_options_file
+
+>      read_modeling_options_file (file_path:pathlib._local.Path, sep:str=',')
+
+*Create a dictionary containing modeling options that can be used as an input in run.SurEauR*
+
+|    | **Type** | **Default** | **Details** |
+| -- | -------- | ----------- | ----------- |
+| file_path | Path |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
+| sep | str | , | CSV file separator can be ',' or ';' |
+| **Returns** | **Dict** |  |  |
+
+
+::: {#cell-4 .cell}
+``` {.python .cell-code}
+#read_modeling_options_file(
+#    '/tmp/pysureau_project_fG7GxSSG/1_parameter_files/modeling_options.csv'
+#)
+```
+
+::: {.cell-output .cell-output-error}
+
+::: {.ansi-escaped-output}
+```{=html}
+<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[15]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">read_modeling_options_file</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp/pysureau_project_fG7GxSSG/1_parameter_files/modeling_options.csv</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
+
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 52</span>, in <span class="ansi-cyan-fg">read_modeling_options_file</span><span class="ansi-blue-fg">(file_path, sep)</span>
+<span class="ansi-green-fg">     48</span>         modelling_options_dict[each_key] = <span style="color:rgb(0,135,0)">str</span>(modelling_options_dict[each_key])
+<span class="ansi-green-fg">     50</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Transform parameters values to float</span>
+<span class="ansi-green-fg">     51</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">52</span>         modelling_options_dict[each_key] = <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">float</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">modelling_options_dict</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">each_key</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">     54</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> modelling_options_dict
+
+<span class="ansi-red-fg">ValueError</span>: could not convert string to float: 'xxx1'</pre>
+```
+:::
+
+:::
+:::
+
+
+::: {#cell-5 .cell}
+``` {.python .cell-code}
+## Make sure output_path str
+#   assert isinstance(
+#       output_path, str
+#   ), f'output_path must be a string not a {type(output_path)}'#
+#   if not os.path.isdir(output_path):
+#       raise ValueError(
+#           f'Directory {output_path}, does not exist, check presence or spelling'
+#       )
+#
+#   assert isinstance(
+#       output_path, str
+#   ), f'output_path must be a string not a {type(output_path)}'
+#
+#   # Latitude
+#   assert (
+#       isinstance(latitude, float) | isinstance(latitude, int)
+#       and 95 >= latitude >= -95
+#   ), 'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
+#
+#   # Longitude
+#   assert (
+#       isinstance(longitude, float) | isinstance(longitude, int)
+#       and 180 >= longitude >= -180
+#   ), 'Provide longitude as coordinates points bewteen -180 and 180 i.e. longitude = 179.001'
+#
+#   # year_start
+#   assert (
+#       isinstance(year_start, int) and 3000 >= year_start > 0
+#   ), 'year_start must be a integer value between 0-3000'
+#
+#   # year_end
+#   assert (
+#       isinstance(year_end, int) and 3000 >= year_end > 0
+#   ), 'year_end must be a integer value between 0-3000'
+#
+#   # Compare end_year_simulation is larger than start_year_simulation
+#   assert (
+#       year_start <= year_end
+#   ), f'year_start ({year_start}) is larger than year_end ({year_end})'
+#
+#   # Time step
+#   assert time_step_for_evapo in [
+#       "variable",
+#       1,
+#       2,
+#       4,
+#       6,
+#   ], 'time_step_for_evap must be set as 1, 2, 4, 6 or "variable"'
+#
+#   # Make sure that resolution output only has three options
+#   assert (
+#       resolution_output
+#       in [
+#           'subdaily',
+#           'daily',
+#           'yearly',
+#       ]
+#   ), f'{resolution_output} not a valid option for resolution_output, select "subdaily", "daily" or "yearly"'
+#
+#   # Make sure that output_type only has four options
+#   assert (
+#       output_type
+#       in [
+#           "simple",
+#           "diagnostic",
+#           "LFMC",
+#           "forest_diback",
+#       ]
+#   ), f'{output_type} not a valid option for output_type, select "simple", "diagnostic", "LFMC" or "forest_diback"'#
+#   # output_overwrite
+#   assert isinstance(output_overwrite, bool), 'output_overwrite must be a boolean (True/False)'
+#
+#   assert isinstance(
+#       constant_climate, bool
+#   ), 'constant_climate must be a boolean (True/False)'#
+#   assert isinstance(
+#       defoliation, bool
+#   ), 'defoliation must be a boolean (True/False)'#
+#   assert (
+#       isinstance(threshold_mortality, int) and 50 <= threshold_mortality <= 100
+#   ), 'threshold_mortality must be a integer between 50 and 100'#
+#   assert pet_formulation in [
+#       'pt',
+#       'penman',
+#   ], f'{pet_formulation} not a valid option for pet_formulation, choose "pt" or "penman"'#
+#   assert rn_formulation in [
+#       'linacre',
+#       'linear',
+#   ], f'{rn_formulation} not a valid option for, choose "linacre" or "linear"'#
+#   assert (
+#       comp_options_for_evapo
+#       in [
+#           'normal',
+#           'accurate',
+#           'fast',
+#           'custom',
+#       ]
+#   ), f'{comp_options_for_evapo} not a valid option for comp_options_for_evapo, choose "normal", "accurate", "fast" or "custom" '#
+#   assert (
+#       stomatal_reg_formulation
+#       in [
+#           'sigmoid',
+#           'piecewise_linear',
+#           'turgor',
+#       ]
+#   ), f'{stomatal_reg_formulation} not a valid option for stomatal_reg_formulation, choose "sigmoid", "piecewise_linear" or "turgor" '#
+#   assert transpiration_model in [
+#       'jarvis',
+#       'granier',
+#   ], f'{transpiration_model} not a valid option for transpiration_model, choose  "jarvis" or "granier"'#
+#   assert (
+#       numerical_scheme
+#       in [
+#           'implicit',
+#           'semi-implicit',
+#           'explicit',
+#       ]
+#   ), f'{numerical_scheme} not a valid option for numerical_scheme, choose  "implicit", "semi-implicit" or "explicit"'#
+#   # Create array with time steps for the evapo --------------------------------
+#   if time_step_for_evapo == "variable":
+#       time = np.array([0, 6, 12, 14, 16, 22])
+#       raise ValueError('time_step_for_evapo set to "variable". This has not been implemented yet')#
+#   elif time_step_for_evapo != "variable":
+#       time = np.arange(0, 24, time_step_for_evapo, dtype=int)#
+#   # Create comp_options -------------------------------------------------------
+#   comp_options = collections.defaultdict(list)
+#
+#   # Every 10min, 6min, 3min, 1min
+#   if comp_options_for_evapo == 'normal':
+#           # Add key value pairs to the comp_dictionary
+#           comp_options['numerical_scheme'] = numerical_scheme
+#           comp_options['nsmalltimesteps'] = time_step_for_evapo * np.array(
+#               [6, 10, 20, 60]
+#           )
+#           comp_options['lsym'] = 1
+#           comp_options['ssym'] = 1
+#           comp_options['clapo'] = 1
+#           comp_options['ctapo'] = 1
+#           comp_options['eord'] = eord
+#           comp_options['lcav'] = lcav
+#           comp_options['scav'] = scav#
+#   # every 10 seconds
+#   if comp_options_for_evapo == 'accurate':
+#           comp_options['numerical_scheme'] = numerical_scheme
+#           comp_options['nsmalltimesteps'] = time_step_for_evapo * np.array([600])
+#           comp_options['lsym'] = 1
+#           comp_options['ssym'] = 1
+#           comp_options['clapo'] = 1
+#           comp_options['ctapo'] = 1
+#           comp_options['eord'] = eord
+#           comp_options['lcav'] = lcav
+#           comp_options['scav'] = scav#
+#   # every hours, every 10 min
+#   if comp_options_for_evapo == 'fast':
+#           comp_options['numerical_scheme'] = numerical_scheme
+#           comp_options['nsmalltimesteps'] = time_step_for_evapo * np.array([
+#               1, 6]
+#           )
+#           comp_options['lsym'] = 1
+#           comp_options['ssym'] = 1
+#           comp_options['clapo'] = 1
+#           comp_options['ctapo'] = 1
+#           comp_options['eord'] = eord
+#           comp_options['lcav'] = lcav
+#           comp_options['scav'] = scav#
+#   # every customSmallTimeStepInSec
+#   if comp_options_for_evapo == 'custom':
+#
+#           comp_options['numerical_scheme'] = numerical_scheme#
+#           comp_options['nsmalltimesteps'] = (
+#               (time_step_for_evapo * 3600) / custom_small_time_step_in_sec
+#           )
+#           comp_options['lsym'] = 1
+#           comp_options['ssym'] = 1
+#           comp_options['clapo'] = 1
+#           comp_options['ctapo'] = 1
+#           comp_options['eord'] = eord
+#           comp_options['lcav'] = lcav
+#           comp_options['scav'] = scav#
+#   # Create empty dictionary for storing modeling options ----------------------
+#   modeling_options = collections.defaultdict(list)
+#
+#   # Append parameters to dictionary
+#   modeling_options['year_start'] = year_start
+#   modeling_options['year_end'] = year_end
+#   modeling_options['resolution_output'] = resolution_output
+#   modeling_options['output_type'] = output_type
+#   modeling_options['constant_climate'] = constant_climate
+#   modeling_options['pet_formulation'] = pet_formulation
+#   modeling_options['rn_formulation'] = rn_formulation
+#   modeling_options['time_step_for_evapo'] = time_step_for_evapo
+#   modeling_options['time'] = time
+#   modeling_options['latitude'] = latitude
+#   modeling_options['longitude'] = longitude
+#   modeling_options['comp_options'] = comp_options
+#   modeling_options['stomatal_reg_formulation'] = stomatal_reg_formulation
+#   modeling_options['defoliation'] = defoliation
+#   modeling_options['threshold_mortality'] = threshold_mortality
+#   modeling_options['transpiration_model'] = transpiration_model
+#   modeling_options['print_prog'] = print_prog
+#   modeling_options['stop_simulation_dead_plant'] = print_prog
+#   modeling_options['transpiration_granier_args'] = collections.defaultdict(list,{"a":transpiration_granier_arg_a,
+#                                                                                  "b":transpiration_granier_arg_b,
+#                                                                                  "c":transpiration_granier_arg_c})
+#   # Create folder for storing output ------------------------------------------
+#   # Create random number for naming folder
+#   random_number = random.randint(1, 10000)
+#
+#   # Join path for storing output
+#
+#   output_path = os.path.join(output_path, f'sureau_output_{datetime.datetime.now().strftime("%Y_%m_%d")}_{random_number}')
+#   modeling_options['output_path'] = output_path #
+#   # New folder
+#   if not os.path.exists(output_path):
+#       # Create folder
+#       os.mkdir(output_path)
+#       print(f'Directory for storing output created at {output_path}')#
+#   # Overwrite folder
+#   elif os.path.exists(output_path) and output_overwrite is True:
+#       shutil.rmtree(output_path)
+#       os.makedirs(output_path)
+#       modeling_options['output_path'] = output_path
+#       print(f'Directory ({output_path}) for storing output overwritten')#
+#   # Errors
+#   elif os.path.exists(output_path) and output_overwrite is False:
+#       raise ValueError(
+#           "File already exists and 'output_overwrite' option is set to False, change the 'output_path' or set 'overwrite' to True"
+#       )#
+#   else:
+#       raise ValueError(
+#           'Error creating folder in modeling_options function'
+#       )
+#
+#   return modeling_options
+```
+:::
+
+

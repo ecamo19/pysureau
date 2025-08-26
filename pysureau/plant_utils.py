@@ -767,6 +767,7 @@ def create_empty_vegetation_parameter_file(
             'slope_vc_stem': 'NA',
             'species': 'NA',
             'sym_frac_stem': 'NA',
+            'sym_frac_leaf': 'NA',
             't_base': 'NA',
             't_gs_optim': 'NA',
             't_gs_sens': 'NA',

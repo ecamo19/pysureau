@@ -61,10 +61,10 @@ def pysureau_init(
         os.mkdir(path_to_logfiles_folder)
 
         # Create empty parameter files for soil
-        create_empty_soil_parameter_files(path=path_to_params_folder)
+        create_empty_soil_parameter_files(path = path_to_params_folder)
 
         # Create empty parameter files for veg
-        create_empty_vegetation_parameter_file(path=path_to_params_folder)
+        create_empty_vegetation_parameter_file(path = path_to_params_folder)
         
         # Create empty parameter files for climate
 

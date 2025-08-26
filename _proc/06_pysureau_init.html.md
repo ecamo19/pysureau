@@ -26,9 +26,10 @@ pysureau_init(path='/tmp')
 
 ::: {.cell-output .cell-output-stdout}
 ```
-CSV file saved as /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_vg.csv
-CSV file saved as /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv
-pysureau project created at /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW
+CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/soil_parameters_vg.csv
+CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/soil_parameters_campbell.csv
+CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/vegetation_parameters.csv
+pysureau project created at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH
 ```
 :::
 :::

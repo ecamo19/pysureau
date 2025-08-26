@@ -14,7 +14,7 @@ from pandera.typing import DataFrame
 from .soil_utils import create_empty_soil_parameter_files
 from .plant_utils import create_empty_vegetation_parameter_file
 from .pysureau_utils import _create_parameter_definitions_csv_file
-#from pysureau.modeling_options_utils import create_empty_modeling_options_file
+from .modeling_options_utils import create_empty_modeling_options_file
 
 # %% ../nbs/06_pysureau_init.ipynb 4
 def pysureau_init(
@@ -68,8 +68,7 @@ def pysureau_init(
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
         # Create empty modelling options file
-
-        # EDIT ME
+        create_empty_modeling_options_file(path=path_to_params_folder)
 
         # Create empty parameter files for veg
         create_empty_vegetation_parameter_file(path=path_to_params_folder)
@@ -108,8 +107,7 @@ def pysureau_init(
         create_empty_soil_parameter_files(path=path_to_params_folder)
 
         # Create empty modelling options file
-
-        # EDIT ME
+        create_empty_modeling_options_file(path=path_to_params_folder)
 
         # Create empty parameter files for veg
         create_empty_vegetation_parameter_file(path=path_to_params_folder)

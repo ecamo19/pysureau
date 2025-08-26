@@ -13,9 +13,9 @@ import numpy as np
 import pandas as pd
 from typing import Dict
 from pathlib import Path, PosixPath
+from pydantic import ValidationError
 from .pysureau_utils import dict_to_csv
-#from pysureau.parameter_validators import SoilParameterValidatorCampbell
-#from pysureau.parameter_validators import ModelingOptionsParameterValidator
+from .parameter_validators import ModelingOptionsParameterValidator
 
 # %% ../nbs/05_modeling_options_utils.ipynb 4
 def create_empty_modeling_options_file(
@@ -122,15 +122,30 @@ def read_modeling_options_file(
         'stomatal_reg_formulation',
         'output_path',
     ]
+    
+    parameters_of_class_bool = ['eord', 'lcav', 'scav']
 
     # Loop over all keys
     for each_key in modelling_options_dict.keys():
+
         if each_key in parameters_of_class_str:
+            
             # If value is in parameters_of_class_str then transform to str
             modelling_options_dict[each_key] = str(
                 modelling_options_dict[each_key]
             )
 
+        elif each_key in parameters_of_class_bool:
+            
+            # If value is in parameters_of_class_bool then transform to int
+            # Done in this way because values only can be 0 or 1 and if I do as 
+            # bool(modelling_options_dict[each_key]) instead of 
+            # int(modelling_options_dict[each_key]) a value of 2 will return 
+            # True
+            modelling_options_dict[each_key] = int(
+                modelling_options_dict[each_key]
+            )
+        
         else:
             # Transform parameters values to float
             modelling_options_dict[each_key] = float(
@@ -138,5 +153,10 @@ def read_modeling_options_file(
             )
 
     # Validate, raise error if modelling_options_dict don't follow the Schema ---
+    try:
+        ModelingOptionsParameterValidator.model_validate(modelling_options_dict)
+
+    except ValidationError as error:
+            raise (error)
 
     return modelling_options_dict

@@ -14,7 +14,7 @@ import pandas as pd
 import pandera as pa
 from typing import Dict
 from pathlib import Path, PosixPath
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict

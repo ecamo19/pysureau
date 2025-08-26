@@ -49,26 +49,35 @@ title: Modeling options utils
 #)
 ```
 
-::: {.cell-output .cell-output-error}
-
-::: {.ansi-escaped-output}
-```{=html}
-<pre><span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">ValueError</span>                                Traceback (most recent call last)
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[15]</span><span class="ansi-green-fg">, line 1</span>
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">read_modeling_options_file</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-fg ansi-yellow-bg">/tmp/pysureau_project_fG7GxSSG/1_parameter_files/modeling_options.csv</span><span class="ansi-yellow-fg ansi-yellow-bg">'</span><span class="ansi-yellow-bg">)</span>
-
-<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 52</span>, in <span class="ansi-cyan-fg">read_modeling_options_file</span><span class="ansi-blue-fg">(file_path, sep)</span>
-<span class="ansi-green-fg">     48</span>         modelling_options_dict[each_key] = <span style="color:rgb(0,135,0)">str</span>(modelling_options_dict[each_key])
-<span class="ansi-green-fg">     50</span>     <span style="font-style:italic;color:rgb(95,135,135)"># Transform parameters values to float</span>
-<span class="ansi-green-fg">     51</span>     <span style="font-weight:bold;color:rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">---&gt; </span><span class="ansi-green-fg">52</span>         modelling_options_dict[each_key] = <span style="color:rgb(0,135,0)" class="ansi-yellow-bg">float</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">modelling_options_dict</span><span class="ansi-yellow-bg">[</span><span class="ansi-yellow-bg">each_key</span><span class="ansi-yellow-bg">]</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-fg">     54</span> <span style="font-weight:bold;color:rgb(0,135,0)">return</span> modelling_options_dict
-
-<span class="ansi-red-fg">ValueError</span>: could not convert string to float: 'xxx1'</pre>
+::: {.cell-output .cell-output-display}
 ```
-:::
-
+{'comp_options_for_evapo': 'normal',
+ 'constant_climate': 'False',
+ 'custom_small_time_step_in_sec': 600.0,
+ 'defoliation': 'False',
+ 'eord': 1.0,
+ 'latitude': 90.0,
+ 'lcav': 1.0,
+ 'longitude': 90.0,
+ 'numerical_scheme': 'xxx',
+ 'output_overwrite': 'False',
+ 'output_path': '/pysureau_project_EDITME/2_model_outputs',
+ 'output_type': 'simple',
+ 'pet_formulation': 'pt',
+ 'print_prog': 'True',
+ 'resolution_output': 'subdaily',
+ 'rn_formulation': 'linacre',
+ 'scav': 0.0,
+ 'stomatal_reg_formulation': 'xxx',
+ 'threshold_mortality': 90.0,
+ 'time_step_for_evapo': 1.0,
+ 'transpiration_granier_arg_a': -0.006,
+ 'transpiration_granier_arg_b': 0.134,
+ 'transpiration_granier_arg_c': 0.0,
+ 'transpiration_model': 'jarvis',
+ 'year_end': nan,
+ 'year_start': nan}
+```
 :::
 :::
 

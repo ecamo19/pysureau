@@ -27,7 +27,7 @@ title: Modeling options utils
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/modeling_options_utils.py#L74){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/modeling_options_utils.py#L75){target="_blank" style="float:right; font-size:smaller"}
 
 ### read_modeling_options_file
 

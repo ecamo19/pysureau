@@ -787,8 +787,8 @@ def create_empty_vegetation_parameter_file(
 
 # %% ../nbs/02_plant_utils.ipynb 37
 def read_vegetation_file(
-    file_path: Path,  # Path to a csv file containing parameter values i.e path/to/file_name.csv
-    modeling_options: Dict,  # Dictionary created using the `create_modeling_options` function
+    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+    modeling_options: Dict,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
     sep: str = ';',  # CSV file separator can be ',' or ';'
 ) -> Dict:
     'Function for reading a data frame containing information about vegetation characteristics'
@@ -853,10 +853,6 @@ def read_vegetation_file(
         },
     )
 
-    # Add frac_leaf_sym if not provided -----------------------------------------
-    if 'frac_leaf_sym' not in vegetation_parameters:
-        print("frac_leaf_sym' set to 0.4")
-        vegetation_parameters['frac_leaf_sym'] = 0.4
 
     # Read modeling_options dictionary ------------------------------------------
 

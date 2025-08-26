@@ -546,8 +546,8 @@ defaultdict(list,
 
 |    | **Type** | **Default** | **Details** |
 | -- | -------- | ----------- | ----------- |
-| file_path | Path |  | Path to a csv file containing parameter values i.e path/to/file_name.csv |
-| modeling_options | Dict |  | Dictionary created using the `create_modeling_options` function |
+| file_path | Path |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
+| modeling_options | Dict |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
 | sep | str | ; | CSV file separator can be ',' or ';' |
 | **Returns** | **Dict** |  |  |
 
@@ -579,7 +579,7 @@ read_vegetation_file(
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L936){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L932){target="_blank" style="float:right; font-size:smaller"}
 
 ### k_series_sum
 

@@ -26,10 +26,23 @@ pysureau_init(path='/tmp')
 
 ::: {.cell-output .cell-output-stdout}
 ```
-CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/soil_parameters_vg.csv
-CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/soil_parameters_campbell.csv
-CSV parameter file saved at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH/1_parameter_files/vegetation_parameters.csv
-pysureau project created at /tmp/pysureau_project_jzpe3q6hHB3eNWm2HKXfVH
+CSV parameter file saved at /tmp/pysureau_project_X3BDY8ymUVqi4mojYMNDrC/1_parameter_files/soil_parameters_vg.csv
+CSV parameter file saved at /tmp/pysureau_project_X3BDY8ymUVqi4mojYMNDrC/1_parameter_files/soil_parameters_campbell.csv
+CSV parameter file saved at /tmp/pysureau_project_X3BDY8ymUVqi4mojYMNDrC/1_parameter_files/vegetation_parameters.csv
+pysureau project created at /tmp/pysureau_project_X3BDY8ymUVqi4mojYMNDrC
+```
+:::
+:::
+
+
+::: {#cell-4 .cell}
+``` {.python .cell-code}
+shortuuid.uuid()
+```
+
+::: {.cell-output .cell-output-display}
+```
+'2zksDk5x'
 ```
 :::
 :::

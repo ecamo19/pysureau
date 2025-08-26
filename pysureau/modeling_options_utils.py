@@ -81,7 +81,7 @@ def read_modeling_options_file(
     # Assert parameters ---------------------------------------------------------
 
     assert os.path.exists(file_path), (
-        f'sureau_parameter_files folder not found at {file_path}. Save soil parameter files within sureau_parameter_files'
+        f'sureau_parameter_files folder not found at {file_path}. Save the CSV inside the parameter_files folder in the pysureau project'
     )
 
     # Read and validate dataframe -----------------------------------------------
@@ -134,7 +134,17 @@ def read_modeling_options_file(
             modelling_options_dict[each_key] = str(
                 modelling_options_dict[each_key]
             )
-
+        
+        # Special case. Done in this way beacuse param can be an integer or a str
+        elif each_key == 'time_step_for_evapo':
+            
+            if modelling_options_dict[each_key] == "variable":
+                modelling_options_dict[each_key] = str(modelling_options_dict[each_key])
+                
+            else:        
+                modelling_options_dict[each_key] = int(modelling_options_dict[each_key])
+                
+             
         elif each_key in parameters_of_class_bool:
             
             # If value is in parameters_of_class_bool then transform to int
@@ -162,7 +172,7 @@ def read_modeling_options_file(
     # Compare end_year_simulation is larger than start_year_simulation
     assert (
         modelling_options_dict['year_start'] <= modelling_options_dict['year_end']
-        ), f'year_start ({year_start}) is larger than year_end ({year_end})'
+        ), f'year_start ({modelling_options_dict['year_start']}) is larger than year_end ({modelling_options_dict['year_end']})'
 
 
     return modelling_options_dict

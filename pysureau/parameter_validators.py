@@ -71,13 +71,30 @@ class ModelingOptionsParameterValidator(BaseModel):
     eord: Literal[0, 1]
     lcav: Literal[0, 1]
     scav: Literal[0, 1]
-    latitude: float = Field(ge = -91, le = 91)
-    longitude: float = Field(ge = -181, le = 181)
+    pet_formulation: Literal['pt', 'penman']
+    rn_formulation: Literal['linacre', 'linear']
+    transpiration_model:Literal['jarvis','granier']
+    time_step_for_evapo: Literal["variable", 1, 2, 4, 6]
+    resolution_output: Literal['subdaily','daily','yearly']
+    numerical_scheme: Literal['implicit','semi-implicit','explicit']
+    output_type: Literal["simple","diagnostic","LFMC","forest_diback",]
+    comp_options_for_evapo: Literal['normal','accurate','fast','custom']
+    stomatal_reg_formulation: Literal['sigmoid', 'piecewise_linear','turgor']
     year_end: int
     year_start: int
-    time_step_for_evapo: Literal["variable", 1, 2, 4, 6]
+    custom_small_time_step_in_sec: int 
+    print_prog: bool
+    defoliation: bool
+    constant_climate: bool
+    output_overwrite: bool    
+    transpiration_granier_arg_a: float
+    transpiration_granier_arg_b: float
+    transpiration_granier_arg_c: float
+    latitude: float = Field(ge = -91, le = 91)
+    longitude: float = Field(ge = -181, le = 181)
+    threshold_mortality: float = Field(ge = 0, le = 100)
 
-# %% ../nbs/07_parameter_validators.ipynb 12
+# %% ../nbs/07_parameter_validators.ipynb 11
 # This class is created for validating the input climate dataframe
 # If the data dont follow the structure in the class the function will fail
 # class ClimateDataValidator(pa.SchemaModel):
@@ -121,7 +138,7 @@ class ModelingOptionsParameterValidator(BaseModel):
 #    class Config:
 #        strict = True
 
-# %% ../nbs/07_parameter_validators.ipynb 14
+# %% ../nbs/07_parameter_validators.ipynb 13
 # class PlantDataValidator(pa.SchemaModel):
 #    Schema for validating the input CSV spreadsheet with trait parameters.
 #

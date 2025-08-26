@@ -117,12 +117,33 @@ Attributes:
 ### ModelingOptionsParameterValidator
 
 >      ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
->                                         scav:Literal[0,1], latitude:Annotated[
->                                         float,Ge(ge=-91),Le(le=91)], longitude
->                                         :Annotated[float,Ge(ge=-
->                                         181),Le(le=181)], year_end:int,
->                                         year_start:int, time_step_for_evapo:Li
->                                         teral['variable',1,2,4,6])
+>                                         scav:Literal[0,1], pet_formulation:Lit
+>                                         eral['pt','penman'], rn_formulation:Li
+>                                         teral['linacre','linear'], transpirati
+>                                         on_model:Literal['jarvis','granier'], 
+>                                         time_step_for_evapo:Literal['variable'
+>                                         ,1,2,4,6], resolution_output:Literal['
+>                                         subdaily','daily','yearly'], numerical
+>                                         _scheme:Literal['implicit','semi-
+>                                         implicit','explicit'], output_type:Lit
+>                                         eral['simple','diagnostic','LFMC','for
+>                                         est_diback'], comp_options_for_evapo:L
+>                                         iteral['normal','accurate','fast','cus
+>                                         tom'], stomatal_reg_formulation:Litera
+>                                         l['sigmoid','piecewise_linear','turgor
+>                                         '], year_end:int, year_start:int,
+>                                         custom_small_time_step_in_sec:int,
+>                                         print_prog:bool, defoliation:bool,
+>                                         constant_climate:bool,
+>                                         output_overwrite:bool,
+>                                         transpiration_granier_arg_a:float,
+>                                         transpiration_granier_arg_b:float,
+>                                         transpiration_granier_arg_c:float, lat
+>                                         itude:Annotated[float,Ge(ge=-
+>                                         91),Le(le=91)], longitude:Annotated[fl
+>                                         oat,Ge(ge=-181),Le(le=181)], threshold
+>                                         _mortality:Annotated[float,Ge(ge=0),Le
+>                                         (le=100)])
 
 *!!! abstract "Usage Documentation"
     [Models](../concepts/models.md)

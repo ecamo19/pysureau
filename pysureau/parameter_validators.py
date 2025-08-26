@@ -11,7 +11,7 @@ __all__ = ['SoilParameterValidatorCampbell', 'SoilParameterValidatorVg', 'Modeli
 # from typing import Dict
 # from pathlib import Path
 from typing import Literal
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 # from pandera.typing import DataFrame Series
 
 # %% ../nbs/07_parameter_validators.ipynb 5
@@ -20,7 +20,7 @@ from pydantic import BaseModel
 # class SoilDataValidator(pa.SchemaModel):
 #    Schema for validating the input soil parameter file
 #
-#    parameter_name: Series = pa.Field(description=Column containing parameter names)
+#    parameter_me: Series = pa.Field(description=Column containing parameter names)
 #    parameter_value: Series = pa.Field(description=Parameter values)
 #
 #    # Added for making sure that it only accepts the columns specified above
@@ -71,6 +71,11 @@ class ModelingOptionsParameterValidator(BaseModel):
     eord: Literal[0, 1]
     lcav: Literal[0, 1]
     scav: Literal[0, 1]
+    latitude: float = Field(ge = -91, le = 91)
+    longitude: float = Field(ge = -181, le = 181)
+    year_end: int
+    year_start: int
+    time_step_for_evapo: Literal["variable", 1, 2, 4, 6]
 
 # %% ../nbs/07_parameter_validators.ipynb 12
 # This class is created for validating the input climate dataframe

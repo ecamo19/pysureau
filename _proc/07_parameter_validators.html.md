@@ -117,7 +117,12 @@ Attributes:
 ### ModelingOptionsParameterValidator
 
 >      ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
->                                         scav:Literal[0,1])
+>                                         scav:Literal[0,1], latitude:Annotated[
+>                                         float,Ge(ge=-91),Le(le=91)], longitude
+>                                         :Annotated[float,Ge(ge=-
+>                                         181),Le(le=181)], year_end:int,
+>                                         year_start:int, time_step_for_evapo:Li
+>                                         teral['variable',1,2,4,6])
 
 *!!! abstract "Usage Documentation"
     [Models](../concepts/models.md)

@@ -290,7 +290,12 @@ __pydantic_private__: Values of private attributes set on the model instance.*</
 <h3 class="anchored" data-anchor-id="modelingoptionsparametervalidator">ModelingOptionsParameterValidator</h3>
 <blockquote class="blockquote">
 <pre><code> ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
-                                    scav:Literal[0,1])</code></pre>
+                                    scav:Literal[0,1], latitude:Annotated[
+                                    float,Ge(ge=-91),Le(le=91)], longitude
+                                    :Annotated[float,Ge(ge=-
+                                    181),Le(le=181)], year_end:int,
+                                    year_start:int, time_step_for_evapo:Li
+                                    teral['variable',1,2,4,6])</code></pre>
 </blockquote>
 <p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
 <p>A base class for creating Pydantic models.</p>

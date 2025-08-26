@@ -158,5 +158,11 @@ def read_modeling_options_file(
 
     except ValidationError as error:
             raise (error)
+        
+    # Compare end_year_simulation is larger than start_year_simulation
+    assert (
+        modelling_options_dict['year_start'] <= modelling_options_dict['year_end']
+        ), f'year_start ({year_start}) is larger than year_end ({year_end})'
+
 
     return modelling_options_dict

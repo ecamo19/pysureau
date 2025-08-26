@@ -2,7 +2,7 @@
 description: 'AUTHORS: __Julien Ruffault (julien.ruff@gmail.com), Nicolas Martin-StPaul
   (nicolas.martin@inrae.fr)__'
 output-file: modeling_options_utils.html
-title: Create modeling options
+title: Modeling options utils
 
 ---
 

@@ -1,35 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ecamo19.github.io/pysureau/pysureau_utils.html</loc>
-    <lastmod>2025-08-26T08:13:20.514Z</lastmod>
+    <loc>https://ecamo19.github.io/pysureau/modeling_options_utils.html</loc>
+    <lastmod>2025-08-27T06:53:50.429Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ecamo19.github.io/pysureau/conversions_utils.html</loc>
+    <lastmod>2025-08-27T06:53:50.297Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/plant_utils.html</loc>
-    <lastmod>2025-08-26T08:13:20.625Z</lastmod>
+    <lastmod>2025-08-27T06:53:50.447Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/soil_utils.html</loc>
-    <lastmod>2025-08-26T11:01:12.278Z</lastmod>
+    <lastmod>2025-08-27T06:53:50.392Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/parameter_validators.html</loc>
-    <lastmod>2025-08-26T12:43:28.162Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ecamo19.github.io/pysureau/pysureau_init.html</loc>
-    <lastmod>2025-08-26T08:38:03.956Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ecamo19.github.io/pysureau/create_modeling_options.html</loc>
-    <lastmod>2025-08-26T08:13:20.530Z</lastmod>
+    <lastmod>2025-08-27T06:53:49.951Z</lastmod>
   </url>
   <url>
     <loc>https://ecamo19.github.io/pysureau/index.html</loc>
-    <lastmod>2025-08-21T08:34:44.227Z</lastmod>
+    <lastmod>2025-08-27T06:53:49.851Z</lastmod>
   </url>
   <url>
-    <loc>https://ecamo19.github.io/pysureau/modeling_options_utils.html</loc>
-    <lastmod>2025-08-27T06:20:33.334Z</lastmod>
+    <loc>https://ecamo19.github.io/pysureau/pysureau_init.html</loc>
+    <lastmod>2025-08-27T06:53:50.319Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ecamo19.github.io/pysureau/climate_utils.html</loc>
+    <lastmod>2025-08-27T06:53:50.061Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ecamo19.github.io/pysureau/pysureau_utils.html</loc>
+    <lastmod>2025-08-27T06:53:50.368Z</lastmod>
   </url>
 </urlset>

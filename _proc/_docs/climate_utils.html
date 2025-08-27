@@ -6,8 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="AUTHORS: Julien Ruffault (julien.ruff@gmail.com), Nicolas Martin-StPaul (nicolas.martin@inrae.fr)">
 
-<title>Parameter validators – pysureau</title>
+<title>Climate utils functions – pysureau</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -70,11 +106,11 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="Parameter validators – pysureau">
-<meta property="og:description" content="Reimplementation of the SurEau-Ecos model for python">
+<meta property="og:title" content="Climate utils functions – pysureau">
+<meta property="og:description" content="AUTHORS: Julien Ruffault (julien.ruff@gmail.com), Nicolas Martin-StPaul (nicolas.martin@inrae.fr)">
 <meta property="og:site_name" content="pysureau">
-<meta name="twitter:title" content="Parameter validators – pysureau">
-<meta name="twitter:description" content="Reimplementation of the SurEau-Ecos model for python">
+<meta name="twitter:title" content="Climate utils functions – pysureau">
+<meta name="twitter:description" content="AUTHORS: Julien Ruffault (julien.ruff@gmail.com), Nicolas Martin-StPaul (nicolas.martin@inrae.fr)">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -99,7 +135,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./parameter_validators.html">Parameter validators</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./climate_utils.html">Climate utils functions</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -137,7 +173,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./climate_utils.html" class="sidebar-item-text sidebar-link">
+  <a href="./climate_utils.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Climate utils functions</span></a>
   </div>
 </li>
@@ -155,7 +191,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./parameter_validators.html" class="sidebar-item-text sidebar-link active">
+  <a href="./parameter_validators.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Parameter validators</span></a>
   </div>
 </li>
@@ -175,28 +211,23 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#soil-data-validator" id="toc-soil-data-validator" class="nav-link active" data-scroll-target="#soil-data-validator">Soil data validator</a>
-  <ul class="collapse">
-  <li><a href="#soilparametervalidatorcampbell" id="toc-soilparametervalidatorcampbell" class="nav-link" data-scroll-target="#soilparametervalidatorcampbell">SoilParameterValidatorCampbell</a></li>
-  <li><a href="#soilparametervalidatorvg" id="toc-soilparametervalidatorvg" class="nav-link" data-scroll-target="#soilparametervalidatorvg">SoilParameterValidatorVg</a></li>
-  </ul></li>
-  <li><a href="#modeling-options-validator" id="toc-modeling-options-validator" class="nav-link" data-scroll-target="#modeling-options-validator">Modeling options validator</a>
-  <ul class="collapse">
-  <li><a href="#modelingoptionsparametervalidator" id="toc-modelingoptionsparametervalidator" class="nav-link" data-scroll-target="#modelingoptionsparametervalidator">ModelingOptionsParameterValidator</a></li>
-  </ul></li>
-  <li><a href="#climate-data-validator" id="toc-climate-data-validator" class="nav-link" data-scroll-target="#climate-data-validator">Climate data validator</a></li>
-  <li><a href="#plant-data-validator" id="toc-plant-data-validator" class="nav-link" data-scroll-target="#plant-data-validator">Plant data Validator</a></li>
+  <li><a href="#day_length" id="toc-day_length" class="nav-link active" data-scroll-target="#day_length">day_length</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.com/ecamo19/pysureau/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="parameter_validators.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/ecamo19/pysureau/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div><div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="climate_utils.html.md"><i class="bi bi-file-code"></i>CommonMark</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Parameter validators</h1>
+<h1 class="title">Climate utils functions</h1>
 </div>
 
+<div>
+  <div class="description">
+    AUTHORS: <strong>Julien Ruffault (julien.ruff@gmail.com), Nicolas Martin-StPaul (nicolas.martin@inrae.fr)</strong>
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -212,156 +243,92 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
-<section id="soil-data-validator" class="level1">
-<h1>Soil data validator</h1>
 <hr>
-<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/data_and_parameter_validators.py#L33" target="_blank" style="float:right; font-size:smaller">source</a></p>
-<section id="soilparametervalidatorcampbell" class="level3">
-<h3 class="anchored" data-anchor-id="soilparametervalidatorcampbell">SoilParameterValidatorCampbell</h3>
+<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/climate_utils.py#L17" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="day_length" class="level3">
+<h3 class="anchored" data-anchor-id="day_length">day_length</h3>
 <blockquote class="blockquote">
-<pre><code> SoilParameterValidatorCampbell (rfc_1:float, rfc_2:float, rfc_3:float,
-                                 soil_depth_1:float, soil_depth_2:float,
-                                 soil_depth_3:float, psie:float,
-                                 b_camp:float, g_soil_0:float,
-                                 offset_psoil:float, ksat_campbell:float,
-                                 psoil_at_field_capacity:float,
-                                 saturation_capacity_campbell:float,
-                                 pedo_transfer_formulation:str,
-                                 soil_formulation:str)</code></pre>
+<pre><code> day_length (latitude:float, day_of_year:int, no_times_as_na:bool=False)</code></pre>
 </blockquote>
-<p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
-<p>A base class for creating Pydantic models.</p>
-<p>Attributes: <strong>class_vars</strong>: The names of the class variables defined on the model. <strong>private_attributes</strong>: Metadata about the private attributes of the model. <strong>signature</strong>: The synthesized <code>__init__</code> [<code>Signature</code>][inspect.Signature] of the model.</p>
-<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The core schema of the model.
-__pydantic_custom_init__: Whether the model has a custom `__init__` function.
-__pydantic_decorators__: Metadata containing the decorators defined on the model.
-    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
-__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
-    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
-__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
-__pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
-__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
-__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
+<p><em>Original function from chillR R package. This function computes sunrise time, sunset time and daylength for a particular location and day of the year (Julian day). This is done using equations by Spencer (1971) and Almorox et al.&nbsp;(2005).</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>latitude</td>
+<td>float</td>
+<td></td>
+<td>numeric value specifying the geographic latitude (in decimal degrees) of the location of interest</td>
+</tr>
+<tr class="even">
+<td>day_of_year</td>
+<td>int</td>
+<td></td>
+<td>numeric (usually integer) value or vector specifying the Julian day (day of the year), for which calculations should be done.</td>
+</tr>
+<tr class="odd">
+<td>no_times_as_na</td>
+<td>bool</td>
+<td>False</td>
+<td>parameter to determine whether for days without sunrise or sunset, na should be returned for Sunset and Sunrise. If left at FALSE, the function returns -99 and 99 for sunrise and sunset or polar nights and polar days, respectively</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>Dict</strong></td>
+<td></td>
+<td><strong>Dictionary with three elements Sunrise, Sunset and Daylength. For days without sunrise (polar nights),sunset and sunrise become -99 and the daylength 0. For days without sunset, sunset and sunrise are 99 and daylength 24.</strong></td>
+</tr>
+</tbody>
+</table>
+<section id="example-calculate-day-length" class="level4">
+<h4 class="anchored" data-anchor-id="example-calculate-day-length"><strong>Example: Calculate day length</strong></h4>
+<p>This function was originally developed in the ChillR R <a href="https://cran.r-project.org/web/packages/chillR/chillR.pdf">package</a></p>
+<div id="cell-5" class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>day_length(latitude<span class="op">=</span><span class="dv">45</span>, day_of_year<span class="op">=</span><span class="dv">100</span>, no_times_as_na<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_27135/2141787043.py:9: UserWarning: Double check day_length function works for Australia
+  warnings.warn('Double check day_length function works for Australia')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>defaultdict(list,
+            {'sunrise': array([5.4049135]),
+             'sunset': array([18.5950865]),
+             'day_length': array([13.190173])})</code></pre>
+</div>
+</div>
+<div id="cell-6" class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>day_length(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    latitude<span class="op">=</span><span class="dv">50</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    day_of_year<span class="op">=</span>np.array([<span class="dv">78</span>, <span class="dv">79</span>, <span class="dv">80</span>, <span class="dv">81</span>, <span class="dv">82</span>]),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    no_times_as_na<span class="op">=</span><span class="va">False</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>/tmp/ipykernel_27135/2141787043.py:9: UserWarning: Double check day_length function works for Australia
+  warnings.warn('Double check day_length function works for Australia')</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>defaultdict(list,
+            {'sunrise': array([5.98160544, 5.95020317, 5.91880891, 5.88742546, 5.85605558]),
+             'sunset': array([18.01839456, 18.04979683, 18.08119109, 18.11257454, 18.14394442]),
+             'day_length': array([12.03678911, 12.09959365, 12.16238217, 12.22514908, 12.28788884])})</code></pre>
+</div>
+</div>
 
-__pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
-__pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
 
-__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
-    is set to `'allow'`.
-__pydantic_fields_set__: The names of fields explicitly set during instantiation.
-__pydantic_private__: Values of private attributes set on the model instance.*</code></pre>
-<hr>
-<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/data_and_parameter_validators.py#L53" target="_blank" style="float:right; font-size:smaller">source</a></p>
 </section>
-<section id="soilparametervalidatorvg" class="level3">
-<h3 class="anchored" data-anchor-id="soilparametervalidatorvg">SoilParameterValidatorVg</h3>
-<blockquote class="blockquote">
-<pre><code> SoilParameterValidatorVg (rfc_1:float, rfc_2:float, rfc_3:float,
-                           soil_depth_1:float, soil_depth_2:float,
-                           soil_depth_3:float, psie:float, n_vg:float,
-                           i_vg:float, ksat_vg:float, g_soil_0:float,
-                           alpha_vg:float, offset_psoil:float,
-                           residual_capacity_vg:float,
-                           saturation_capacity_vg:float,
-                           psoil_at_field_capacity:float,
-                           pedo_transfer_formulation:str,
-                           soil_formulation:str)</code></pre>
-</blockquote>
-<p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
-<p>A base class for creating Pydantic models.</p>
-<p>Attributes: <strong>class_vars</strong>: The names of the class variables defined on the model. <strong>private_attributes</strong>: Metadata about the private attributes of the model. <strong>signature</strong>: The synthesized <code>__init__</code> [<code>Signature</code>][inspect.Signature] of the model.</p>
-<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The core schema of the model.
-__pydantic_custom_init__: Whether the model has a custom `__init__` function.
-__pydantic_decorators__: Metadata containing the decorators defined on the model.
-    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
-__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
-    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
-__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
-__pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
-__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
-__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
-
-__pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
-__pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
-
-__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
-    is set to `'allow'`.
-__pydantic_fields_set__: The names of fields explicitly set during instantiation.
-__pydantic_private__: Values of private attributes set on the model instance.*</code></pre>
-</section>
-</section>
-<section id="modeling-options-validator" class="level1">
-<h1>Modeling options validator</h1>
-<hr>
-<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L70" target="_blank" style="float:right; font-size:smaller">source</a></p>
-<section id="modelingoptionsparametervalidator" class="level3">
-<h3 class="anchored" data-anchor-id="modelingoptionsparametervalidator">ModelingOptionsParameterValidator</h3>
-<blockquote class="blockquote">
-<pre><code> ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
-                                    scav:Literal[0,1], pet_formulation:Lit
-                                    eral['pt','penman'], rn_formulation:Li
-                                    teral['linacre','linear'], transpirati
-                                    on_model:Literal['jarvis','granier'], 
-                                    time_step_for_evapo:Literal['variable'
-                                    ,1,2,4,6], resolution_output:Literal['
-                                    subdaily','daily','yearly'], numerical
-                                    _scheme:Literal['implicit','semi-
-                                    implicit','explicit'], output_type:Lit
-                                    eral['simple','diagnostic','LFMC','for
-                                    est_diback'], comp_options_for_evapo:L
-                                    iteral['normal','accurate','fast','cus
-                                    tom'], stomatal_reg_formulation:Litera
-                                    l['sigmoid','piecewise_linear','turgor
-                                    '], year_end:int, year_start:int,
-                                    custom_small_time_step_in_sec:int,
-                                    print_prog:bool, defoliation:bool,
-                                    constant_climate:bool,
-                                    output_overwrite:bool,
-                                    transpiration_granier_arg_a:float,
-                                    transpiration_granier_arg_b:float,
-                                    transpiration_granier_arg_c:float, lat
-                                    itude:Annotated[float,Ge(ge=-
-                                    91),Le(le=91)], longitude:Annotated[fl
-                                    oat,Ge(ge=-181),Le(le=181)], threshold
-                                    _mortality:Annotated[float,Ge(ge=0),Le
-                                    (le=100)])</code></pre>
-</blockquote>
-<p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
-<p>A base class for creating Pydantic models.</p>
-<p>Attributes: <strong>class_vars</strong>: The names of the class variables defined on the model. <strong>private_attributes</strong>: Metadata about the private attributes of the model. <strong>signature</strong>: The synthesized <code>__init__</code> [<code>Signature</code>][inspect.Signature] of the model.</p>
-<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
-__pydantic_core_schema__: The core schema of the model.
-__pydantic_custom_init__: Whether the model has a custom `__init__` function.
-__pydantic_decorators__: Metadata containing the decorators defined on the model.
-    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
-__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
-    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
-__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
-__pydantic_post_init__: The name of the post-init method for the model, if defined.
-__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
-__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
-__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
-
-__pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
-__pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
-
-__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
-    is set to `'allow'`.
-__pydantic_fields_set__: The names of fields explicitly set during instantiation.
-__pydantic_private__: Values of private attributes set on the model instance.*</code></pre>
-</section>
-</section>
-<section id="climate-data-validator" class="level1">
-<h1>Climate data validator</h1>
-</section>
-<section id="plant-data-validator" class="level1">
-<h1>Plant data Validator</h1>
-
-
 </section>
 
 </main> <!-- /main -->

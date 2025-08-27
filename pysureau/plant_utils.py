@@ -5,7 +5,7 @@ __all__ = ['rs_comp', 'turgor_comp', 'compute_turgor_from_psi', 'osmo_comp', 'ps
            'plc_comp', 'plc_prime_comp', 'gs_curve', 'compute_gmin', 'compute_emin', 'compute_dfmc',
            'distribute_conductances', 'compute_g_crown', 'convert_flux_from_mmolm2s_to_mm',
            'convert_flux_from_mm_to_mmolm2s', 'calculate_ebound_mm_granier', 'calculate_ebound_granier',
-           'compute_tleaf', 'create_empty_vegetation_parameter_file', 'read_vegetation_file', 'k_series_sum']
+           'compute_tleaf', 'create_empty_vegetation_parameter_file', 'k_series_sum']
 
 # %% ../nbs/02_plant_utils.ipynb 3
 import os
@@ -783,146 +783,147 @@ def create_empty_vegetation_parameter_file(
         raise ValueError('Failed creating empty vegetation parameter file')
 
 # %% ../nbs/02_plant_utils.ipynb 37
-def read_vegetation_file(
-    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
-    modeling_options: Dict,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
-    sep: str = ';',  # CSV file separator can be ',' or ';'
-) -> Dict:
-    "Function for reading a data frame containing information about vegetation characteristics"
-
-    # Assert parameters ---------------------------------------------------------
-
-    # Make sure that modeling_options is a dictionary
-    assert modeling_options is None or isinstance(modeling_options, Dict), (
-        f'modeling_options must be a dictionary not a {type(modeling_options)}'
-    )
-
-    # Make sure the file_path exist
-    assert os.path.exists(file_path), (
-        f'Path: {file_path} not found, check spelling or presence'
-    )
-
-    # Read CSV data frame -------------------------------------------------------
-    vegetation_csv_data = pd.read_csv(file_path, header=0, sep=sep)
-
-    # Raise error if soil data don't follow the PlantDataValidator Schema
-    PlantDataValidator.validate(vegetation_csv_data, lazy=True)
-
-    # Remove the dots and numbers in column names. This is done for detecting
-    # duplicated colnames since pandas reads columns with the same name as col1
-    # col1.1, col1.2 etc
-    vegetation_csv_data.columns = vegetation_csv_data.columns.str.replace(
-        r'\.\d+', '', regex=True
-    )
-
-    # Raise error if duplicated coulmn names exists
-    if len(vegetation_csv_data.columns) is not len(
-        set(vegetation_csv_data.columns)
-    ):
-        duplicated_params = []
-
-        # Save duplicated parameters into list
-        for each_param, each_count in collections.Counter(
-            vegetation_csv_data.columns
-        ).items():
-            if each_count > 1:
-                duplicated_params.append(each_param)
-
-        # Raise error
-        raise ValueError(
-            f'{duplicated_params} repeated several times in input dataframe. Please make sure that each column is unique'
-        )
-
-    # Create dictionary with params ---------------------------------------------
-    # Reshape dataframe for converting it to a list
-    vegetation_csv_data = pd.DataFrame(
-        vegetation_csv_data.melt(ignore_index=True).reset_index()[
-            ['variable', 'value']
-        ]
-    )
-
-    # Transform data to a list and then create dictionary
-    vegetation_parameters = collections.defaultdict(
-        list,
-        {
-            each_cell[0]: each_cell[1]
-            for each_cell in vegetation_csv_data.values.tolist()
-        },
-    )
-
-    # Read modeling_options dictionary ------------------------------------------
-
-    # stomatal_reg_formulation traits
-    # Set parameters for stomatal regulation of vegetation according to the type
-    # of stomatal regulation
-    if modeling_options['stomatal_reg_formulation'] == 'piecewise_linear':
-        stomatal_regulation_params = ['psi_start_closing', 'psi_close']
-
-    elif modeling_options['stomatal_reg_formulation'] == 'sigmoid':
-        stomatal_regulation_params = ['p12_gs', 'p88_gs']
-
-    elif modeling_options['stomatal_reg_formulation'] == 'turgor':
-        stomatal_regulation_params = ['turgor_pressure_at_gs_max']
-
-    # Check if traits stomatal_reg_formulation are missing in the
-    # vegetation_parameters
-    for each_stomatal_regulation_param in stomatal_regulation_params:
-        if each_stomatal_regulation_param not in vegetation_parameters:
-            raise ValueError(
-                f'Trait {each_stomatal_regulation_param} for {modeling_options["stomatal_reg_formulation"]} stomatal_reg_formulation is missing. Add it to the CSV file'
-            )
-
-    # transpiration_model traits
-    if modeling_options['transpiration_model'] == 'jarvis':
-        transpiration_model_params = [
-            'g_crown0',
-            'gs_max',
-            'gs_night',
-            'jarvis_par',
-            'tgs_sens',
-            'tgs_optim',
-        ]
-
-    elif modeling_options['transpiration_model'] == 'granier':
-        raise ValueError(print('granier option have been not implemented yet'))
-
-    # Check if traits for modeling_options["transpiration_model"] are missing in
-    # the vegetation_parameters
-    for each_transpiration_model_param in transpiration_model_params:
-        if each_transpiration_model_param not in vegetation_parameters:
-            raise ValueError(
-                f'Trait {each_transpiration_model_param} for {modeling_options["transpiration_model"]} transpiration model is missing. Add it to the CSV file'
-            )
-
-    # Foliage traits
-    if vegetation_parameters['foliage'] == 'deciduous':
-        foliage_params = ['t_base', 'f_crit', 'day_start', 'nbday_lai']
-
-    elif vegetation_parameters['foliage'] == 'forced':
-        foliage_params = ['day_start_forced', 'day_end_forced', 'nbday_lai']
-
-    else:
-        warnings.warn('Foliage evergreen has no params')
-        foliage_params = []
-
-    # Check if traits for foliage type are missing in the vegetation_parameters
-    for each_foliage_param in foliage_params:
-        if each_foliage_param not in vegetation_parameters:
-            raise ValueError(
-                f'Trait {each_foliage_param} for {vegetation_parameters["foliage"]} foliage is missing. Add it to the CSV file'
-            )
-
-    # ETP parameters for PT or PM
-    if modeling_options['etp_formulation'] == 'pt':
-        if 'pt_coeff' not in vegetation_parameters:
-            raise ValueError(
-                'pt_coeff for "pt" etp_formulation is missing. Add it to the CSV file'
-            )
-
-    elif modeling_options['etp_formulation'] == 'penman':
-        raise ValueError(print('penman option have been not implemented yet'))
-
-    return vegetation_parameters
+#
+#def read_vegetation_file(
+#    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+#    modeling_options: Dict,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+#    sep: str = ';',  # CSV file separator can be ',' or ';'
+#) -> Dict:
+#    "Function for reading a data frame containing information about vegetation characteristics"
+#
+#    # Assert parameters ---------------------------------------------------------
+#
+#    # Make sure that modeling_options is a dictionary
+#    assert modeling_options is None or isinstance(modeling_options, Dict), (
+#        f'modeling_options must be a dictionary not a {type(modeling_options)}'
+#    )
+#
+#    # Make sure the file_path exist
+#    assert os.path.exists(file_path), (
+#        f'Path: {file_path} not found, check spelling or presence'
+#    )
+#
+#    # Read CSV data frame -------------------------------------------------------
+#    vegetation_csv_data = pd.read_csv(file_path, header=0, sep=sep)
+#
+#    # Raise error if soil data don't follow the PlantDataValidator Schema
+#    PlantDataValidator.validate(vegetation_csv_data, lazy=True)
+#
+#    # Remove the dots and numbers in column names. This is done for detecting
+#    # duplicated colnames since pandas reads columns with the same name as col1
+#    # col1.1, col1.2 etc
+#    vegetation_csv_data.columns = vegetation_csv_data.columns.str.replace(
+#        r'\.\d+', '', regex=True
+#    )
+#
+#    # Raise error if duplicated coulmn names exists
+#    if len(vegetation_csv_data.columns) is not len(
+#        set(vegetation_csv_data.columns)
+#    ):
+#        duplicated_params = []
+#
+#        # Save duplicated parameters into list
+#        for each_param, each_count in collections.Counter(
+#            vegetation_csv_data.columns
+#        ).items():
+#            if each_count > 1:
+#                duplicated_params.append(each_param)
+#
+#        # Raise error
+#        raise ValueError(
+#            f'{duplicated_params} repeated several times in input dataframe. Please make sure that each column is unique'
+#        )
+#
+#    # Create dictionary with params ---------------------------------------------
+#    # Reshape dataframe for converting it to a list
+#    vegetation_csv_data = pd.DataFrame(
+#        vegetation_csv_data.melt(ignore_index=True).reset_index()[
+#            ['variable', 'value']
+#        ]
+#    )
+#
+#    # Transform data to a list and then create dictionary
+#    vegetation_parameters = collections.defaultdict(
+#        list,
+#        {
+#            each_cell[0]: each_cell[1]
+#            for each_cell in vegetation_csv_data.values.tolist()
+#        },
+#    )
+#
+#    # Read modeling_options dictionary ------------------------------------------
+#
+#    # stomatal_reg_formulation traits
+#    # Set parameters for stomatal regulation of vegetation according to the type
+#    # of stomatal regulation
+#    if modeling_options['stomatal_reg_formulation'] == 'piecewise_linear':
+#        stomatal_regulation_params = ['psi_start_closing', 'psi_close']
+#
+#    elif modeling_options['stomatal_reg_formulation'] == 'sigmoid':
+#        stomatal_regulation_params = ['p12_gs', 'p88_gs']
+#
+#    elif modeling_options['stomatal_reg_formulation'] == 'turgor':
+#        stomatal_regulation_params = ['turgor_pressure_at_gs_max']
+#
+#    # Check if traits stomatal_reg_formulation are missing in the
+#    # vegetation_parameters
+#    for each_stomatal_regulation_param in stomatal_regulation_params:
+#        if each_stomatal_regulation_param not in vegetation_parameters:
+#            raise ValueError(
+#                f'Trait {each_stomatal_regulation_param} for {modeling_options["stomatal_reg_formulation"]} stomatal_reg_formulation is missing. Add it to the CSV file'
+#            )
+#
+#    # transpiration_model traits
+#    if modeling_options['transpiration_model'] == 'jarvis':
+#        transpiration_model_params = [
+#            'g_crown0',
+#            'gs_max',
+#            'gs_night',
+#            'jarvis_par',
+#            'tgs_sens',
+#            'tgs_optim',
+#        ]
+#
+#    elif modeling_options['transpiration_model'] == 'granier':
+#        raise ValueError(print('granier option have been not implemented yet'))
+#
+#    # Check if traits for modeling_options["transpiration_model"] are missing in
+#    # the vegetation_parameters
+#    for each_transpiration_model_param in transpiration_model_params:
+#        if each_transpiration_model_param not in vegetation_parameters:
+#            raise ValueError(
+#                f'Trait {each_transpiration_model_param} for {modeling_options["transpiration_model"]} transpiration model is missing. Add it to the CSV file'
+#            )
+#
+#    # Foliage traits
+#    if vegetation_parameters['foliage'] == 'deciduous':
+#        foliage_params = ['t_base', 'f_crit', 'day_start', 'nbday_lai']
+#
+#    elif vegetation_parameters['foliage'] == 'forced':
+#        foliage_params = ['day_start_forced', 'day_end_forced', 'nbday_lai']
+#
+#    else:
+#        warnings.warn('Foliage evergreen has no params')
+#        foliage_params = []
+#
+#    # Check if traits for foliage type are missing in the vegetation_parameters
+#    for each_foliage_param in foliage_params:
+#        if each_foliage_param not in vegetation_parameters:
+#            raise ValueError(
+#                f'Trait {each_foliage_param} for {vegetation_parameters["foliage"]} foliage is missing. Add it to the CSV file'
+#            )
+#
+#    # ETP parameters for PT or PM
+#    if modeling_options['etp_formulation'] == 'pt':
+#        if 'pt_coeff' not in vegetation_parameters:
+#            raise ValueError(
+#                'pt_coeff for "pt" etp_formulation is missing. Add it to the CSV file'
+#            )
+#
+#    elif modeling_options['etp_formulation'] == 'penman':
+#        raise ValueError(print('penman option have been not implemented yet'))
+#
+#    return vegetation_parameters
 
 # %% ../nbs/02_plant_utils.ipynb 41
 def k_series_sum(k1: float, k2: float) -> float:

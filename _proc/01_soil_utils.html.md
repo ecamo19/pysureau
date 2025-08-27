@@ -257,7 +257,7 @@ array([0.25151288, 0.78572343])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L348){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L26){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vwc_to_sws
 
@@ -288,7 +288,7 @@ convert_vwc_to_sws(1, layer_thickness=1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/soil_utils.py#L358){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L37){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_sws_to_vwc
 

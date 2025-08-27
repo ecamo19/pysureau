@@ -467,7 +467,7 @@ calculate_ebound_granier(pet=1, lai=2, time_step=3)
 | -- | -------- | ----------- | ----------- |
 | t_air | float |  | Air temperature (degC) |
 | par | float |  | Unknown parameter definition |
-| potential_par | float |  | Unknown parameter definition. Calculated using `potential_par` function? |
+| potential_par | float |  | Unknown parameter definition. Calculated using [`potential_par`](https://ecamo19.github.io/pysureau/conversions_utils.html#potential_par) function? |
 | wind_speed | float |  | Unknown parameter definition (m/s) |
 | relative_humidity | int |  | Air relative_humidity(%) |
 | gs | float |  | Stomatal conductance |
@@ -533,25 +533,6 @@ defaultdict(list,
 
 #### __Read vegetation file__
 
----
-
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L786){target="_blank" style="float:right; font-size:smaller"}
-
-### read_vegetation_file
-
->      read_vegetation_file (file_path:pathlib._local.Path,
->                            modeling_options:Dict, sep:str=';')
-
-*Function for reading a data frame containing information about vegetation characteristics*
-
-|    | **Type** | **Default** | **Details** |
-| -- | -------- | ----------- | ----------- |
-| file_path | Path |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
-| modeling_options | Dict |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
-| sep | str | ; | CSV file separator can be ',' or ';' |
-| **Returns** | **Dict** |  |  |
-
-
 #### __Example: Read vegetation CSV file__
 
 modeling_options_dict = create_modeling_options(
@@ -579,7 +560,7 @@ read_vegetation_file(
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L928){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L929){target="_blank" style="float:right; font-size:smaller"}
 
 ### k_series_sum
 

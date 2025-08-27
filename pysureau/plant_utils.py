@@ -5,7 +5,7 @@ __all__ = ['rs_comp', 'turgor_comp', 'compute_turgor_from_psi', 'osmo_comp', 'ps
            'plc_comp', 'plc_prime_comp', 'gs_curve', 'compute_gmin', 'compute_emin', 'compute_dfmc',
            'distribute_conductances', 'compute_g_crown', 'convert_flux_from_mmolm2s_to_mm',
            'convert_flux_from_mm_to_mmolm2s', 'calculate_ebound_mm_granier', 'calculate_ebound_granier',
-           'compute_tleaf', 'create_empty_vegetation_parameter_file', 'k_series_sum']
+           'compute_tleaf', 'create_empty_vegetation_parameter_file', 'read_vegetation_file', 'k_series_sum']
 
 # %% ../nbs/02_plant_utils.ipynb 3
 import os
@@ -19,7 +19,9 @@ from typing import Dict, List
 
 # from pandera.typing import Series
 from pathlib import Path, PosixPath
+from pydantic import ValidationError
 from .pysureau_utils import dict_to_csv
+from .modeling_options_utils import read_modeling_options_file
 
 # %% ../nbs/02_plant_utils.ipynb 4
 def rs_comp(
@@ -731,7 +733,7 @@ def create_empty_vegetation_parameter_file(
             'f_crit': 'NA',
             'foliage': 'NA',
             'f_root_to_leaf': 'NA',
-            'f_trb_to_Leaf': 'NA',
+            'f_trb_to_leaf': 'NA',
             'g_crown0': 'NA',
             'group': 'NA',
             'gmin_s': 'NA',
@@ -783,29 +785,78 @@ def create_empty_vegetation_parameter_file(
         raise ValueError('Failed creating empty vegetation parameter file')
 
 # %% ../nbs/02_plant_utils.ipynb 37
-#
-#def read_vegetation_file(
-#    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
-#    modeling_options: Dict,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
-#    sep: str = ';',  # CSV file separator can be ',' or ';'
-#) -> Dict:
-#    "Function for reading a data frame containing information about vegetation characteristics"
-#
-#    # Assert parameters ---------------------------------------------------------
-#
-#    # Make sure that modeling_options is a dictionary
-#    assert modeling_options is None or isinstance(modeling_options, Dict), (
-#        f'modeling_options must be a dictionary not a {type(modeling_options)}'
-#    )
-#
-#    # Make sure the file_path exist
-#    assert os.path.exists(file_path), (
-#        f'Path: {file_path} not found, check spelling or presence'
-#    )
-#
-#    # Read CSV data frame -------------------------------------------------------
-#    vegetation_csv_data = pd.read_csv(file_path, header=0, sep=sep)
-#
+def read_vegetation_file(
+    file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+    modeling_options_file_path: Path,  # Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv
+    sep: str = ',',  # CSV file separator can be ',' or ';'
+) -> Dict:
+    "Function for reading a data frame containing information about vegetation characteristics"
+
+    # Assert parameters ---------------------------------------------------------
+
+    # Make sure that modeling_options file exist
+    assert os.path.exists(modeling_options_file_path), (
+        f'Path to modeling options file not found. Check spelling or presence {modeling_options_file_path}.'
+    )
+
+    assert os.path.exists(file_path), (
+        f'Path to vegetation parameter file not found. Check spelling or presence {file_path}.'
+    )
+
+    # Read CSV data frames -----------------------------------------------------
+
+    # Read modeling options file
+    modeling_options_dict = read_modeling_options_file(
+        file_path=modeling_options_file_path
+    )
+
+    # Read vegetation parameters file
+    vegetation_parameters_data = pd.read_csv(file_path, header=0, sep=sep)
+
+    # Validate parameter file ---------------------------------------------------
+
+    # Validate the column names of vegetation parameters file are parameter_name, parameter_value
+    # To correctly transform the the CSV file as dict later
+    if vegetation_parameters_data.columns.tolist() != [
+        'parameter_name',
+        'parameter_value',
+    ]:
+        raise ValueError(
+            'Column names in vegetation parameters file must be called parameter_name and parameter_value'
+        )
+
+    # Transform dataframe into dictionary
+    vegetation_parameters_dict = vegetation_parameters_data.set_index(
+        'parameter_name'
+    ).to_dict()['parameter_value']
+
+    # Loop over dictionary to transform the data types.
+    # This step is done beacuse the csv file can contain str sand float values
+
+    parameters_of_class_str = ['foliage', 'group', 'life_form', 'species']
+
+    # Loop over all keys.
+    for each_key in vegetation_parameters_dict.keys():
+        if each_key in parameters_of_class_str:
+            # If value is in parameters_of_class_str then transform to str
+            vegetation_parameters_dict[each_key] = str(
+                vegetation_parameters_dict[each_key]
+            )
+
+        else:
+            # Transform parameters values to float
+            vegetation_parameters_dict[each_key] = float(
+                vegetation_parameters_dict[each_key]
+            )
+
+    # Validate modelling_options_dict pydanthic schema
+    # try:
+    #    ModelingOptionsParameterValidator.model_validate(vegetation_parameters_dict)
+
+    # except ValidationError as error:
+    #        raise (error)
+
+
 #    # Raise error if soil data don't follow the PlantDataValidator Schema
 #    PlantDataValidator.validate(vegetation_csv_data, lazy=True)
 #
@@ -925,7 +976,7 @@ def create_empty_vegetation_parameter_file(
 #
 #    return vegetation_parameters
 
-# %% ../nbs/02_plant_utils.ipynb 41
+# %% ../nbs/02_plant_utils.ipynb 40
 def k_series_sum(k1: float, k2: float) -> float:
     "Function to sum 2 conductances in series"
 

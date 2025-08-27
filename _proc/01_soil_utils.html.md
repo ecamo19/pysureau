@@ -288,7 +288,7 @@ convert_vwc_to_sws(1, layer_thickness=1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L37){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L38){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_sws_to_vwc
 

@@ -30,9 +30,7 @@ title: Conversions functions utils
 
 ::: {#cell-3 .cell}
 ``` {.python .cell-code}
-convert_vwc_to_sws(volumetric_water_content_x = 0.5, 
-                   rfc = 50, 
-                   layer_thickness = 1)
+convert_vwc_to_sws(volumetric_water_content_x=0.5, rfc=50, layer_thickness=1)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -45,7 +43,7 @@ convert_vwc_to_sws(volumetric_water_content_x = 0.5,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L37){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L38){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_sws_to_vwc
 
@@ -64,9 +62,7 @@ convert_vwc_to_sws(volumetric_water_content_x = 0.5,
 
 ::: {#cell-5 .cell}
 ``` {.python .cell-code}
-convert_sws_to_vwc(soil_water_stock_x = 250, 
-                   rfc = 50, 
-                   layer_thickness = 1)
+convert_sws_to_vwc(soil_water_stock_x=250, rfc=50, layer_thickness=1)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -79,7 +75,7 @@ convert_sws_to_vwc(soil_water_stock_x = 250,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L48){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L47){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_ksat_cmday_to_ksat_micromol
 
@@ -95,7 +91,7 @@ convert_sws_to_vwc(soil_water_stock_x = 250,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L64){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L63){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_rate_to_molm_s_m_mpa
 
@@ -128,7 +124,7 @@ convert_rate_to_molm_s_m_mpa(1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L78){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L77){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_molm_s_m_mpa_to_rate
 
@@ -161,7 +157,7 @@ convert_molm_s_m_mpa_to_rate(655.1255924715483)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L89){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L88){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_mpa_to_m
 
@@ -191,7 +187,7 @@ convert_mpa_to_m(1)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L99){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L97){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_m_to_mpa
 
@@ -221,7 +217,7 @@ convert_m_to_mpa(101.97162129779284)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L109){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L106){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_pf_to_hpa
 
@@ -250,7 +246,7 @@ convert_pf_to_hpa(1.8)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L117){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L114){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_hpa_to_pf
 
@@ -279,7 +275,7 @@ convert_hpa_to_pf(63.09573444801933)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L125){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L122){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vg_psi_to_theta
 
@@ -300,11 +296,9 @@ convert_hpa_to_pf(63.09573444801933)
 
 ::: {#cell-20 .cell}
 ``` {.python .cell-code}
-convert_vg_psi_to_theta(vg_psi_x = np.array([-1e6, -1e2, 0]), 
-                        theta_s = 0.5, 
-                        theta_r = 0.1, 
-                        a = 0.05, 
-                        n = 1.5)
+convert_vg_psi_to_theta(
+    vg_psi_x=np.array([-1e6, -1e2, 0]), theta_s=0.5, theta_r=0.1, a=0.05, n=1.5
+)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -317,7 +311,7 @@ array([0.10178885, 0.27384953, 0.5       ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L138){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L136){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vg_theta_to_psi
 
@@ -338,11 +332,13 @@ array([0.10178885, 0.27384953, 0.5       ])
 
 ::: {#cell-22 .cell}
 ``` {.python .cell-code}
-convert_vg_theta_to_psi(vwc_theta_x = np.array([.1, .3, .5]), 
-                        theta_s = 0.5, 
-                        theta_r = 0.1, 
-                        a = 0.05, 
-                        n = 1.5)
+convert_vg_theta_to_psi(
+    vwc_theta_x=np.array([0.1, 0.3, 0.5]),
+    theta_s=0.5,
+    theta_r=0.1,
+    a=0.05,
+    n=1.5,
+)
 ```
 
 ::: {.cell-output .cell-output-stderr}
@@ -362,7 +358,7 @@ array([       -inf, -73.1861142,  -0.       ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L154){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L151){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_vwc_to_rew
 
@@ -380,9 +376,7 @@ array([       -inf, -73.1861142,  -0.       ])
 
 ::: {#cell-24 .cell}
 ``` {.python .cell-code}
-convert_vwc_to_rew(vwc_x = np.array([0.1, 0.3, 0.5]), 
-                   theta_s = 0.5, 
-                   theta_r = 0.1)
+convert_vwc_to_rew(vwc_x=np.array([0.1, 0.3, 0.5]), theta_s=0.5, theta_r=0.1)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -395,7 +389,7 @@ array([0. , 0.5, 1. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L165){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L161){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_rew_to_vwc
 
@@ -413,9 +407,7 @@ array([0. , 0.5, 1. ])
 
 ::: {#cell-26 .cell}
 ``` {.python .cell-code}
-convert_rew_to_vwc(rew_x = np.array([0, 0.5, 1]), 
-                   theta_s = 0.5, 
-                   theta_r = 0.1)
+convert_rew_to_vwc(rew_x=np.array([0, 0.5, 1]), theta_s=0.5, theta_r=0.1)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -428,7 +420,7 @@ array([0.1, 0.3, 0.5])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L175){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L170){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_mmol_to_m3
 
@@ -460,14 +452,13 @@ convert_mmol_to_m3(1)
 ::: {#cell-29 .cell}
 ``` {.python .cell-code}
 def convert_m3_to_mmol(
-    m3_x:float, 
+    m3_x: float,
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
-) -> float: # 
-    
-    'Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres.'
-    
-    return m3_x/molm * pw * 1e6
+) -> float:  #
+    "Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres."
+
+    return m3_x / molm * pw * 1e6
 ```
 :::
 
@@ -487,7 +478,7 @@ convert_m3_to_mmol(1.8051382765531063e-08)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L186){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L180){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_mmol_to_mm
 
@@ -519,13 +510,12 @@ convert_mmol_to_mm(1)
 ::: {#cell-33 .cell}
 ``` {.python .cell-code}
 def convert_mm_to_mmol(
-    mm_x:float,
+    mm_x: float,
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
-    )-> float: 
-    
-    'Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres.'
-    
+) -> float:
+    "Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres."
+
     return mm_x / molm * pw * 1e3
 ```
 :::
@@ -546,7 +536,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L196){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L189){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_leaf_to_soil
 
@@ -563,7 +553,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L204){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L197){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_soil_to_leaf
 
@@ -580,7 +570,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L212){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L205){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_stem_to_leaf
 
@@ -597,7 +587,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L220){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L213){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_leaf_to_stem
 
@@ -614,7 +604,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L228){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L221){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_stem_to_soil
 
@@ -631,7 +621,7 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L236){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L229){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_compartment_soil_to_stem
 
@@ -648,31 +638,31 @@ convert_mm_to_mmol(1.8051382765531063e-05)
 
 ::: {#cell-41 .cell}
 ``` {.python .cell-code}
-def convert_stock_to_flux(x:float,
-                          dt:int # Time step length in seconds
-                          ) -> float: #
-    
-    'Function lacks definition, documentation needs to be improved.'
-    return  x / dt
+def convert_stock_to_flux(
+    x: float,
+    dt: int,  # Time step length in seconds
+) -> float:  #
+    "Function lacks definition, documentation needs to be improved."
+    return x / dt
 ```
 :::
 
 
 ::: {#cell-42 .cell}
 ``` {.python .cell-code}
-def convert_flux_to_stock(x:float,
-                          dt:int # Time step length in seconds
-                          ) -> float: #
-    
-    'Function lacks definition, documentation needs to be improved.'
-    return x*dt
+def convert_flux_to_stock(
+    x: float,
+    dt: int,  # Time step length in seconds
+) -> float:  #
+    "Function lacks definition, documentation needs to be improved."
+    return x * dt
 ```
 :::
 
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L245){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L238){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_stock_mm_soil_to_flux_mmol_leaf
 
@@ -695,9 +685,7 @@ def convert_flux_to_stock(x:float,
 
 ::: {#cell-44 .cell}
 ``` {.python .cell-code}
-convert_stock_mm_soil_to_flux_mmol_leaf(stand_water_stock_x = 2, 
-                                        dt = 60**2, 
-                                        lai = 3)
+convert_stock_mm_soil_to_flux_mmol_leaf(stand_water_stock_x=2, dt=60**2, lai=3)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -711,18 +699,17 @@ convert_stock_mm_soil_to_flux_mmol_leaf(stand_water_stock_x = 2,
 ::: {#cell-45 .cell}
 ``` {.python .cell-code}
 def convert_flux_mmol_leaf_to_stock_mm_soil(
-    leaf_area_based_flux:float, # Instantaneous leaf area-based flux to be converted (mmol m-2Leaf s-1)
+    leaf_area_based_flux: float,  # Instantaneous leaf area-based flux to be converted (mmol m-2Leaf s-1)
     dt: float,  # Time step length in seconds
-    lai: float,  # Leaf area Index 
+    lai: float,  # Leaf area Index
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
-) -> float: # Stand level water stock for a given LAI in mm (L m-2Soil) over the period of time considered.
-    
-    'Converts an instantaneous leaf area-based flux (mmol m-2Leaf s-1) to a stand level water quantity (mm, i.e. L m-2Soil) for a given leaf area index over a defined time period.'
-    stock  = convert_flux_to_stock(x = leaf_area_based_flux, dt = dt)
-    mm = convert_mmol_to_mm(mmol_h2o_x = stock, molm = molm, pw = pw)
-    
-    return convert_compartment_leaf_to_soil(x = mm, lai = lai)
+) -> float:  # Stand level water stock for a given LAI in mm (L m-2Soil) over the period of time considered.
+    "Converts an instantaneous leaf area-based flux (mmol m-2Leaf s-1) to a stand level water quantity (mm, i.e. L m-2Soil) for a given leaf area index over a defined time period."
+    stock = convert_flux_to_stock(x=leaf_area_based_flux, dt=dt)
+    mm = convert_mmol_to_mm(mmol_h2o_x=stock, molm=molm, pw=pw)
+
+    return convert_compartment_leaf_to_soil(x=mm, lai=lai)
 ```
 :::
 
@@ -732,9 +719,7 @@ def convert_flux_mmol_leaf_to_stock_mm_soil(
 # 10 mmol/s over a period of 1 hour with an LAI of 3 m² is converted to
 # millimetres of soil water stock (L/m²)
 
-convert_flux_mmol_leaf_to_stock_mm_soil(leaf_area_based_flux = 10, 
-                                      dt = 60**2, 
-                                      lai = 3)
+convert_flux_mmol_leaf_to_stock_mm_soil(leaf_area_based_flux=10, dt=60**2, lai=3)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -747,7 +732,7 @@ convert_flux_mmol_leaf_to_stock_mm_soil(leaf_area_based_flux = 10,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L272){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L263){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_optim_mm_soil_to_mmol_leaf
 
@@ -766,7 +751,7 @@ convert_flux_mmol_leaf_to_stock_mm_soil(leaf_area_based_flux = 10,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L296){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L285){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_optim_mmol_leaf_to_mm_soil
 
@@ -786,7 +771,7 @@ convert_flux_mmol_leaf_to_stock_mm_soil(leaf_area_based_flux = 10,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L308){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L295){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_vpd_from_temp_rh
 
@@ -833,7 +818,7 @@ array([36.10624792, 53.70318944])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L403){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L390){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_slope_sat
 
@@ -849,7 +834,7 @@ array([36.10624792, 53.70318944])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L416){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L403){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_pet
 
@@ -891,7 +876,9 @@ compute_pet(
 
 ::: {#cell-59 .cell}
 ``` {.python .cell-code}
-compute_pet(tmoy=15, net_radiation = 5, wind_speed_u =2, vpd =1, formulation = "penman")
+compute_pet(
+    tmoy=15, net_radiation=5, wind_speed_u=2, vpd=1, formulation='penman'
+)
 ```
 
 ::: {.cell-output .cell-output-display}
@@ -904,7 +891,7 @@ compute_pet(tmoy=15, net_radiation = 5, wind_speed_u =2, vpd =1, formulation = "
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L537){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L530){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_radiation_diurnal_pattern
 
@@ -930,7 +917,7 @@ calculate_radiation_diurnal_pattern(time_of_day=1, day_length=40)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L600){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L592){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_temperature_diurnal_pattern
 
@@ -972,7 +959,7 @@ calculate_temperature_diurnal_pattern(
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L642){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L634){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_rh_diurnal_pattern
 
@@ -1006,7 +993,7 @@ calculate_rh_diurnal_pattern(17, 40, 80, 15, 25)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L666){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L658){target="_blank" style="float:right; font-size:smaller"}
 
 ### global_radiation_conversions_watts_ppfd
 
@@ -1132,7 +1119,7 @@ Global radiation (rg) converted from watts to ppfd
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L721){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L715){target="_blank" style="float:right; font-size:smaller"}
 
 ### global_radiation_conversions_watts_mjules
 
@@ -1243,7 +1230,7 @@ Global radiation (rg) converted from Mega Jules to Watts per hour
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L814){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L807){target="_blank" style="float:right; font-size:smaller"}
 
 ### declination
 
@@ -1302,7 +1289,7 @@ array([0.1349969 , 0.35853539])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L868){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/conversions_utils.py#L861){target="_blank" style="float:right; font-size:smaller"}
 
 ### potential_par
 

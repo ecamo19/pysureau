@@ -11,7 +11,7 @@ import numpy as np
 from math import pi
 from typing import Dict
 from numpy import exp, cos, sin, arccos, arctan
-#from pysureau.parameter_validators import ClimateDataValidator
+# from pysureau.parameter_validators import ClimateDataValidator
 
 # %% ../nbs/03_climate_utils.ipynb 4
 def day_length(
@@ -19,7 +19,7 @@ def day_length(
     day_of_year: int,  # numeric (usually integer) value or vector specifying the Julian day (day of the year), for which calculations should be done.
     no_times_as_na: bool = False,  # parameter to determine whether for days without sunrise or sunset, na should be returned for Sunset and Sunrise. If left at FALSE, the function returns -99 and 99 for sunrise and sunset or polar nights and polar days, respectively
 ) -> Dict:  # Dictionary with three elements Sunrise, Sunset and Daylength. For days without sunrise (polar nights),sunset and sunrise become -99 and the daylength 0. For days without sunset, sunset and sunrise are 99 and daylength 24.
-    'Original function from chillR R package. This function computes sunrise time, sunset time and daylength for a particular location and day of the year (Julian day). This is done using equations by Spencer (1971) and Almorox et al. (2005).'
+    "Original function from chillR R package. This function computes sunrise time, sunset time and daylength for a particular location and day of the year (Julian day). This is done using equations by Spencer (1971) and Almorox et al. (2005)."
 
     warnings.warn('Double check day_length function works for Australia')
 
@@ -28,7 +28,9 @@ def day_length(
     assert (
         isinstance(latitude, float) | isinstance(latitude, int)
         and 95 >= latitude >= -95
-    ), 'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
+    ), (
+        'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
+    )
 
     # Day of year
     # Using np.testing instead of assert because parameters can be np.arrays OR

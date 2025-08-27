@@ -11,7 +11,7 @@ title: Plant utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L25){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L27){target="_blank" style="float:right; font-size:smaller"}
 
 ### rs_comp
 
@@ -29,7 +29,7 @@ title: Plant utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L43){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L45){target="_blank" style="float:right; font-size:smaller"}
 
 ### turgor_comp
 
@@ -47,7 +47,7 @@ title: Plant utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L52){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L54){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_turgor_from_psi
 
@@ -104,7 +104,7 @@ for each_psi in range(1, 10):
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L95){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L97){target="_blank" style="float:right; font-size:smaller"}
 
 ### osmo_comp
 
@@ -121,7 +121,7 @@ for each_psi in range(1, 10):
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L103){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L105){target="_blank" style="float:right; font-size:smaller"}
 
 ### psi_total_symp_comp
 
@@ -139,7 +139,7 @@ for each_psi in range(1, 10):
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L116){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L118){target="_blank" style="float:right; font-size:smaller"}
 
 ### stomatal_regulation_turgor
 
@@ -177,7 +177,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L142){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L144){target="_blank" style="float:right; font-size:smaller"}
 
 ### plc_comp
 
@@ -195,7 +195,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L152){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L154){target="_blank" style="float:right; font-size:smaller"}
 
 ### plc_prime_comp
 
@@ -212,7 +212,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L161){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L163){target="_blank" style="float:right; font-size:smaller"}
 
 ### gs_curve
 
@@ -243,7 +243,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L241){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L243){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_gmin
 
@@ -265,7 +265,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L270){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L272){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_emin
 
@@ -286,7 +286,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L283){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L285){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_dfmc
 
@@ -305,7 +305,7 @@ array([1.5, 3. ])
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L293){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L295){target="_blank" style="float:right; font-size:smaller"}
 
 ### distribute_conductances
 
@@ -343,7 +343,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L323){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L325){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_g_crown
 
@@ -360,7 +360,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L335){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L337){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_flux_from_mmolm2s_to_mm
 
@@ -378,7 +378,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L344){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L346){target="_blank" style="float:right; font-size:smaller"}
 
 ### convert_flux_from_mm_to_mmolm2s
 
@@ -396,7 +396,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L357){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L359){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_ebound_mm_granier
 
@@ -417,7 +417,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L371){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L373){target="_blank" style="float:right; font-size:smaller"}
 
 ### calculate_ebound_granier
 
@@ -450,7 +450,7 @@ calculate_ebound_granier(pet=1, lai=2, time_step=3)
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L405){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L407){target="_blank" style="float:right; font-size:smaller"}
 
 ### compute_tleaf
 
@@ -517,7 +517,7 @@ defaultdict(list,
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L706){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L708){target="_blank" style="float:right; font-size:smaller"}
 
 ### create_empty_vegetation_parameter_file
 
@@ -533,34 +533,41 @@ defaultdict(list,
 
 #### __Read vegetation file__
 
+---
+
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L788){target="_blank" style="float:right; font-size:smaller"}
+
+### read_vegetation_file
+
+>      read_vegetation_file (file_path:pathlib._local.Path,
+>                            modeling_options_file_path:pathlib._local.Path,
+>                            sep:str=',')
+
+*Function for reading a data frame containing information about vegetation characteristics*
+
+|    | **Type** | **Default** | **Details** |
+| -- | -------- | ----------- | ----------- |
+| file_path | Path |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
+| modeling_options_file_path | Path |  | Path to the sureau_parameter_files folder containing the csv files with parameter values i.e path/to/sureau_parameter_files/file_name.csv |
+| sep | str | , | CSV file separator can be ',' or ';' |
+| **Returns** | **Dict** |  |  |
+
+
 #### __Example: Read vegetation CSV file__
 
-modeling_options_dict = create_modeling_options(
-    time_step_for_evapo=2,
-    reset_swc=True,
-    avoid_water_soil_transfer=True,
-    constant_climate=False,
-    defoliation=True,
-    soil_evapo=True,
-    threshold_mortality=51,
-    etp_formulation='pt',
-    rn_formulation='linear',
-    comp_options_for_evapo='custom',
-    stomatal_reg_formulation='turgor',
-    transpiration_model='jarvis',
-    numerical_scheme='implicit',
-    pedo_transfer_formulation='vg',
-)
-
+::: {#cell-37 .cell}
+``` {.python .cell-code}
 read_vegetation_file(
-    file_path='./sample_data/vegetation_example_wide.csv',
-    modeling_options=modeling_options_dict,
-    sep=',',
+    file_path='/tmp/pysureau_project_8osWFnip/1_parameter_files/vegetation_parameters.csv',
+    modeling_options_file_path='/tmp/pysureau_project_8osWFnip/1_parameter_files/modeling_options.csv',
 )
+```
+:::
+
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L929){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/plant_utils.py#L980){target="_blank" style="float:right; font-size:smaller"}
 
 ### k_series_sum
 

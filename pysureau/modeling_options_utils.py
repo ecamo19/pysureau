@@ -100,13 +100,13 @@ def read_modeling_options_file(
         )
 
     # Validate parameter file ---------------------------------------------------
-    
-    # Transform dataframe into dictionary 
+
+    # Transform dataframe into dictionary
     modelling_options_dict = modelling_options_data.set_index(
         'parameter_name'
     ).to_dict()['parameter_value']
 
-    # Loop over dictionary to transform the data types 
+    # Loop over dictionary to transform the data types
     # If this is not done all values will be considered str
 
     parameters_of_class_str = [
@@ -124,147 +124,206 @@ def read_modeling_options_file(
         'stomatal_reg_formulation',
         'output_path',
     ]
-    
+
     parameters_of_class_bool = ['eord', 'lcav', 'scav']
 
-    # Loop over all keys  
+    # Loop over all keys. This step is done beacuse the csv file can contain str
+    # and float values
     for each_key in modelling_options_dict.keys():
-
         if each_key in parameters_of_class_str:
-            
             # If value is in parameters_of_class_str then transform to str
             modelling_options_dict[each_key] = str(
                 modelling_options_dict[each_key]
             )
-        
+
         # Special case. Done in this way beacuse param can be an integer or a str
         elif each_key == 'time_step_for_evapo':
-            
-            if modelling_options_dict[each_key] == "variable":
-                modelling_options_dict[each_key] = str(modelling_options_dict[each_key])
-                
-            else:        
-                modelling_options_dict[each_key] = int(modelling_options_dict[each_key])
-                
+            if modelling_options_dict[each_key] == 'variable':
+                modelling_options_dict[each_key] = str(
+                    modelling_options_dict[each_key]
+                )
+
+            else:
+                modelling_options_dict[each_key] = int(
+                    modelling_options_dict[each_key]
+                )
+
         elif each_key in parameters_of_class_bool:
-            
             # If value is in parameters_of_class_bool then transform to int
-            # Done in this way because values only can be 0 or 1 and if I do as 
-            # bool(modelling_options_dict[each_key]) instead of 
-            # int(modelling_options_dict[each_key]) a value of 2 will return 
+            # Done in this way because values only can be 0 or 1 and if I do as
+            # bool(modelling_options_dict[each_key]) instead of
+            # int(modelling_options_dict[each_key]) a value of 2 will return
             # True
             modelling_options_dict[each_key] = int(
                 modelling_options_dict[each_key]
             )
-        
+
         else:
             # Transform parameters values to float
             modelling_options_dict[each_key] = float(
                 modelling_options_dict[each_key]
             )
-    
-    # Validate modelling_options_dict pydanthic schema 
+
+    # Validate modelling_options_dict pydanthic schema
     try:
         ModelingOptionsParameterValidator.model_validate(modelling_options_dict)
 
     except ValidationError as error:
-            raise (error)
-        
+        raise (error)
+
     # Compare end_year_simulation is larger than start_year_simulation
     assert (
-        modelling_options_dict['year_start'] <= modelling_options_dict['year_end']
-        ), f'year_start ({modelling_options_dict['year_start']}) is larger than year_end ({modelling_options_dict['year_end']})'
-    
-    # Validate output path 
+        modelling_options_dict['year_start']
+        <= modelling_options_dict['year_end']
+    ), (
+        f'year_start ({modelling_options_dict["year_start"]}) is larger than year_end ({modelling_options_dict["year_end"]})'
+    )
+
+    # Validate output path
     if os.path.exists(Path(modelling_options_dict['output_path'])):
         pass
-    
+
     else:
-        raise ValueError(f'Output path {Path(modelling_options_dict['output_path'])} not found')
-    
+        raise ValueError(
+            f'Output path {Path(modelling_options_dict["output_path"])} not found'
+        )
+
     # Create new parameters based on input parameters ---------------------------
-    
-    # Create array with time steps for the evapo 
-   
-    if modelling_options_dict['time_step_for_evapo'] == "variable":
-        
+
+    # Create array with time steps for the evapo
+
+    if modelling_options_dict['time_step_for_evapo'] == 'variable':
         time = np.array([0, 6, 12, 14, 16, 22])
-        raise ValueError('time_step_for_evapo set to "variable". This has not been implemented yet')
-   
-    else:        
-        time = np.arange(0, 24, modelling_options_dict['time_step_for_evapo'], dtype = int)
+        raise ValueError(
+            'time_step_for_evapo set to "variable". This has not been implemented yet'
+        )
+
+    else:
+        time = np.arange(
+            0, 24, modelling_options_dict['time_step_for_evapo'], dtype=int
+        )
         modelling_options_dict['time'] = time
-            
-    # Create comp_options 
+
+    # Create comp_options
     modelling_options_dict['comp_options'] = collections.defaultdict(list)
 
     # Every 10min, 6min, 3min, 1min
     if modelling_options_dict['comp_options_for_evapo'] == 'normal':
-            # Add key value pairs to the comp_dictionary
-            modelling_options_dict['comp_options']['numerical_scheme'] = modelling_options_dict['numerical_scheme']
-            modelling_options_dict['comp_options']['nsmalltimesteps']  = modelling_options_dict['time_step_for_evapo'] * np.array([6, 10, 20, 60])
-            modelling_options_dict['comp_options']['lsym'] = 1
-            modelling_options_dict['comp_options']['ssym'] = 1
-            modelling_options_dict['comp_options']['clapo'] = 1
-            modelling_options_dict['comp_options']['ctapo'] = 1
-            modelling_options_dict['comp_options']['eord'] = modelling_options_dict['eord']
-            modelling_options_dict['comp_options']['lcav'] = modelling_options_dict['lcav']
-            modelling_options_dict['comp_options']['scav'] = modelling_options_dict['scav']
-            
+        # Add key value pairs to the comp_dictionary
+        modelling_options_dict['comp_options']['numerical_scheme'] = (
+            modelling_options_dict['numerical_scheme']
+        )
+        modelling_options_dict['comp_options']['nsmalltimesteps'] = (
+            modelling_options_dict['time_step_for_evapo']
+            * np.array([6, 10, 20, 60])
+        )
+        modelling_options_dict['comp_options']['lsym'] = 1
+        modelling_options_dict['comp_options']['ssym'] = 1
+        modelling_options_dict['comp_options']['clapo'] = 1
+        modelling_options_dict['comp_options']['ctapo'] = 1
+        modelling_options_dict['comp_options']['eord'] = modelling_options_dict[
+            'eord'
+        ]
+        modelling_options_dict['comp_options']['lcav'] = modelling_options_dict[
+            'lcav'
+        ]
+        modelling_options_dict['comp_options']['scav'] = modelling_options_dict[
+            'scav'
+        ]
+
     # every 10 seconds
     elif modelling_options_dict['comp_options_for_evapo'] == 'accurate':
-            modelling_options_dict['comp_options']['numerical_scheme'] = modelling_options_dict['numerical_scheme']
-            modelling_options_dict['comp_options']['nsmalltimesteps'] = modelling_options_dict['time_step_for_evapo'] * np.array([600])
-            modelling_options_dict['comp_options']['lsym'] = 1
-            modelling_options_dict['comp_options']['ssym'] = 1
-            modelling_options_dict['comp_options']['clapo'] = 1
-            modelling_options_dict['comp_options']['ctapo'] = 1
-            modelling_options_dict['comp_options']['eord'] = modelling_options_dict['eord']
-            modelling_options_dict['comp_options']['lcav'] = modelling_options_dict['lcav']
-            modelling_options_dict['comp_options']['scav'] = modelling_options_dict['scav']
-            
+        modelling_options_dict['comp_options']['numerical_scheme'] = (
+            modelling_options_dict['numerical_scheme']
+        )
+        modelling_options_dict['comp_options']['nsmalltimesteps'] = (
+            modelling_options_dict['time_step_for_evapo'] * np.array([600])
+        )
+        modelling_options_dict['comp_options']['lsym'] = 1
+        modelling_options_dict['comp_options']['ssym'] = 1
+        modelling_options_dict['comp_options']['clapo'] = 1
+        modelling_options_dict['comp_options']['ctapo'] = 1
+        modelling_options_dict['comp_options']['eord'] = modelling_options_dict[
+            'eord'
+        ]
+        modelling_options_dict['comp_options']['lcav'] = modelling_options_dict[
+            'lcav'
+        ]
+        modelling_options_dict['comp_options']['scav'] = modelling_options_dict[
+            'scav'
+        ]
+
     # every hours, every 10 min
     elif modelling_options_dict['comp_options_for_evapo'] == 'fast':
-            modelling_options_dict['comp_options']['numerical_scheme'] = modelling_options_dict['numerical_scheme']
-            modelling_options_dict['comp_options']['nsmalltimesteps'] = modelling_options_dict['time_step_for_evapo'] * np.array([1, 6])
-            modelling_options_dict['comp_options']['lsym'] = 1
-            modelling_options_dict['comp_options']['ssym'] = 1
-            modelling_options_dict['comp_options']['clapo'] = 1
-            modelling_options_dict['comp_options']['ctapo'] = 1
-            modelling_options_dict['comp_options']['eord'] = modelling_options_dict['eord']
-            modelling_options_dict['comp_options']['lcav'] = modelling_options_dict['lcav']
-            modelling_options_dict['comp_options']['scav'] = modelling_options_dict['scav']
-            
+        modelling_options_dict['comp_options']['numerical_scheme'] = (
+            modelling_options_dict['numerical_scheme']
+        )
+        modelling_options_dict['comp_options']['nsmalltimesteps'] = (
+            modelling_options_dict['time_step_for_evapo'] * np.array([1, 6])
+        )
+        modelling_options_dict['comp_options']['lsym'] = 1
+        modelling_options_dict['comp_options']['ssym'] = 1
+        modelling_options_dict['comp_options']['clapo'] = 1
+        modelling_options_dict['comp_options']['ctapo'] = 1
+        modelling_options_dict['comp_options']['eord'] = modelling_options_dict[
+            'eord'
+        ]
+        modelling_options_dict['comp_options']['lcav'] = modelling_options_dict[
+            'lcav'
+        ]
+        modelling_options_dict['comp_options']['scav'] = modelling_options_dict[
+            'scav'
+        ]
+
     # every customSmallTimeStepInSec
     elif modelling_options_dict['comp_options_for_evapo'] == 'custom':
-            modelling_options_dict['comp_options']['numerical_scheme'] = modelling_options_dict['numerical_scheme']
-            modelling_options_dict['comp_options']['nsmalltimesteps'] = ((modelling_options_dict['time_step_for_evapo'] * 3600) / modelling_options_dict['custom_small_time_step_in_sec'])
-            modelling_options_dict['comp_options']['lsym'] = 1
-            modelling_options_dict['comp_options']['ssym'] = 1
-            modelling_options_dict['comp_options']['clapo'] = 1
-            modelling_options_dict['comp_options']['ctapo'] = 1
-            modelling_options_dict['comp_options']['eord'] = modelling_options_dict['`eord']
-            modelling_options_dict['comp_options']['lcav'] = modelling_options_dict['`lcav']
-            modelling_options_dict['comp_options']['scav'] = modelling_options_dict['`scav']
-    
-    else:   
-        raise ValueError('Failed creating comp_options_for_evapo')
-    
-     # Append parameters to dictionary 
+        modelling_options_dict['comp_options']['numerical_scheme'] = (
+            modelling_options_dict['numerical_scheme']
+        )
+        modelling_options_dict['comp_options']['nsmalltimesteps'] = (
+            modelling_options_dict['time_step_for_evapo'] * 3600
+        ) / modelling_options_dict['custom_small_time_step_in_sec']
+        modelling_options_dict['comp_options']['lsym'] = 1
+        modelling_options_dict['comp_options']['ssym'] = 1
+        modelling_options_dict['comp_options']['clapo'] = 1
+        modelling_options_dict['comp_options']['ctapo'] = 1
+        modelling_options_dict['comp_options']['eord'] = modelling_options_dict[
+            '`eord'
+        ]
+        modelling_options_dict['comp_options']['lcav'] = modelling_options_dict[
+            '`lcav'
+        ]
+        modelling_options_dict['comp_options']['scav'] = modelling_options_dict[
+            '`scav'
+        ]
 
-    if modelling_options_dict['transpiration_model'] == 'granier': 
-           
-        modelling_options_dict['transpiration_granier_args'] = collections.defaultdict(list,{"a":modelling_options_dict['transpiration_granier_arg_a'],
-                                                                                             "b":modelling_options_dict['transpiration_granier_arg_b'],
-                                                                                             "c":modelling_options_dict['transpiration_granier_arg_c']})
-    
+    else:
+        raise ValueError('Failed creating comp_options_for_evapo')
+
+    # Append parameters to dictionary
+
+    if modelling_options_dict['transpiration_model'] == 'granier':
+        modelling_options_dict['transpiration_granier_args'] = (
+            collections.defaultdict(
+                list,
+                {
+                    'a': modelling_options_dict['transpiration_granier_arg_a'],
+                    'b': modelling_options_dict['transpiration_granier_arg_b'],
+                    'c': modelling_options_dict['transpiration_granier_arg_c'],
+                },
+            )
+        )
+
     elif modelling_options_dict['transpiration_model'] == 'jarvis':
         pass
-    
-    else:
-        raise ValueError('Failed appending params a,b, c for granier transpiration_model')
-    
-    modelling_options_dict['stop_simulation_dead_plant'] = modelling_options_dict['print_prog']
 
-        
+    else:
+        raise ValueError(
+            'Failed appending params a,b, c for granier transpiration_model'
+        )
+
+    modelling_options_dict['stop_simulation_dead_plant'] = (
+        modelling_options_dict['print_prog']
+    )
+
     return modelling_options_dict

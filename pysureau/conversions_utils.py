@@ -24,31 +24,30 @@ from numpy import exp, cos, sin, arccos, arctan
 
 # %% ../nbs/04_conversions_utils.ipynb 4
 def convert_vwc_to_sws(
-    volumetric_water_content_x: float, # Volumetric water content (m3.m-3) 
+    volumetric_water_content_x: float,  # Volumetric water content (m3.m-3)
     layer_thickness: float,  # Thickness of the soil layer (in m)
     rfc: float = 0,  # Rock fragment content of the soil layer (%)
 ) -> float:  # Soil Water Stock (mm)
+    "Convert soil volumetric water content (VWC) to soil water stock (SWS). The volume of the water quantity per square metre results in the corresponding water stock height (m3 water per m2 soil as height in mm)"
 
-    'Convert soil volumetric water content (VWC) to soil water stock (SWS). The volume of the water quantity per square metre results in the corresponding water stock height (m3 water per m2 soil as height in mm)'
-        
-    return volumetric_water_content_x * (1 - (rfc / 100)) * layer_thickness * 1000
+    return (
+        volumetric_water_content_x * (1 - (rfc / 100)) * layer_thickness * 1000
+    )
 
 # %% ../nbs/04_conversions_utils.ipynb 6
 def convert_sws_to_vwc(
-    soil_water_stock_x:float, # Soil water stock (mm)
-    layer_thickness: float,  # Thickness of the soil layer (in m)    
+    soil_water_stock_x: float,  # Soil water stock (mm)
+    layer_thickness: float,  # Thickness of the soil layer (in m)
     rfc: float = 0,  # Rock fraction  content of the soil layer (%)
-    
-) -> float: # Volumetric Water Content (m3.m-3)
-    
-    'Convert soil water stock (SWS) to volumetric water content (VWC). Convert soil water stock (quantity as height in mm per m2 soil) to volumetric water content (m3.m-3) by accounting for the respective layer thickness and rock fragment content.'
-    return soil_water_stock_x / ((1 - (rfc / 100)) * layer_thickness * 1000) 
+) -> float:  # Volumetric Water Content (m3.m-3)
+    "Convert soil water stock (SWS) to volumetric water content (VWC). Convert soil water stock (quantity as height in mm per m2 soil) to volumetric water content (m3.m-3) by accounting for the respective layer thickness and rock fragment content."
+    return soil_water_stock_x / ((1 - (rfc / 100)) * layer_thickness * 1000)
 
 # %% ../nbs/04_conversions_utils.ipynb 8
 def convert_ksat_cmday_to_ksat_micromol(
     ksat_cmday: float,  # Saturated hydraulic conductivity? in centimeters per day
 ) -> float:  # Saturated Hydraulic Conductivity?(ksat) in mmol/s/m/MPa
-    'Convert Saturated Hydraulic Conductivity?(ksat) units from cm/day (ESDAC unit) to mmol/s/m/MPa (Sureau unit)'
+    "Convert Saturated Hydraulic Conductivity?(ksat) units from cm/day (ESDAC unit) to mmol/s/m/MPa (Sureau unit)"
 
     warnings.warn('Not sure if formula is correct')
     # Should it be (ksat_cmday/24)/(3600/100)
@@ -63,11 +62,11 @@ def convert_ksat_cmday_to_ksat_micromol(
 # %% ../nbs/04_conversions_utils.ipynb 9
 def convert_rate_to_molm_s_m_mpa(
     rate_x: float,  # A rate in L/T. The default assumes cm/d to be converted to m/s
-    molm: float = 18.01528, # Molar mass of h2o (g mol-1)
+    molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pa: float = 9.80665,  # Hydrostatic pressure (Pa mm-1)
     xfac: float = 8640000,  # Divisor converting rate (L T-1) to (m s-1). Value 8640000 comes from 24 * 60 ** 2 * 100
-) -> float:  # Converted rate to SurEau-Ecos unit (mmol.h2o s-1 m-1.soil MPa-1) 
-    'Convert a hydraulic rate to SurEau-Ecos rate'
+) -> float:  # Converted rate to SurEau-Ecos unit (mmol.h2o s-1 m-1.soil MPa-1)
+    "Convert a hydraulic rate to SurEau-Ecos rate"
 
     # TODO: consider temperature-dependency of water pressure? e.g.
     # pa <- getPa(t = 273.15 + 4) # find specific formula
@@ -77,39 +76,37 @@ def convert_rate_to_molm_s_m_mpa(
 # %% ../nbs/04_conversions_utils.ipynb 11
 def convert_molm_s_m_mpa_to_rate(
     rate_x: float,  # # Unknown parameter definition
-    molm: float = 18.01528, # Molar mass of h2o (g mol-1)
+    molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pa: float = 9.80665,  # Hydrostatic pressure (Pa mm-1)
-    xfac: float = 8640000, # Divisor converting rate (L T-1) to (m s-1). Value 8640000 comes from 24 * 60 ** 2 * 100
+    xfac: float = 8640000,  # Divisor converting rate (L T-1) to (m s-1). Value 8640000 comes from 24 * 60 ** 2 * 100
 ) -> float:  # A rate (L/T)
-    'Convert SurEau-Ecos rate to a hydraulic rate. Inverse of convert_rate_to_molm_s_m_mpa() funtion.'
+    "Convert SurEau-Ecos rate to a hydraulic rate. Inverse of convert_rate_to_molm_s_m_mpa() funtion."
 
-    return rate_x / 1e12 * molm * pa * xfac 
+    return rate_x / 1e12 * molm * pa * xfac
 
 # %% ../nbs/04_conversions_utils.ipynb 13
 def convert_mpa_to_m(
-    mpa_x: float,  # Hydrostatic pressure in MPa 
-    pa: float = 9.80665, # Hydrostatic pressure (Pa mm-1)
-) -> float: # Pressure height in meters
-    
-    'Conversion of hydrostatic pressure (MPa) to pressure height (m)'
+    mpa_x: float,  # Hydrostatic pressure in MPa
+    pa: float = 9.80665,  # Hydrostatic pressure (Pa mm-1)
+) -> float:  # Pressure height in meters
+    "Conversion of hydrostatic pressure (MPa) to pressure height (m)"
 
     return mpa_x * 1e3 / pa
 
 # %% ../nbs/04_conversions_utils.ipynb 15
 def convert_m_to_mpa(
     m_x: float,  # Pressure height in meters
-    pa: float = 9.80665, # Hydrostatic pressure (Pa mm-1)
+    pa: float = 9.80665,  # Hydrostatic pressure (Pa mm-1)
 ) -> float:
-    
-    'Conversion of pressure height (m) to hydrostatic pressure (MPa)'
-    
+    "Conversion of pressure height (m) to hydrostatic pressure (MPa)"
+
     return m_x / 1e3 * pa
 
 # %% ../nbs/04_conversions_utils.ipynb 17
 def convert_pf_to_hpa(
     x: float,  # Unknown parameter definition
 ) -> float:  # Unknown parameter definition
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
 
     return 10 ** abs(x)
 
@@ -117,7 +114,7 @@ def convert_pf_to_hpa(
 def convert_hpa_to_pf(
     x: float,  # Unknown parameter definition
 ) -> float:  # Unknown parameter definition
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
 
     return np.log10(abs(x))
 
@@ -129,35 +126,34 @@ def convert_vg_psi_to_theta(
     a: float,  # Parameter related to the inverse of the air-entry pressure (unitless?)
     n: float,  # Parameter related to the pore-size distribution (unitless)
 ) -> float:  # Volumetric water content
-    
-    'Unit conversion from soil matric potential (Psi) to volumetric water content (Theta) using the Mualem-van-Genuchten pedotransfer function'
+    "Unit conversion from soil matric potential (Psi) to volumetric water content (Theta) using the Mualem-van-Genuchten pedotransfer function"
 
-    return theta_r + (theta_s - theta_r) / (1 + abs(a*vg_psi_x)**n)**(1 - 1/n)
+    return theta_r + (theta_s - theta_r) / (1 + abs(a * vg_psi_x) ** n) ** (
+        1 - 1 / n
+    )
 
 # %% ../nbs/04_conversions_utils.ipynb 23
 def convert_vg_theta_to_psi(
     vwc_theta_x: float,  # volumetric water content (L3 L-3)
-    theta_s: float, # Saturated water content (L3 L-3)
+    theta_s: float,  # Saturated water content (L3 L-3)
     theta_r: float,  # Residual water content (L3 L-3)
     a: float,  # Parameter related to the inverse of the air-entry pressure (unitless?)
     n: float,  # Parameter related to the pore-size distribution (unitless)
 ) -> float:  # Soil matric potential
-    
-    'Unit conversion from volumetric water content (Theta) to soil matric potential (Psi) using the Mualem-van-Genuchten pedotransfer function'
+    "Unit conversion from volumetric water content (Theta) to soil matric potential (Psi) using the Mualem-van-Genuchten pedotransfer function"
 
     theta_eff = (vwc_theta_x - theta_r) / (theta_s - theta_r)
 
-    # *(-1) for negative psi    
-    return (theta_eff ** (-1/(1 - 1/n)) - 1) ** (1/n) / a * (-1)
+    # *(-1) for negative psi
+    return (theta_eff ** (-1 / (1 - 1 / n)) - 1) ** (1 / n) / a * (-1)
 
 # %% ../nbs/04_conversions_utils.ipynb 25
 def convert_vwc_to_rew(
     vwc_x: float,  # Volumetric Water Content (L3*L-3)
     theta_s: float,  # Saturated water content (L3 L-3)
     theta_r: float,  # Residual water content (L3 L-3)
-) -> float:  # Relative Extractable water 
-    
-    'Conversion from volumetric water content to relative extractable water (REW). REW is the volumetric water content normalised to saturation capacity (REW=1) and residual capacity (REW=0)'
+) -> float:  # Relative Extractable water
+    "Conversion from volumetric water content to relative extractable water (REW). REW is the volumetric water content normalised to saturation capacity (REW=1) and residual capacity (REW=0)"
 
     return (vwc_x - theta_r) / (theta_s - theta_r)
 
@@ -167,8 +163,7 @@ def convert_rew_to_vwc(
     theta_s: float,  # Saturated water content (L3 L-3)
     theta_r: float,  #  Residual water content (L3 L-3)
 ) -> float:  # Volumetric Water Content (L3*L-3)
-    
-    'Conversion from relative extractable water to volumetric water'
+    "Conversion from relative extractable water to volumetric water"
     return rew_x * (theta_s - theta_r) + theta_r
 
 # %% ../nbs/04_conversions_utils.ipynb 29
@@ -177,9 +172,8 @@ def convert_mmol_to_m3(
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
 ) -> float:  # Unknown parameter
-    
-    'Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres.'
-    
+    "Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres."
+
     return mmol_h2o_x * molm / pw / 1e6  # 1e6 = mmol to mol and g to kg
 
 # %% ../nbs/04_conversions_utils.ipynb 33
@@ -188,16 +182,15 @@ def convert_mmol_to_mm(
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
 ) -> float:  # Unknown parameter
-    
-    'Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres.'
+    "Stochiometric conversion between volume and molarity  In case of converting from or to millimetres (mm), the actual unit is the volume divided by its area, resulting in a depth given in millimetres."
     return mmol_h2o_x * molm / pw / 1e3  # 1e6 = mmol to mol and g to kg
 
 # %% ../nbs/04_conversions_utils.ipynb 37
 def convert_compartment_leaf_to_soil(
     x: float,  # Unknown parameter definition m2.leaf
-    lai: float = 1,  # Leaf Area Index 
+    lai: float = 1,  # Leaf Area Index
 ) -> float:  # Unknown parameter m2.soil
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
     return x * lai
 
 # %% ../nbs/04_conversions_utils.ipynb 38
@@ -205,15 +198,15 @@ def convert_compartment_soil_to_leaf(
     x: float,  # Unknown parameter definition m2.soil
     lai: float = 1,  # Leaf Area Index
 ) -> float:  # Unknown parameter m2.leaf
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
     return x / lai
 
 # %% ../nbs/04_conversions_utils.ipynb 39
-def convert_compartment_stem_to_leaf (
+def convert_compartment_stem_to_leaf(
     stem_x: float,  # Unknown parameter definition m2.stem
     hv: float,  # Huber value (sap wood / leaf area)
 ) -> float:  # Unknown parameter m2.leaf
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
     return stem_x * hv
 
 # %% ../nbs/04_conversions_utils.ipynb 40
@@ -221,7 +214,7 @@ def convert_compartment_leaf_to_stem(
     leaf_x: float,  # Unknown parameter definition m2.leaf
     hv: float,  # Huber value (sap wood / leaf area)
 ) -> float:  # Unknown parameter m2.stem
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
     return leaf_x / hv
 
 # %% ../nbs/04_conversions_utils.ipynb 41
@@ -229,7 +222,7 @@ def convert_compartment_stem_to_soil(
     stem_x: float,  # Unknown parameter definition
     swi: float,  # Sap wood index (m2.sapwood m-2.soil)
 ) -> float:  # Unknown parameter m2.soil
-    'Function lacks definition, documentation needs to be improved.'
+    "Function lacks definition, documentation needs to be improved."
     return stem_x * swi
 
 # %% ../nbs/04_conversions_utils.ipynb 42
@@ -237,21 +230,19 @@ def convert_compartment_soil_to_stem(
     soil_x: float,  # Unknown parameter definition
     swi: float,  # Sap wood index (m2.sapwood m-2.soil)
 ) -> float:  # Unknown parameter m2.stem
-    'Function lacks definition, documentation needs to be improved.'
-    
+    "Function lacks definition, documentation needs to be improved."
+
     return soil_x / swi
 
 # %% ../nbs/04_conversions_utils.ipynb 47
 def convert_stock_mm_soil_to_flux_mmol_leaf(
-    stand_water_stock_x:float, # Stand level water stock for a given LAI in mm(L m-2Soil) over the period of time considered
+    stand_water_stock_x: float,  # Stand level water stock for a given LAI in mm(L m-2Soil) over the period of time considered
     lai: float,  # Leaf area Index
     dt: float,  # Time step length in seconds
     molm: float = 18.01528,  # Molar mass of h2o (g mol-1)
     pw: float = 998,  # Density of water (kg m-3.h2o)
-     
 ) -> float:  # Instantaneous leaf area-based flux (mmol m-2Leaf s-1)
-    
-    'Converts a stand level water quantity (mm, i.e. L m-2Soil) over a defined time period to a leaf area-based flux (mmol m-2Leaf s-1) for a given leaf area index'
+    "Converts a stand level water quantity (mm, i.e. L m-2Soil) over a defined time period to a leaf area-based flux (mmol m-2Leaf s-1) for a given leaf area index"
 
     if isinstance(stand_water_stock_x, float):
         # Transform floatg values into array
@@ -259,50 +250,46 @@ def convert_stock_mm_soil_to_flux_mmol_leaf(
 
     # Conversion ----------------------------------------------------------------
     if lai > 0:
-        flux = convert_stock_to_flux(x = stand_water_stock_x, dt = dt)
-        mmol = convert_mm_to_mmol(mm_x = flux, molm=molm, pw = pw)
-        
-        return convert_compartment_soil_to_leaf(x = mmol, lai = lai)
-            
+        flux = convert_stock_to_flux(x=stand_water_stock_x, dt=dt)
+        mmol = convert_mm_to_mmol(mm_x=flux, molm=molm, pw=pw)
+
+        return convert_compartment_soil_to_leaf(x=mmol, lai=lai)
+
     else:
-        #print(len(np.array(stand_water_stock_x)))
-        return np.repeat(0, repeats = len(stand_water_stock_x))
+        # print(len(np.array(stand_water_stock_x)))
+        return np.repeat(0, repeats=len(stand_water_stock_x))
 
 # %% ../nbs/04_conversions_utils.ipynb 51
 def convert_optim_mm_soil_to_mmol_leaf(
     instaneous_flux: float,  # Stand level water stock for a given LAI in mm (L m-2Soil) over the period of time considered
-    dt: float, # Time step length in seconds
+    dt: float,  # Time step length in seconds
     lai: float,  # Leaf area index
 ) -> float:  # Instantaneous leaf area-based flux (mmol m-2Leaf s-1
-
-    'Converts a stand level water quantity (mm, i.e. L m-2Soil) over a defined time period to a leaf area-based flux (mmol m-2Leaf s-1) for a given leaf area index.'
+    "Converts a stand level water quantity (mm, i.e. L m-2Soil) over a defined time period to a leaf area-based flux (mmol m-2Leaf s-1) for a given leaf area index."
     if lai > 0:
-    
-    # originally version
-    # x * LAI * dt * 3600 * 18 / 1e6
-    #
-    # hard-coded unit conversion for computational speed-up
-    # - 3600 * 18 / 1e6 = 0.0648
-    # - TODO: more exact and equally fast would be
-    #   hours_to_secs * molm / pw / 1e3
-    #   3600 * 18.01528 / 998 / 1e3 = 0.06498498
-    # a more flexible function is given with convert_flux_mmol_s_m2Leaf_To_mm_m2Soil
+        # originally version
+        # x * LAI * dt * 3600 * 18 / 1e6
+        #
+        # hard-coded unit conversion for computational speed-up
+        # - 3600 * 18 / 1e6 = 0.0648
+        # - TODO: more exact and equally fast would be
+        #   hours_to_secs * molm / pw / 1e3
+        #   3600 * 18.01528 / 998 / 1e3 = 0.06498498
+        # a more flexible function is given with convert_flux_mmol_s_m2Leaf_To_mm_m2Soil
         return instaneous_flux / lai * dt * 1.8e-5  # 0.06498498
-    
+
     else:
-         raise ValueError("Failed convert_optim_mm_soil_to_mmol_leaf. lai < 0")
+        raise ValueError('Failed convert_optim_mm_soil_to_mmol_leaf. lai < 0')
 
 # %% ../nbs/04_conversions_utils.ipynb 52
 def convert_optim_mmol_leaf_to_mm_soil(
-    x:float, # Instantaneous leaf area-based flux to be converted (mmol m-2Leaf s-1)
-    dt: float, # Time step length in seconds
+    x: float,  # Instantaneous leaf area-based flux to be converted (mmol m-2Leaf s-1)
+    dt: float,  # Time step length in seconds
     lai: float,  # Leaf area index
-) -> float: # Stand level water stock for a given LAI in mm (L m-2Soil) over the period of time considered
-
-    'Converts an instantaneous leaf area-based flux (mmol m-2Leaf s-1) to a stand level water quantity'
+) -> float:  # Stand level water stock for a given LAI in mm (L m-2Soil) over the period of time considered
+    "Converts an instantaneous leaf area-based flux (mmol m-2Leaf s-1) to a stand level water quantity"
 
     return x * lai * dt * 1.8e-5
-
 
 # %% ../nbs/04_conversions_utils.ipynb 54
 def compute_vpd_from_temp_rh(
@@ -310,7 +297,7 @@ def compute_vpd_from_temp_rh(
     temperature: float,  # Air temperature (degrees Celsius)
     air_pressure: float = 101325,  # Air pressure (Pa)
 ) -> float:
-    'Compute vapor pressure deficit (VPD) from air relative humidity (rh) and air temperature (temp)'
+    "Compute vapor pressure deficit (VPD) from air relative humidity (rh) and air temperature (temp)"
 
     # Assert parameters ---------------------------------------------------------
 
@@ -370,13 +357,13 @@ def compute_vpd_from_temp_rh(
     b = 17.502
     c = 240.97
     f = 1.0007 + 3.46 * 1e-08 * 101 * 1000
-    
-    es = f * a * (exp(b * temperature/(c + temperature)))
-    
-    # Old calculation 
-    #es = 6.108 * exp(17.27 * temperature / (237.2 + temperature)) * 100
 
-    ea = relative_humidity/100 * es 
+    es = f * a * (exp(b * temperature / (c + temperature)))
+
+    # Old calculation
+    # es = 6.108 * exp(17.27 * temperature / (237.2 + temperature)) * 100
+
+    ea = relative_humidity / 100 * es
 
     # Compute VPD ---------------------------------------------------------------
 
@@ -403,7 +390,7 @@ def compute_vpd_from_temp_rh(
 def compute_slope_sat(
     tmoy: float,  # Mean daily temperature in °C
 ) -> float:  # Slope of the saturation vapour pressure function
-    'Compute slope of the saturation vapour pressure function (AO 1998)'
+    "Compute slope of the saturation vapour pressure function (AO 1998)"
 
     return (
         4098
@@ -422,7 +409,7 @@ def compute_pet(
     pt_coeff: float = None,  # An empirical constant accounting for the vapor pressure deficit and resistance values. Typically, α is 1.26 for open bodies of water, but has a wide range of values from less than 1 (humid conditions) to almost 2 (arid conditions).
     formulation: str = 'pt',  # String indicating which formulation to use (Pristeley Taylor (pt) or Penman-Monteith (penman)) for calculating potential evapotranspiration
 ) -> float:  #  Potential evapotranspiration (PET) (mm)
-    'Calcule Potential Evapotranspiration (mm) PET using Pristeley Taylor (pt) or Penmman (penman) formulation'
+    "Calcule Potential Evapotranspiration (mm) PET using Pristeley Taylor (pt) or Penmman (penman) formulation"
 
     # Assert parameters ---------------------------------------------------------
     # tmoy
@@ -445,9 +432,9 @@ def compute_pet(
     ), 'g parameter must be a float or integer value'
 
     # Formulation
-    assert (
-        formulation in ['pt', 'penman']
-    ), f'{formulation} not a valid option for formulation, select "pt" for Pristeley Taylor (pt) or "penman" for Penmman'
+    assert formulation in ['pt', 'penman'], (
+        f'{formulation} not a valid option for formulation, select "pt" for Pristeley Taylor (pt) or "penman" for Penmman'
+    )
 
     # wind_speed
     if formulation == 'penman':
@@ -455,14 +442,18 @@ def compute_pet(
             isinstance(wind_speed_u, float)
             | isinstance(wind_speed_u, int)
             | isinstance(wind_speed_u, np.ndarray)
-        ), 'Parameter wind_speed_u required for penman formulation. This must be a float or integer value'
+        ), (
+            'Parameter wind_speed_u required for penman formulation. This must be a float or integer value'
+        )
 
         # vpd
         assert (
             isinstance(vpd, float)
             | isinstance(vpd, int)
             | isinstance(vpd, np.ndarray)
-        ), 'Parameter vpd required for penman formulation. This must be a float or integer value'
+        ), (
+            'Parameter vpd required for penman formulation. This must be a float or integer value'
+        )
 
     # pt_coeff
     if formulation == 'pt' and pt_coeff is None:
@@ -474,7 +465,9 @@ def compute_pet(
             isinstance(pt_coeff, float)
             | isinstance(pt_coeff, int)
             | isinstance(pt_coeff, np.ndarray)
-        ), 'Parameter pt_coeff required for pt formulation. This must be a float or integer value'
+        ), (
+            'Parameter pt_coeff required for pt formulation. This must be a float or integer value'
+        )
 
     # Calculate pet -------------------------------------------------------------
 
@@ -538,7 +531,7 @@ def calculate_radiation_diurnal_pattern(
     time_of_day: int,  # Numeric value of vector indicating the time of the day (in seconds)
     day_length: int,  # Value indicating the duration of the day (in seconds). Calculated using the `day_length` function
 ) -> float:
-    'Calculated diurnal pattern of temperature assuming a sinusoidal pattern with T = tmin at sunrise and T = (tmin + tmax)/2 at sunset. From sunset to sunrise follows a linear trend'
+    "Calculated diurnal pattern of temperature assuming a sinusoidal pattern with T = tmin at sunrise and T = (tmin + tmax)/2 at sunset. From sunset to sunrise follows a linear trend"
 
     # Assert parameters ---------------------------------------------------------
 
@@ -549,7 +542,7 @@ def calculate_radiation_diurnal_pattern(
     # Solution from:
     # https://stackoverflow.com/questions/45987962/why-arent-there-numpy-testing-assert-array-greater-assert-array-less-equal-as
 
-    #if time_of_day < 0:
+    # if time_of_day < 0:
     #    warnings.warn(
     #        'time_of_day is a negative value. Not sure if this is correct'
     #    )
@@ -576,15 +569,14 @@ def calculate_radiation_diurnal_pattern(
 
     np.testing.assert_array_less(
         np.array(day_length),
-        
-        # This value is 86401 and not 86400 because of the 
-        # np.testing.assert_array_less  
+        # This value is 86401 and not 86400 because of the
+        # np.testing.assert_array_less
         86401,
         err_msg='\nday_length must be must be value between 0 and 86400\n',
     )
 
     # Raise warning for time_of_day and day_length
-    #warnings.warn('Double check that time_of_day and day_length are in seconds')
+    # warnings.warn('Double check that time_of_day and day_length are in seconds')
 
     # Calculate_radiation_diurnal_pattern ---------------------------------------
 
@@ -606,7 +598,7 @@ def calculate_temperature_diurnal_pattern(
     tmax_prev: float,  # Maximum temperature (in degrees C) of the previous target day of the year
     tmin_next: float,  # Minimum temperature (in degrees C) of the next target day of the year
 ) -> float:  # Temperature at the given time
-    'Calculated diurnal pattern of temperature assuming a sinusoidal pattern with T = tmin at sunrise and T = (tmin+tmax)/2 at sunset. From sunset to sunrise follows a linear trend'
+    "Calculated diurnal pattern of temperature assuming a sinusoidal pattern with T = tmin at sunrise and T = (tmin+tmax)/2 at sunset. From sunset to sunrise follows a linear trend"
 
     # Raise warning for time_of_day and day_length
     warnings.warn('Double check that time_of_day and day_length are in seconds')
@@ -646,7 +638,7 @@ def calculate_rh_diurnal_pattern(
     tmin: float,  # Numeric value indicating the minimum daily temperature (degrees C)
     tmax: float,  # Numeric value indicating the maximum daily temperature (degrees C)
 ) -> float:  # Relative humidity at given temperature
-    'Calculate diurnal pattern of relative humidity from temperature'
+    "Calculate diurnal pattern of relative humidity from temperature"
 
     # Assert parameters ---------------------------------------------------------
     # rhmin
@@ -670,15 +662,17 @@ def global_radiation_conversions_watts_ppfd(
     frac_par: float = 0.5,  # Fraction of solar radiation that is photosynthetically active radiation (PAR)
     selected_conversion: str = 'rg_watts_to_rg_ppfd_umol',  # String indicating to what units rg should be converted. Options 'rg_ppfd_umol_to_rg_watts' or 'rg_watts_to_rg_ppfd_umol'
 ) -> float:
-    'Convert Global Radiation (rg) in watts to Photosynthetic Photon Flux Density (ppfd) in umol and viceversa'
+    "Convert Global Radiation (rg) in watts to Photosynthetic Photon Flux Density (ppfd) in umol and viceversa"
 
     # Assert parameters ---------------------------------------------------------
 
     # Make sure that selected_conversion only has three options
-    assert (
-        selected_conversion
-        in ['rg_ppfd_umol_to_rg_watts', 'rg_watts_to_rg_ppfd_umol']
-    ), f'{selected_conversion} not a valid option for selected_conversion, select "rg_ppfd_umol_to_rg_watts" or "rg_watts_to_rg_ppfd_umol"'
+    assert selected_conversion in [
+        'rg_ppfd_umol_to_rg_watts',
+        'rg_watts_to_rg_ppfd_umol',
+    ], (
+        f'{selected_conversion} not a valid option for selected_conversion, select "rg_ppfd_umol_to_rg_watts" or "rg_watts_to_rg_ppfd_umol"'
+    )
 
     # Make sure the necessary parameters for a given conversion are provided
     if selected_conversion == 'rg_ppfd_umol_to_rg_watts':
@@ -722,23 +716,22 @@ def global_radiation_conversions_watts_mjules(
     rg_watts: float = None,  # Instantaneous radiation (watts)
     rg_mj: float = None,  # Instantaneous radiation (in Mega Jules?)
     nhours: float = None,  # Number of hours of sun in the day
-    selected_conversion: str = 'rg_watts_to_rg_mj' # String indicating to what units rg should be converted. Options are 'rg_watts_to_rg_mj', 'rg_mj_to_rg_watts', 'rg_mj_to_rg_watts_hour', 'rg_watts_to_rg_mjday' or 'rg_mjday_to_rg_watts'
+    selected_conversion: str = 'rg_watts_to_rg_mj',  # String indicating to what units rg should be converted. Options are 'rg_watts_to_rg_mj', 'rg_mj_to_rg_watts', 'rg_mj_to_rg_watts_hour', 'rg_watts_to_rg_mjday' or 'rg_mjday_to_rg_watts'
 ) -> float:
-    'Convert instantaneous radiation in watts to daily cumulative radiation in MJ (MJ.day-1) and viceversa'
+    "Convert instantaneous radiation in watts to daily cumulative radiation in MJ (MJ.day-1) and viceversa"
 
     # Assert parameters ---------------------------------------------------------
 
     # Make sure that selected_conversion only has three options
-    assert (
-        selected_conversion
-        in [
-            'rg_watts_to_rg_mj',
-            'rg_mj_to_rg_watts',
-            'rg_mj_to_rg_watts_hour',
-            'rg_watts_to_rg_mjday',
-            'rg_mjday_to_rg_watts',
-        ]
-    ), f'{selected_conversion} not a valid option for selected_conversion, select "rg_watts_to_rg_mj","rg_mj_to_rg_watts", "rg_mj_to_rg_watts_hour", "rg_watts_to_rg_mjday" or "rg_mjday_to_rg_watts"'
+    assert selected_conversion in [
+        'rg_watts_to_rg_mj',
+        'rg_mj_to_rg_watts',
+        'rg_mj_to_rg_watts_hour',
+        'rg_watts_to_rg_mjday',
+        'rg_mjday_to_rg_watts',
+    ], (
+        f'{selected_conversion} not a valid option for selected_conversion, select "rg_watts_to_rg_mj","rg_mj_to_rg_watts", "rg_mj_to_rg_watts_hour", "rg_watts_to_rg_mjday" or "rg_mjday_to_rg_watts"'
+    )
 
     # Make sure the necessary parameters for a given conversion are provided
     if (
@@ -815,7 +808,7 @@ def declination(
     day_of_year: int,  # julian day (day of the year)
     day_of_spring: int = 80,  # Julian day representing the first day of spring
 ) -> float:  # Earth declination at day_of_year
-    'Calculate declination of sun (radians ? ) for a given julian day (DOY)'
+    "Calculate declination of sun (radians ? ) for a given julian day (DOY)"
 
     # Hervé's formula for solar declination
 
@@ -843,9 +836,9 @@ def declination(
     )
 
     # date_of_spring
-    assert isinstance(
-        day_of_spring, int
-    ), 'day_of_spring must be must be a integer value i.e. 80, 90, 1'
+    assert isinstance(day_of_spring, int), (
+        'day_of_spring must be must be a integer value i.e. 80, 90, 1'
+    )
 
     # Constans ------------------------------------------------------------------
 
@@ -870,7 +863,7 @@ def potential_par(
     latitude: float,  # Numeric value specifying the geographic latitude (in decimal degrees) of the location of interest
     day_of_year: int,  # Julian day (day of the year)
 ) -> np.array:  # Potential Photosynthetic Active Radiation (PAR) for each time_of_day at given latitude and given day_of_year
-    'Determine potential for a given place and date /used to determine cloud cover return potential par in W.m2'
+    "Determine potential for a given place and date /used to determine cloud cover return potential par in W.m2"
 
     warnings.warn('Make sure time of day is hours in potential_par function')
 
@@ -894,7 +887,9 @@ def potential_par(
     assert (
         isinstance(latitude, float) | isinstance(latitude, int)
         and 95 >= latitude >= -95
-    ), 'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
+    ), (
+        'Provide latitude as coordinates points bewteen -90 and 90 i.e. latitude = 41.40338'
+    )
 
     # Day of year
     # Using np.testing instead of assert because parameters can be np.arrays OR

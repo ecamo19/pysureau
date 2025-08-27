@@ -112,7 +112,7 @@ Attributes:
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L70){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L51){target="_blank" style="float:right; font-size:smaller"}
 
 ### ModelingOptionsParameterValidator
 
@@ -177,7 +177,98 @@ Attributes:
     __pydantic_private__: Values of private attributes set on the model instance.*
 
 
+# Vegetation parameters validator
+
+---
+
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L84){target="_blank" style="float:right; font-size:smaller"}
+
+### VegetationParameterValidator
+
+>      VegetationParameterValidator (apo_frac_leaf:Annotated[float,Ge(ge=0)],
+>                                    apo_frac_stem:Annotated[float,Ge(ge=0)], be
+>                                    ta_root_profile:Annotated[float,Ge(ge=0)], 
+>                                    canopy_storage_param:Annotated[float,Ge(ge=
+>                                    0)], c_lapo_init:float, c_sapo_init:float, 
+>                                    day_start:Annotated[float,Ge(ge=1800),Lt(lt
+>                                    =3000)], day_end:Annotated[float,Ge(ge=1800
+>                                    ),Lt(lt=3000)],
+>                                    epsilon_sym_leaf:Annotated[float,Ge(ge=0)],
+>                                    epsilon_sym_stem:Annotated[float,Ge(ge=0)],
+>                                    f_crit:Annotated[float,Ge(ge=0)], foliage:L
+>                                    iteral['evergreen','deciduous','forced'],
+>                                    f_root_to_leaf:float, f_trb_to_leaf:float,
+>                                    g_crown0:Annotated[float,Ge(ge=0)],
+>                                    group:str,
+>                                    gmin_s:Annotated[float,Ge(ge=0)],
+>                                    gmin20:Annotated[float,Ge(ge=0)],
+>                                    gs_max:Annotated[float,Ge(ge=0)],
+>                                    gs_night:Annotated[float,Ge(ge=0)],
+>                                    jarvis_par:Annotated[float,Ge(ge=0)],
+>                                    k:Annotated[float,Ge(ge=0)],
+>                                    k_plant_init:Annotated[float,Ge(ge=0)],
+>                                    k_ssym_init:Annotated[float,Ge(ge=0)],
+>                                    leaf_angle:Annotated[float,Ge(ge=0)],
+>                                    leaf_size:Annotated[float,Ge(ge=0)],
+>                                    life_form:str,
+>                                    lmdc:Annotated[float,Ge(ge=0)],
+>                                    lma:Annotated[float,Ge(ge=0)],
+>                                    nb_day_lai:Annotated[float,Ge(ge=0)],
+>                                    p12_gs:Annotated[float,Ge(ge=0)],
+>                                    p50_vc_leaf:Annotated[float,Ge(ge=0)],
+>                                    p50_vc_stem:Annotated[float,Ge(ge=0)],
+>                                    p88_gs:Annotated[float,Ge(ge=0)], pi_full_t
+>                                    urgor_leaf:Annotated[float,Ge(ge=0)], pi_fu
+>                                    ll_turgor_stem:Annotated[float,Ge(ge=0)],
+>                                    psi_close:Annotated[float,Ge(ge=0)],
+>                                    psi_start_closing:float,
+>                                    pt_coeff:Annotated[float,Ge(ge=0)],
+>                                    q10_1_gmin:Annotated[float,Ge(ge=0)],
+>                                    q10_2_gmin:Annotated[float,Ge(ge=0)],
+>                                    root_radius:Annotated[float,Ge(ge=0)],
+>                                    slope_vc_leaf:float, slope_vc_stem:float,
+>                                    species:str,
+>                                    sym_frac_stem:Annotated[float,Ge(ge=0)],
+>                                    sym_frac_leaf:Annotated[float,Ge(ge=0)],
+>                                    t_base:Annotated[float,Ge(ge=0)],
+>                                    t_gs_optim:Annotated[float,Ge(ge=0)],
+>                                    t_gs_sens:Annotated[float,Ge(ge=0)],
+>                                    t_phase_gmin:Annotated[float,Ge(ge=0)],
+>                                    turgor_pressure_at_gs_max:float,
+>                                    vol_stem:Annotated[float,Ge(ge=0)])
+
+*!!! abstract "Usage Documentation"
+    [Models](../concepts/models.md)
+
+A base class for creating Pydantic models.
+
+Attributes:
+    __class_vars__: The names of the class variables defined on the model.
+    __private_attributes__: Metadata about the private attributes of the model.
+    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.
+
+    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+    __pydantic_core_schema__: The core schema of the model.
+    __pydantic_custom_init__: Whether the model has a custom `__init__` function.
+    __pydantic_decorators__: Metadata containing the decorators defined on the model.
+        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+    __pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+        __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+    __pydantic_post_init__: The name of the post-init method for the model, if defined.
+    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
+
+    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
+    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
+
+    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+        is set to `'allow'`.
+    __pydantic_fields_set__: The names of fields explicitly set during instantiation.
+    __pydantic_private__: Values of private attributes set on the model instance.*
+
+
 # Climate data validator
 
-# Plant data Validator
 

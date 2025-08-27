@@ -96,10 +96,10 @@ class VegetationParameterValidator(BaseModel):
     canopy_storage_param: float = Field(ge=0)
 
     # c_lapoinit:Capacitance of the leaf apoplasm
-    c_lapo_init: float
+    c_lapo_init: float = Field(ge=-1000, lt=1000)
 
     # c_sapoinit: Capacitance of the stem apoplasm
-    c_sapo_init: float
+    c_sapo_init: float = Field(ge=-1000, lt=1000)
 
     day_start: float = Field(ge=1800, lt=3000)
 
@@ -117,10 +117,10 @@ class VegetationParameterValidator(BaseModel):
     foliage: Literal['evergreen', 'deciduous', 'forced']
 
     # froottoleaf: Root to leaf ratio (unitless??
-    f_root_to_leaf: float
+    f_root_to_leaf: float = Field(ge=-1000, lt=1000)
 
     # ftrbtoleaf: No definition found
-    f_trb_to_leaf: float
+    f_trb_to_leaf: float = Field(ge=-1000, lt=1000)
 
     g_crown0: float = Field(ge=0)
 
@@ -184,7 +184,7 @@ class VegetationParameterValidator(BaseModel):
 
     psi_close: float = Field(ge=0)
 
-    psi_start_closing: float
+    psi_start_closing: float = Field(ge=-1000, lt=1000)
 
     pt_coeff: float = Field(ge=0)
 
@@ -198,10 +198,10 @@ class VegetationParameterValidator(BaseModel):
     root_radius: float = Field(ge=0)
 
     # slope_vc_leaf: Slope (%/MPa of the vulnerability curve
-    slope_vc_leaf: float
+    slope_vc_leaf: float = Field(ge=-1000, lt=1000)
 
     # slope_vc_stem: Slope of rate of stem embolism spread at ψ50S
-    slope_vc_stem: float
+    slope_vc_stem: float = Field(ge=-1000, lt=1000)
 
     species: str
 
@@ -220,7 +220,7 @@ class VegetationParameterValidator(BaseModel):
     # conductance
     t_phase_gmin: float = Field(ge=0)
 
-    turgor_pressure_at_gs_max: float
+    turgor_pressure_at_gs_max: float = Field(ge=-1000, lt=1000)
 
     # vol_stem: Volume of tissue of the stem (includes the root trunk and
     # branches

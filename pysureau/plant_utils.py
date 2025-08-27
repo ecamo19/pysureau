@@ -16,12 +16,12 @@ import pandas as pd
 
 # import pandera as pa
 from typing import Dict, List
-
+from pydantic import ValidationError
 # from pandera.typing import Series
 from pathlib import Path, PosixPath
-from pydantic import ValidationError
 from .pysureau_utils import dict_to_csv
 from .modeling_options_utils import read_modeling_options_file
+from .parameter_validators import VegetationParameterValidator
 
 # %% ../nbs/02_plant_utils.ipynb 4
 def rs_comp(
@@ -850,11 +850,11 @@ def read_vegetation_file(
             )
 
     # Validate modelling_options_dict pydanthic schema
-    # try:
-    #    ModelingOptionsParameterValidator.model_validate(vegetation_parameters_dict)
+    try:
+        VegetationParameterValidator.model_validate(vegetation_parameters_dict)
 
-    # except ValidationError as error:
-    #        raise (error)
+    except ValidationError as error:
+        raise (error)
 
 
 #    # Raise error if soil data don't follow the PlantDataValidator Schema

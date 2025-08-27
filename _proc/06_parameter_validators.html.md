@@ -189,15 +189,19 @@ Attributes:
 >                                    apo_frac_stem:Annotated[float,Ge(ge=0)], be
 >                                    ta_root_profile:Annotated[float,Ge(ge=0)], 
 >                                    canopy_storage_param:Annotated[float,Ge(ge=
->                                    0)], c_lapo_init:float, c_sapo_init:float, 
->                                    day_start:Annotated[float,Ge(ge=1800),Lt(lt
->                                    =3000)], day_end:Annotated[float,Ge(ge=1800
->                                    ),Lt(lt=3000)],
+>                                    0)], c_lapo_init:Annotated[float,Ge(ge=-
+>                                    1000),Lt(lt=1000)], c_sapo_init:Annotated[f
+>                                    loat,Ge(ge=-1000),Lt(lt=1000)], day_start:A
+>                                    nnotated[float,Ge(ge=1800),Lt(lt=3000)], da
+>                                    y_end:Annotated[float,Ge(ge=1800),Lt(lt=300
+>                                    0)],
 >                                    epsilon_sym_leaf:Annotated[float,Ge(ge=0)],
 >                                    epsilon_sym_stem:Annotated[float,Ge(ge=0)],
 >                                    f_crit:Annotated[float,Ge(ge=0)], foliage:L
->                                    iteral['evergreen','deciduous','forced'],
->                                    f_root_to_leaf:float, f_trb_to_leaf:float,
+>                                    iteral['evergreen','deciduous','forced'], f
+>                                    _root_to_leaf:Annotated[float,Ge(ge=-
+>                                    1000),Lt(lt=1000)], f_trb_to_leaf:Annotated
+>                                    [float,Ge(ge=-1000),Lt(lt=1000)],
 >                                    g_crown0:Annotated[float,Ge(ge=0)],
 >                                    group:str,
 >                                    gmin_s:Annotated[float,Ge(ge=0)],
@@ -220,21 +224,25 @@ Attributes:
 >                                    p88_gs:Annotated[float,Ge(ge=0)], pi_full_t
 >                                    urgor_leaf:Annotated[float,Ge(ge=0)], pi_fu
 >                                    ll_turgor_stem:Annotated[float,Ge(ge=0)],
->                                    psi_close:Annotated[float,Ge(ge=0)],
->                                    psi_start_closing:float,
+>                                    psi_close:Annotated[float,Ge(ge=0)], psi_st
+>                                    art_closing:Annotated[float,Ge(ge=-
+>                                    1000),Lt(lt=1000)],
 >                                    pt_coeff:Annotated[float,Ge(ge=0)],
 >                                    q10_1_gmin:Annotated[float,Ge(ge=0)],
 >                                    q10_2_gmin:Annotated[float,Ge(ge=0)],
->                                    root_radius:Annotated[float,Ge(ge=0)],
->                                    slope_vc_leaf:float, slope_vc_stem:float,
+>                                    root_radius:Annotated[float,Ge(ge=0)], slop
+>                                    e_vc_leaf:Annotated[float,Ge(ge=-
+>                                    1000),Lt(lt=1000)], slope_vc_stem:Annotated
+>                                    [float,Ge(ge=-1000),Lt(lt=1000)],
 >                                    species:str,
 >                                    sym_frac_stem:Annotated[float,Ge(ge=0)],
 >                                    sym_frac_leaf:Annotated[float,Ge(ge=0)],
 >                                    t_base:Annotated[float,Ge(ge=0)],
 >                                    t_gs_optim:Annotated[float,Ge(ge=0)],
 >                                    t_gs_sens:Annotated[float,Ge(ge=0)],
->                                    t_phase_gmin:Annotated[float,Ge(ge=0)],
->                                    turgor_pressure_at_gs_max:float,
+>                                    t_phase_gmin:Annotated[float,Ge(ge=0)], tur
+>                                    gor_pressure_at_gs_max:Annotated[float,Ge(g
+>                                    e=-1000),Lt(lt=1000)],
 >                                    vol_stem:Annotated[float,Ge(ge=0)])
 
 *!!! abstract "Usage Documentation"

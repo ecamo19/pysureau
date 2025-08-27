@@ -505,11 +505,11 @@ compute_tleaf(
 ::: {.cell-output .cell-output-display}
 ```
 defaultdict(list,
-            {'t_leaf': 60.394042704329365,
-             'g_bl': 3076.697970227172,
-             'vpd_leaf': 7.823071542236241,
-             'vpd_air': 7.978058190496631,
-             'delta_t': 0.39404270432936683})
+            {'t_leaf': np.float64(60.394042704329365),
+             'g_bl': np.float64(3076.697970227172),
+             'vpd_leaf': np.float64(7.823071542236241),
+             'vpd_air': np.float64(7.978058190496631),
+             'delta_t': np.float64(0.39404270432936683)})
 ```
 :::
 :::

@@ -1,5 +1,6 @@
 ---
-description: 'AUTHORS: Erick Calderon Morales'
+AUTHORS: Erick Calderon Morales
+description: null
 output-file: parameter_validators.html
 title: Parameter validators
 
@@ -74,6 +75,75 @@ Attributes:
 >                                psoil_at_field_capacity:float,
 >                                pedo_transfer_formulation:str,
 >                                soil_formulation:str)
+
+*!!! abstract "Usage Documentation"
+    [Models](../concepts/models.md)
+
+A base class for creating Pydantic models.
+
+Attributes:
+    __class_vars__: The names of the class variables defined on the model.
+    __private_attributes__: Metadata about the private attributes of the model.
+    __signature__: The synthesized `__init__` [`Signature`][inspect.Signature] of the model.
+
+    __pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+    __pydantic_core_schema__: The core schema of the model.
+    __pydantic_custom_init__: Whether the model has a custom `__init__` function.
+    __pydantic_decorators__: Metadata containing the decorators defined on the model.
+        This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+    __pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+        __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+    __pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+    __pydantic_post_init__: The name of the post-init method for the model, if defined.
+    __pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+    __pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+    __pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
+
+    __pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
+    __pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
+
+    __pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+        is set to `'allow'`.
+    __pydantic_fields_set__: The names of fields explicitly set during instantiation.
+    __pydantic_private__: Values of private attributes set on the model instance.*
+
+
+# Modeling options validator
+
+---
+
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L70){target="_blank" style="float:right; font-size:smaller"}
+
+### ModelingOptionsParameterValidator
+
+>      ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
+>                                         scav:Literal[0,1], pet_formulation:Lit
+>                                         eral['pt','penman'], rn_formulation:Li
+>                                         teral['linacre','linear'], transpirati
+>                                         on_model:Literal['jarvis','granier'], 
+>                                         time_step_for_evapo:Literal['variable'
+>                                         ,1,2,4,6], resolution_output:Literal['
+>                                         subdaily','daily','yearly'], numerical
+>                                         _scheme:Literal['implicit','semi-
+>                                         implicit','explicit'], output_type:Lit
+>                                         eral['simple','diagnostic','LFMC','for
+>                                         est_diback'], comp_options_for_evapo:L
+>                                         iteral['normal','accurate','fast','cus
+>                                         tom'], stomatal_reg_formulation:Litera
+>                                         l['sigmoid','piecewise_linear','turgor
+>                                         '], year_end:int, year_start:int,
+>                                         custom_small_time_step_in_sec:int,
+>                                         print_prog:bool, defoliation:bool,
+>                                         constant_climate:bool,
+>                                         output_overwrite:bool,
+>                                         transpiration_granier_arg_a:float,
+>                                         transpiration_granier_arg_b:float,
+>                                         transpiration_granier_arg_c:float, lat
+>                                         itude:Annotated[float,Ge(ge=-
+>                                         91),Le(le=91)], longitude:Annotated[fl
+>                                         oat,Ge(ge=-181),Le(le=181)], threshold
+>                                         _mortality:Annotated[float,Ge(ge=0),Le
+>                                         (le=100)])
 
 *!!! abstract "Usage Documentation"
     [Models](../concepts/models.md)

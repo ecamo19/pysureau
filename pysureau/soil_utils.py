@@ -14,7 +14,7 @@ import pandas as pd
 import pandera as pa
 from typing import Dict
 from pathlib import Path, PosixPath
-from pydantic import BaseModel, ValidationError
+from pydantic import ValidationError
 
 # from pandera.typing import Series, DataFrame
 from collections import OrderedDict, defaultdict
@@ -199,12 +199,12 @@ def create_empty_soil_parameter_files(
             'offset_psoil': 'NA',
             'ksat_campbell': 'NA',
             'psoil_at_field_capacity': 'NA',
-            'pedo_transfer_formulation': 'NA',
             'saturation_capacity_campbell': 'NA',
+            'pedo_transfer_formulation': 'NA',
             'soil_formulation': 'campbell',
         }
 
-        # Write to CSV files
+        # Write CSV files
         dict_to_csv(
             dictionary=soil_params_vg,
             path=path,
@@ -269,7 +269,7 @@ def read_soil_file(
         else:
             soil_data_dict[each_key] = float(soil_data_dict[each_key])
 
-    # Validate, raise error if soil data don't follow the Schema ----------------
+    # Validate, raise error if soil_data_dict don't follow the Schema -----------
     if soil_data_dict['soil_formulation'] == 'campbell':
         try:
             SoilParameterValidatorCampbell.model_validate(soil_data_dict)
@@ -344,7 +344,7 @@ def read_soil_file(
     # Return
     return defaultdict(list, soil_data_dict)
 
-# %% ../nbs/01_soil_utils.ipynb 21
+# %% ../nbs/01_soil_utils.ipynb 20
 def convert_vwc_to_sws(
     vwc_x: float,  # Volumetric Water Content m3.m-3
     layer_thickness: float,  # Soil layer thickness in meters?
@@ -354,7 +354,7 @@ def convert_vwc_to_sws(
 
     return vwc_x * (1 - (rfc / 100)) * layer_thickness * 1000
 
-# %% ../nbs/01_soil_utils.ipynb 23
+# %% ../nbs/01_soil_utils.ipynb 22
 def convert_sws_to_vwc(
     sws_x: float,  # Soil Water Stock (mm)
     layer_thickness: float,  # Soil layer thickness in meters?

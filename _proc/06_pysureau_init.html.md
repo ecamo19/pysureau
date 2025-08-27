@@ -10,7 +10,7 @@ title: pysureau init
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L18){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_init.py#L20){target="_blank" style="float:right; font-size:smaller"}
 
 ### pysureau_init
 
@@ -26,9 +26,11 @@ pysureau_init(path='/tmp')
 
 ::: {.cell-output .cell-output-stdout}
 ```
-CSV file saved as /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_vg.csv
-CSV file saved as /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW/1_parameter_files/soil_parameters_campbell.csv
-pysureau project created at /tmp/pysureau_project_ciZ64j6epyCqPxyavomxgW
+CSV parameter file saved at /tmp/pysureau_project_fG7GxSSG/1_parameter_files/soil_parameters_vg.csv
+CSV parameter file saved at /tmp/pysureau_project_fG7GxSSG/1_parameter_files/soil_parameters_campbell.csv
+CSV parameter file saved at /tmp/pysureau_project_fG7GxSSG/1_parameter_files/modeling_options.csv
+CSV parameter file saved at /tmp/pysureau_project_fG7GxSSG/1_parameter_files/vegetation_parameters.csv
+pysureau project created at /tmp/pysureau_project_fG7GxSSG
 ```
 :::
 :::

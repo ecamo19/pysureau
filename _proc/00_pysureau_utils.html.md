@@ -10,7 +10,7 @@ title: pysureau utils functions
 
 ---
 
-[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L14){target="_blank" style="float:right; font-size:smaller"}
+[source](https://github.com/ecamo19/pysureau/blob/master/pysureau/pysureau_utils.py#L383){target="_blank" style="float:right; font-size:smaller"}
 
 ### dict_to_csv
 

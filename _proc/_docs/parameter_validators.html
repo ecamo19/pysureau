@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="AUTHORS: Erick Calderon Morales">
 
 <title>Parameter validators – pysureau</title>
 <style>
@@ -72,10 +71,10 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="Parameter validators – pysureau">
-<meta property="og:description" content="AUTHORS: Erick Calderon Morales">
+<meta property="og:description" content="Reimplementation of the SurEau-Ecos model for python">
 <meta property="og:site_name" content="pysureau">
 <meta name="twitter:title" content="Parameter validators – pysureau">
-<meta name="twitter:description" content="AUTHORS: Erick Calderon Morales">
+<meta name="twitter:description" content="Reimplementation of the SurEau-Ecos model for python">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -132,6 +131,18 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./plant_utils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Plant utils functions</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./modeling_options_utils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Modeling options utils</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./pysureau_init.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">pysureau init</span></a>
   </div>
@@ -157,6 +168,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#soilparametervalidatorcampbell" id="toc-soilparametervalidatorcampbell" class="nav-link" data-scroll-target="#soilparametervalidatorcampbell">SoilParameterValidatorCampbell</a></li>
   <li><a href="#soilparametervalidatorvg" id="toc-soilparametervalidatorvg" class="nav-link" data-scroll-target="#soilparametervalidatorvg">SoilParameterValidatorVg</a></li>
   </ul></li>
+  <li><a href="#modeling-options-validator" id="toc-modeling-options-validator" class="nav-link" data-scroll-target="#modeling-options-validator">Modeling options validator</a>
+  <ul class="collapse">
+  <li><a href="#modelingoptionsparametervalidator" id="toc-modelingoptionsparametervalidator" class="nav-link" data-scroll-target="#modelingoptionsparametervalidator">ModelingOptionsParameterValidator</a></li>
+  </ul></li>
   <li><a href="#climate-data-validator" id="toc-climate-data-validator" class="nav-link" data-scroll-target="#climate-data-validator">Climate data validator</a></li>
   <li><a href="#plant-data-validator" id="toc-plant-data-validator" class="nav-link" data-scroll-target="#plant-data-validator">Plant data Validator</a></li>
   </ul>
@@ -170,11 +185,6 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">Parameter validators</h1>
 </div>
 
-<div>
-  <div class="description">
-    AUTHORS: Erick Calderon Morales
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -246,6 +256,67 @@ __pydantic_private__: Values of private attributes set on the model instance.*</
                            psoil_at_field_capacity:float,
                            pedo_transfer_formulation:str,
                            soil_formulation:str)</code></pre>
+</blockquote>
+<p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
+<p>A base class for creating Pydantic models.</p>
+<p>Attributes: <strong>class_vars</strong>: The names of the class variables defined on the model. <strong>private_attributes</strong>: Metadata about the private attributes of the model. <strong>signature</strong>: The synthesized <code>__init__</code> [<code>Signature</code>][inspect.Signature] of the model.</p>
+<pre><code>__pydantic_complete__: Whether model building is completed, or if there are still undefined fields.
+__pydantic_core_schema__: The core schema of the model.
+__pydantic_custom_init__: Whether the model has a custom `__init__` function.
+__pydantic_decorators__: Metadata containing the decorators defined on the model.
+    This replaces `Model.__validators__` and `Model.__root_validators__` from Pydantic V1.
+__pydantic_generic_metadata__: Metadata for generic models; contains data used for a similar purpose to
+    __args__, __origin__, __parameters__ in typing-module generics. May eventually be replaced by these.
+__pydantic_parent_namespace__: Parent namespace of the model, used for automatic rebuilding of models.
+__pydantic_post_init__: The name of the post-init method for the model, if defined.
+__pydantic_root_model__: Whether the model is a [`RootModel`][pydantic.root_model.RootModel].
+__pydantic_serializer__: The `pydantic-core` `SchemaSerializer` used to dump instances of the model.
+__pydantic_validator__: The `pydantic-core` `SchemaValidator` used to validate instances of the model.
+
+__pydantic_fields__: A dictionary of field names and their corresponding [`FieldInfo`][pydantic.fields.FieldInfo] objects.
+__pydantic_computed_fields__: A dictionary of computed field names and their corresponding [`ComputedFieldInfo`][pydantic.fields.ComputedFieldInfo] objects.
+
+__pydantic_extra__: A dictionary containing extra values, if [`extra`][pydantic.config.ConfigDict.extra]
+    is set to `'allow'`.
+__pydantic_fields_set__: The names of fields explicitly set during instantiation.
+__pydantic_private__: Values of private attributes set on the model instance.*</code></pre>
+</section>
+</section>
+<section id="modeling-options-validator" class="level1">
+<h1>Modeling options validator</h1>
+<hr>
+<p><a href="https://github.com/ecamo19/pysureau/blob/master/pysureau/parameter_validators.py#L70" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="modelingoptionsparametervalidator" class="level3">
+<h3 class="anchored" data-anchor-id="modelingoptionsparametervalidator">ModelingOptionsParameterValidator</h3>
+<blockquote class="blockquote">
+<pre><code> ModelingOptionsParameterValidator (eord:Literal[0,1], lcav:Literal[0,1],
+                                    scav:Literal[0,1], pet_formulation:Lit
+                                    eral['pt','penman'], rn_formulation:Li
+                                    teral['linacre','linear'], transpirati
+                                    on_model:Literal['jarvis','granier'], 
+                                    time_step_for_evapo:Literal['variable'
+                                    ,1,2,4,6], resolution_output:Literal['
+                                    subdaily','daily','yearly'], numerical
+                                    _scheme:Literal['implicit','semi-
+                                    implicit','explicit'], output_type:Lit
+                                    eral['simple','diagnostic','LFMC','for
+                                    est_diback'], comp_options_for_evapo:L
+                                    iteral['normal','accurate','fast','cus
+                                    tom'], stomatal_reg_formulation:Litera
+                                    l['sigmoid','piecewise_linear','turgor
+                                    '], year_end:int, year_start:int,
+                                    custom_small_time_step_in_sec:int,
+                                    print_prog:bool, defoliation:bool,
+                                    constant_climate:bool,
+                                    output_overwrite:bool,
+                                    transpiration_granier_arg_a:float,
+                                    transpiration_granier_arg_b:float,
+                                    transpiration_granier_arg_c:float, lat
+                                    itude:Annotated[float,Ge(ge=-
+                                    91),Le(le=91)], longitude:Annotated[fl
+                                    oat,Ge(ge=-181),Le(le=181)], threshold
+                                    _mortality:Annotated[float,Ge(ge=0),Le
+                                    (le=100)])</code></pre>
 </blockquote>
 <p>*!!! abstract “Usage Documentation” <a href="../concepts/models.md">Models</a></p>
 <p>A base class for creating Pydantic models.</p>

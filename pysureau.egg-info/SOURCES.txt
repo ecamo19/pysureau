@@ -6,6 +6,8 @@ settings.ini
 setup.py
 pysureau/__init__.py
 pysureau/_modidx.py
+pysureau/climate_utils.py
+pysureau/conversions_utils.py
 pysureau/core.py
 pysureau/create_modeling_options.py
 pysureau/data_and_parameter_validators.py

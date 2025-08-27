@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: pysureau
-Version: 0.0.4
+Version: 0.0.5
 Summary: Reimplementation of the SurEau-Ecos model for python
 Home-page: https://github.com/ecamo19/pysureau
 Author: ecamo19

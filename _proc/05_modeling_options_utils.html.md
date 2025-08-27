@@ -44,10 +44,56 @@ title: Modeling options utils
 
 ::: {#cell-4 .cell}
 ``` {.python .cell-code}
-#read_modeling_options_file(
-#    '/tmp/pysureau_project_fG7GxSSG/1_parameter_files/modeling_options.csv'
-#)
+read_modeling_options_file(
+    '/tmp/pysureau_project_8osWFnip/1_parameter_files/modeling_options.csv'
+)
 ```
+
+::: {.cell-output .cell-output-display}
+```
+{'eord': 1,
+ 'lcav': 1,
+ 'scav': 1,
+ 'latitude': 90.0,
+ 'longitude': 80.0,
+ 'year_end': 2000.0,
+ 'year_start': 1900.0,
+ 'time_step_for_evapo': 1,
+ 'threshold_mortality': 90.0,
+ 'transpiration_granier_arg_c': 0.0,
+ 'custom_small_time_step_in_sec': 600.0,
+ 'transpiration_granier_arg_b': 0.134,
+ 'transpiration_granier_arg_a': -0.006,
+ 'print_prog': 'False',
+ 'defoliation': 'False',
+ 'constant_climate': 'False',
+ 'output_overwrite': 'False',
+ 'output_type': 'simple',
+ 'pet_formulation': 'pt',
+ 'rn_formulation': 'linacre',
+ 'numerical_scheme': 'implicit',
+ 'resolution_output': 'subdaily',
+ 'transpiration_model': 'granier',
+ 'comp_options_for_evapo': 'normal',
+ 'stomatal_reg_formulation': 'sigmoid',
+ 'output_path': '/tmp/pysureau_project_8osWFnip/2_model_outputs',
+ 'time': array([ 0,  1,  2,  3,  4,  5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16,
+        17, 18, 19, 20, 21, 22, 23]),
+ 'comp_options': defaultdict(list,
+             {'numerical_scheme': 'implicit',
+              'nsmalltimesteps': array([ 6, 10, 20, 60]),
+              'lsym': 1,
+              'ssym': 1,
+              'clapo': 1,
+              'ctapo': 1,
+              'eord': 1,
+              'lcav': 1,
+              'scav': 1}),
+ 'transpiration_granier_args': defaultdict(list,
+             {'a': -0.006, 'b': 0.134, 'c': 0.0}),
+ 'stop_simulation_dead_plant': 'False'}
+```
+:::
 :::
 
 

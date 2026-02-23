@@ -6,62 +6,14 @@
 This file will become your README and also the index of your
 documentation.
 
-## Developer Guide
+## Install
 
-If you are new to using `nbdev` here are some useful pointers to get you
-started.
-
-### Install pysureau in Development mode
+[Code](https://cuddly-train-pg45gq96vww26wgv.github.dev/)
 
 ``` sh
-# make sure pysureau package is installed in development mode
-$ pip install -e .
-
-# make changes under nbs/ directory
-# ...
-
-# compile to have changes apply to pysureau
-$ nbdev_prepare
+pip install pysureau
 ```
-
-## Usage
-
-### Installation
-
-Install latest from the GitHub
-[repository](https://github.com/ecamo19/pysureau):
-
-``` sh
-$ pip install git+https://github.com/ecamo19/pysureau.git
-```
-
-or from [conda](https://anaconda.org/ecamo19/pysureau)
-
-``` sh
-$ conda install -c ecamo19 pysureau
-```
-
-or from [pypi](https://pypi.org/project/pysureau/)
-
-``` sh
-$ pip install pysureau
-```
-
-### Documentation
-
-Documentation can be found hosted on this GitHub
-[repository](https://github.com/ecamo19/pysureau)’s
-[pages](https://ecamo19.github.io/pysureau/). Additionally you can find
-package manager specific guidelines on
-[conda](https://anaconda.org/ecamo19/pysureau) and
-[pypi](https://pypi.org/project/pysureau/) respectively.
 
 ## How to use
 
-Fill me in please! Don’t forget code examples:
-
-``` python
-1+1
-```
-
-    2
+1)  Run pysureau_init(“path/to/folder”)

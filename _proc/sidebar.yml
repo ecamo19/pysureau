@@ -1,0 +1,13 @@
+website:
+  sidebar:
+    contents:
+      - index.ipynb
+      - 00_pysureau_utils.ipynb
+      - 01_parameter_validators.ipynb
+      - 02_conversions_utils.ipynb
+      - 03_soil_utils.ipynb
+      - 04_plant_utils.ipynb
+      - 05_climate_utils.ipynb
+      - 06_modeling_options_utils.ipynb
+      - 07_pysureau_init.ipynb
+      - 10_prepare_soil_parameters.ipynb

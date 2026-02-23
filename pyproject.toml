@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysureau"
+dynamic = ["version"]
+description = "Python implementation of Sureau"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "Apache-2.0"}
+authors = [{name = "ecamo19", email = "erickcamo19@gmail.com"}]
+keywords = ['nbdev']
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/ecamo19/pysureau"
+Documentation = "https://ecamo19.github.io/pysureau/"
+
+[project.entry-points.nbdev]
+pysureau = "pysureau._modidx:d"
+
+[tool.setuptools.dynamic]
+version = {attr = "pysureau.__version__"}
+
+[tool.setuptools.packages.find]
+include = ["pysureau"]
+
+[tool.nbdev]

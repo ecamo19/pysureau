@@ -1,0 +1,9 @@
+project:
+  output-dir: _docs
+
+website:
+  title: "pysureau"
+  site-url: "https://ecamo19.github.io/pysureau"
+  description: "Python implementation of Sureau"
+  repo-branch: main
+  repo-url: "https://github.com/ecamo19/pysureau"

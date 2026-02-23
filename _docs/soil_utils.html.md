@@ -202,7 +202,7 @@ compute_theta_at_given_p_soil_camp(
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/ecamo19/pysureau/blob/main/pysureau/soil_utils.py#L153"
+href="https://github.com/ecamo19/pysureau/blob/main/pysureau/soil_utils.py#L139"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### create_empty_soil_parameter_files
@@ -221,7 +221,7 @@ parameters*
 ------------------------------------------------------------------------
 
 <a
-href="https://github.com/ecamo19/pysureau/blob/main/pysureau/soil_utils.py#L235"
+href="https://github.com/ecamo19/pysureau/blob/main/pysureau/soil_utils.py#L221"
 target="_blank" style="float:right; font-size:smaller">source</a>
 
 ### read_soil_file

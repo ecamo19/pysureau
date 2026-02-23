@@ -203,7 +203,7 @@ def prepare_soil_parameters(
             },
         )
         
-        # v_ parameters
+        # v_ parameters ---------------------------------------------------------
         soil_parameters_dict['v_field_capacity_vg'] = (
                 collections.defaultdict(
                     list,
@@ -260,13 +260,7 @@ def prepare_soil_parameters(
 
     
     
-    #            # Add v_wilting_point
-    #            soil_parameters_dict['v_wilting_point'] = convert_f_cm3_to_v_mm(
-    #                                                                x=soil_parameters_dict['wilting_point'],
-    #                                                                rfc=soil_parameters_dict['rfc'],
-    #                                                                layer_thickness=soil_parameters_dict['soil_layers_thickness'],
-    #            )
-    
+        # Add v_wilting_point
         soil_parameters_dict['v_wilting_point'] = (
                 collections.defaultdict(
                     list,
@@ -298,167 +292,250 @@ def prepare_soil_parameters(
     #
     #            print('Can soil_params["v_soil_storage_capacity"] be negative?? Ask')
     #
-        # Add new soil params for campbell formulation --------------------------
+    
+    # Add new soil params for campbell formulation ------------------------------
     elif soil_parameters_dict['pedo_transfer_formulation'] == "campbell":
-        pass
-    #
-    #            # Shape parameters of the relationship between soil water content and
-    #            # soil water potential
-    #
-    #            # Shape parameter 1
-    #            soil_parameters_dict['b_campbell'] = np.repeat(soil_parameters_dict['b_camp'], 3)
-    #
-    #
-    #            # Shape parameter 2
-    #            soil_parameters_dict['psie'] = np.repeat(soil_parameters_dict['psie'], 3)
-    #
-    #            # Soil conductivity at saturation (mol/m/s/Mpa)
-    #            # Value not repeated 3 times as the ksat_vg param
-    #            soil_parameters_dict['ksat_campbell'] = soil_parameters_dict['ksat_campbell']
-    #
-    #
-    #            # Fraction of water at saturation capacity (cm3/cm3)
-    #            soil_parameters_dict['saturation_capacity_campbell'] = np.repeat(soil_parameters_dict['saturation_capacity_campbell'], 3)
-    #
-    #            # Add wilting point
-    #            soil_parameters_dict['wilting_point'] = compute_theta_at_given_p_soil_camp(
-    #                                                                                    psi_target=-1.5,
-    #                                                                                    theta_sat=soil_parameters_dict['saturation_capacity_campbell'],
-    #                                                                                    psie=soil_parameters_dict['psie'],
-    #                                                                                    b_camp=soil_parameters_dict['b_campbell'],
-    #            )
-    #
-    #
-    #            # Add field capacity
-    #            soil_parameters_dict['field_capacity'] = compute_theta_at_given_p_soil_camp(
-    #                                                                                    psi_target=soil_parameters_dict['psoil_at_field_capacity'],
-    #                                                                                    theta_sat=soil_parameters_dict['saturation_capacity_campbell'],
-    #                                                                                    psie=soil_parameters_dict['psie'],
-    #                                                                                    b_camp=soil_parameters_dict['b_campbell'],
-    #            )
-    #
-    #
-    #            # Add residual capacity camp,Fraction of residual water  (cm3/cm3)
-    #            soil_parameters_dict['residual_capacity_campbell'] = compute_theta_at_given_p_soil_camp(
-    #                                                                                    psi_target=-100,
-    #                                                                                    theta_sat=soil_parameters_dict['saturation_capacity_campbell'],
-    #                                                                                    psie=soil_parameters_dict['psie'],
-    #                                                                                    b_camp=soil_parameters_dict['b_campbell'],
-    #            )
-    #
-    #
-    #            # Water values
-    #
-    #            # Add v_field_capacity
-    #            soil_parameters_dict['v_field_capacity'] = convert_f_cm3_to_v_mm(
-    #                                                                            x=soil_parameters_dict['field_capacity'],
-    #                                                                            rfc=soil_parameters_dict['rfc'],
-    #                                                                            layer_thickness=soil_parameters_dict['soil_layers_thickness'],
-    #            )
-    #
-    #
-    #            # Add v_saturation_capacity_campbellsoil_params_from_args['n_vg']
-    #            soil_parameters_dict['v_saturation_capacity_campbell'] = convert_f_cm3_to_v_mm(
-    #                                                                                    x=soil_parameters_dict['saturation_capacity_campbell'],
-    #                                                                                    rfc=soil_parameters_dict['rfc'],
-    #                                                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness'],
-    #            )
-    #
-    #            # Add v_residual_capacity_campbell
-    #            soil_parameters_dict['v_residual_capacity_campbell'] = convert_f_cm3_to_v_mm(
-    #                                                                                    x=soil_parameters_dict['residual_capacity_campbell'],
-    #                                                                                    rfc=soil_parameters_dict['rfc'],
-    #                                                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness'],
-    #            )
-    #
-    #            # Add v_wilting_point
-    #            soil_parameters_dict['v_wilting_point'] = convert_f_cm3_to_v_mm(
-    #                                                                            x=soil_parameters_dict['wilting_point'],
-    #                                                                            rfc=soil_parameters_dict['rfc'],
-    #                                                                            layer_thickness=soil_parameters_dict['layer_thickness'],
-    #            )
-    #
-    #            # Duplicate v_saturation_capacity, Don't know why
-    #            soil_parameters_dict['v_saturation_capacity'] = soil_parameters_dict['v_saturation_capacity_campbell']
-    #
-    #            # For diagnostic (TAW)
-    #            soil_parameters_dict['v_soil_storage_capacity_wilt_campbell'] = np.sum(soil_parameters_dict['v_field_capacity']) - np.sum(soil_parameters_dict['v_wilting_point'])
-    #
-    #            soil_parameters_dict['v_soil_storage_capacity_res_campbell'] = np.sum(soil_parameters_dict['v_field_capacity']) - np.sum(soil_parameters_dict['v_residual_capacity_campbell'])
-    #
-    #            soil_parameters_dict['v_soil_storage_capacity'] = soil_parameters_dict['v_soil_storage_capacity_wilt_campbell']
-    #
-    #            print(
-    #                f'Available water capacity Wilting: {soil_parameters_dict["v_soil_storage_capacity_wilt_campbell"]} mm'
-    #            )
-    #            print(
-    #                f'Available water capacity Residual: {soil_parameters_dict["v_soil_storage_capacity_res_campbell"]} mm'
-    #            )
-    #
-    #            print('Can soil_params["v_soil_storage_capacity"] be negative?? Ask')
-    #
-    #    else:
-    #            # f'Option {soil_parameters_dict["pedo_transfer_formulation"]} not recognized.'
-    #            raise ValueError("Failed to create soil parameters from input file")
-    #
+        
+    
+                # Shape parameters of the relationship between soil water content and
+                # soil water potential
+    
+                soil_parameters_dict['b_camp'] = collections.defaultdict(list,{
+                        'layer_1': soil_parameters_dict['b_camp'],
+                        'layer_2': soil_parameters_dict['b_camp'],
+                        'layer_3': soil_parameters_dict['b_camp'],},)
+
+    
+                # Shape parameter 2
+                soil_parameters_dict['psie'] = collections.defaultdict(list,{
+                        'layer_1': soil_parameters_dict['psie'],
+                        'layer_2': soil_parameters_dict['psie'],
+                        'layer_3': soil_parameters_dict['psie'],},)
+
+                # Soil conductivity at saturation (mol/m/s/Mpa)
+                # Value not repeated 3 times as the ksat_vg param
+                soil_parameters_dict['ksat_campbell'] = soil_parameters_dict['ksat_campbell']
+    
+    
+                # Fraction of water at saturation capacity (cm3/cm3)                
+                soil_parameters_dict['saturation_capacity_campbell'] = collections.defaultdict(list,{
+                        'layer_1': soil_parameters_dict['saturation_capacity_campbell'],
+                        'layer_2': soil_parameters_dict['saturation_capacity_campbell'],
+                        'layer_3': soil_parameters_dict['saturation_capacity_campbell'],},)
+                    
+                # Add wilting point ---------------------------------------------
+        
+                soil_parameters_dict['wilting_point'] = collections.defaultdict(
+                    list,{
+                        'layer_1': compute_theta_at_given_p_soil_camp(psi_target=-1.5,
+                                                                      theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_1'],
+                                                                      psie=soil_parameters_dict['psie']['layer_1'],
+                                                                      b_camp=soil_parameters_dict['b_camp']['layer_1'],),
+                          
+                          'layer_2': compute_theta_at_given_p_soil_camp(psi_target=-1.5,
+                                                                        theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_2'],
+                                                                        psie=soil_parameters_dict['psie']['layer_2'],
+                                                                        b_camp=soil_parameters_dict['b_camp']['layer_2'],),
+                          
+                          'layer_3': compute_theta_at_given_p_soil_camp(psi_target=-1.5,
+                                                                        theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_3'],
+                                                                        psie=soil_parameters_dict['psie']['layer_3'],
+                                                                        b_camp=soil_parameters_dict['b_camp']['layer_3'],)},)
+    
+                # Add field capacity --------------------------------------------
+                soil_parameters_dict['field_capacity'] = collections.defaultdict(
+                    list,{
+                        'layer_1': compute_theta_at_given_p_soil_camp(psi_target=soil_parameters_dict['psoil_at_field_capacity'],
+                                                              theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_1'],
+                                                              psie=soil_parameters_dict['psie']['layer_1'],
+                                                              b_camp=soil_parameters_dict['b_camp']['layer_1']),
+                
+                        'layer_2': compute_theta_at_given_p_soil_camp(psi_target=soil_parameters_dict['psoil_at_field_capacity'],
+                                           theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_2'],
+                                           psie=soil_parameters_dict['psie']['layer_2'],
+                                           b_camp=soil_parameters_dict['b_camp']['layer_2']),
+                                   
+                        'layer_3':compute_theta_at_given_p_soil_camp(psi_target=soil_parameters_dict['psoil_at_field_capacity'],
+                                           theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_3'],
+                                           psie=soil_parameters_dict['psie']['layer_3'],
+                                           b_camp=soil_parameters_dict['b_camp']['layer_3'])})
+                #
+                # Add residual capacity camp,Fraction of residual water ---------
+                # (cm3/cm3)
+                soil_parameters_dict['residual_capacity_campbell'] = collections.defaultdict(
+                    list,{'layer_1': compute_theta_at_given_p_soil_camp(psi_target=-100,
+                                                                        theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_1'],
+                                                                        psie=soil_parameters_dict['psie']['layer_1'],
+                                                                        b_camp=soil_parameters_dict['b_camp']['layer_1'],),
+                          
+                          'layer_2': compute_theta_at_given_p_soil_camp(psi_target=-100,
+                                                                      theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_2'],
+                                                                      psie=soil_parameters_dict['psie']['layer_2'],
+                                                                      b_camp=soil_parameters_dict['b_camp']['layer_2'],),          
+                          
+                          'layer_3': compute_theta_at_given_p_soil_camp(psi_target=-100,
+                                                                        theta_sat=soil_parameters_dict['saturation_capacity_campbell']['layer_3'],
+                                                                        psie=soil_parameters_dict['psie']['layer_3'],
+                                                                        b_camp=soil_parameters_dict['b_camp']['layer_3'],)})
+                
+                # Water values v_parameters -------------------------------------
+    
+                # Add v_field_capacity
+                soil_parameters_dict['v_field_capacity'] = collections.defaultdict(
+                    list,{'layer_1': convert_f_to_v(x=soil_parameters_dict['field_capacity']['layer_1'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_1'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_1'],),
+                
+                          'layer_2': convert_f_to_v(x=soil_parameters_dict['field_capacity']['layer_2'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_2'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_2'],),
+                         
+                          'layer_3': convert_f_to_v(x=soil_parameters_dict['field_capacity']['layer_3'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_3'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_3'],)
+                            })
+                
+                # Add v_saturation_capacity_campbellsoil_params_from_args['n_vg']
+                soil_parameters_dict['v_saturation_capacity_campbell'] = collections.defaultdict(
+                    list,{'layer_1':  convert_f_to_v(x=soil_parameters_dict['saturation_capacity_campbell']['layer_1'],
+                                                     rfc=soil_parameters_dict['rfc']['layer_1'],
+                                                     layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_1'],),
+                          
+                          'layer_2':  convert_f_to_v(x=soil_parameters_dict['saturation_capacity_campbell']['layer_2'],
+                                                     rfc=soil_parameters_dict['rfc']['layer_2'],
+                                                     layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_2'],),
+                          
+                          'layer_3':  convert_f_to_v(x=soil_parameters_dict['saturation_capacity_campbell']['layer_3'],
+                                                     rfc=soil_parameters_dict['rfc']['layer_3'],
+                                                     layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_3'],)})
+    
+                # Add v_residual_capacity_campbell
+                
+                soil_parameters_dict['v_residual_capacity_campbell'] = collections.defaultdict(
+                    list,{'layer_1': convert_f_to_v(x=soil_parameters_dict['residual_capacity_campbell']['layer_1'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_1'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_1'],),
+                          
+                          'layer_2': convert_f_to_v(x=soil_parameters_dict['residual_capacity_campbell']['layer_2'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_2'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_2'],), 
+                          
+                          'layer_3': convert_f_to_v(x=soil_parameters_dict['residual_capacity_campbell']['layer_3'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_3'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_3'],)})
+    
+                # Add v_wilting_point
+                soil_parameters_dict['v_wilting_point'] = collections.defaultdict(
+                    list,{'layer_1': convert_f_to_v(x=soil_parameters_dict['wilting_point']['layer_1'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_1'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_1'],),
+                          
+                          'layer_2': convert_f_to_v(x=soil_parameters_dict['wilting_point']['layer_2'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_2'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_2'],),
+                          
+                          'layer_3': convert_f_to_v(x=soil_parameters_dict['wilting_point']['layer_3'],
+                                                    rfc=soil_parameters_dict['rfc']['layer_3'],
+                                                    layer_thickness=soil_parameters_dict['soil_layers_thickness']['layer_3'],)})
+    
+                # Duplicate v_saturation_capacity, Don't know why
+                #soil_parameters_dict['v_saturation_capacity'] = soil_parameters_dict['v_saturation_capacity_campbell']
+    
+                # For diagnostic (TAW)
+                #soil_parameters_dict['v_soil_storage_capacity_wilt_campbell'] = np.sum(soil_parameters_dict['v_field_capacity']) - np.sum(soil_parameters_dict['v_wilting_point'])
+    
+                #soil_parameters_dict['v_soil_storage_capacity_res_campbell'] = np.sum(soil_parameters_dict['v_field_capacity']) - np.sum(soil_parameters_dict['v_residual_capacity_campbell'])
+    
+                #soil_parameters_dict['v_soil_storage_capacity'] = soil_parameters_dict['v_soil_storage_capacity_wilt_campbell']
+    
+                #print(
+                #    f'Available water capacity Wilting: {soil_parameters_dict["v_soil_storage_capacity_wilt_campbell"]} mm'
+                #)
+                
+                #print(
+                #    f'Available water capacity Residual: {soil_parameters_dict["v_soil_storage_capacity_res_campbell"]} mm'
+                #)
+    
+                #print('Can soil_params["v_soil_storage_capacity"] be negative?? Ask')
+    
+    else:
+                # f'Option {soil_parameters_dict["pedo_transfer_formulation"]} not recognized.'
+                raise ValueError("Failed to create soil parameters from input file")
+    
     return soil_parameters_dict
 ```
 
 #### **Example: Create soil parameters**
 
 ``` python
-#prepare_soil_parameters(file_path='/tmp/pysureau_project_bnXyZFMV/1_parameter_files/soil_parameters_vg.csv',)
+from pysureau.pysureau_init import pysureau_init
 ```
 
+``` python
+#pysureau_init('/tmp')
+```
+
+    CSV parameter file saved at /tmp/pysureau_project_he3V99rs/1_parameter_files/soil_parameters_vg.csv
+    CSV parameter file saved at /tmp/pysureau_project_he3V99rs/1_parameter_files/soil_parameters_campbell.csv
+    CSV parameter file saved at /tmp/pysureau_project_he3V99rs/1_parameter_files/modeling_options.csv
+    CSV parameter file saved at /tmp/pysureau_project_he3V99rs/1_parameter_files/vegetation_parameters.csv
+    pysureau project created at /tmp/pysureau_project_he3V99rs
+
+``` python
+prepare_soil_parameters(file_path='/tmp/pysureau_project_he3V99rs/1_parameter_files/soil_parameters_campbell.csv',)
+```
+
+    3.0
+    7.0
+    11.0
+
     defaultdict(list,
-                {'alpha_vg': defaultdict(list,
+                {'b_camp': defaultdict(list,
                              {'layer_1': 1.0, 'layer_2': 1.0, 'layer_3': 1.0}),
                  'g_soil_0': 2.0,
-                 'i_vg': defaultdict(list,
-                             {'layer_1': 3.0, 'layer_2': 3.0, 'layer_3': 3.0}),
-                 'ksat_vg': defaultdict(list,
-                             {'layer_1': 4.0, 'layer_2': 4.0, 'layer_3': 4.0}),
-                 'n_vg': defaultdict(list,
-                             {'layer_1': 5.0, 'layer_2': 5.0, 'layer_3': 5.0}),
-                 'offset_psoil': 6.0,
-                 'pedo_transfer_formulation': 'vg',
-                 'psie': 7.0,
-                 'psie_vg': 8.0,
-                 'psoil_at_field_capacity': 9.0,
+                 'ksat_campbell': 3.0,
+                 'offset_psoil': 4.0,
+                 'pedo_transfer_formulation': 'campbell',
+                 'psie': defaultdict(list,
+                             {'layer_1': -5.0, 'layer_2': -5.0, 'layer_3': -5.0}),
+                 'psie_camp': -0.025,
+                 'psoil_at_field_capacity': 6.0,
                  'psoil_at_wilting_point': 1.5,
-                 'residual_capacity_vg': defaultdict(list,
-                             {'layer_1': 0.098,
-                              'layer_2': 0.098,
-                              'layer_3': 0.098}),
+                 'residual_capacity_campbell': defaultdict(list,
+                             {'layer_1': 200.0,
+                              'layer_2': 200.0,
+                              'layer_3': 200.0}),
                  'reset_swc': True,
+                 'saturation_capacity_campbell': defaultdict(list,
+                             {'layer_1': 10.0, 'layer_2': 10.0, 'layer_3': 10.0}),
                  'soil_evap': True,
-                 'saturation_capacity_vg': defaultdict(list,
-                             {'layer_1': 17.0, 'layer_2': 17.0, 'layer_3': 17.0}),
-                 'soil_formulation': 'vg',
+                 'soil_formulation': 'campbell',
                  'water_soil_transfer': True,
                  'soil_layers_thickness': defaultdict(list,
-                             {'layer_1': 13.0, 'layer_2': 1.0, 'layer_3': 1.0}),
+                             {'layer_1': 11.0, 'layer_2': 1.0, 'layer_3': 1.0}),
                  'rfc': defaultdict(list,
-                             {'layer_1': 10.0, 'layer_2': 11.0, 'layer_3': 12.0}),
+                             {'layer_1': 7.0, 'layer_2': 8.0, 'layer_3': 9.0}),
                  'soil_depth': defaultdict(list,
-                             {'layer_1': 13.0, 'layer_2': 14.0, 'layer_3': 15.0}),
+                             {'layer_1': 11.0, 'layer_2': 12.0, 'layer_3': 13.0}),
                  'wilting_point': defaultdict(list,
-                             {'layer_1': 0.09800000000000034,
-                              'layer_2': 0.09800000000000034,
-                              'layer_3': 0.09800000000000034}),
+                             {'layer_1': 3.0, 'layer_2': 3.0, 'layer_3': 3.0}),
                  'field_capacity': defaultdict(list,
-                             {'layer_1': 0.098,
-                              'layer_2': 0.098,
-                              'layer_3': 0.098}),
-                 'v_field_capacity_vg': defaultdict(list,
-                             {'layer_1': 198900.0,
-                              'layer_2': 15130.0,
-                              'layer_3': 14960.0}),
-                 'v_residual_capacity_vg': defaultdict(list,
-                             {'layer_1': 1146.6000000000001,
-                              'layer_2': 87.22,
-                              'layer_3': 86.24}),
+                             {'layer_1': -12.0,
+                              'layer_2': -12.0,
+                              'layer_3': -12.0}),
+                 'v_field_capacity': defaultdict(list,
+                             {'layer_1': -122760.0,
+                              'layer_2': -11040.000000000002,
+                              'layer_3': -10920.0}),
+                 'v_saturation_capacity_campbell': defaultdict(list,
+                             {'layer_1': 102299.99999999999,
+                              'layer_2': 9200.000000000002,
+                              'layer_3': 9100.0}),
+                 'v_residual_capacity_campbell': defaultdict(list,
+                             {'layer_1': 2046000.0,
+                              'layer_2': 184000.0,
+                              'layer_3': 182000.0}),
                  'v_wilting_point': defaultdict(list,
-                             {'layer_1': 1146.600000000004,
-                              'layer_2': 87.2200000000003,
-                              'layer_3': 86.24000000000031})})
+                             {'layer_1': 30690.0,
+                              'layer_2': 2760.0000000000005,
+                              'layer_3': 2730.0})})

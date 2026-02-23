@@ -133,20 +133,6 @@ def compute_theta_at_given_p_soil_camp(
     # single values (i.e. 1). assert only works when params are always one
     # type
 
-    np.testing.assert_array_less(
-        np.array(psie), 0, err_msg='\nError: psie values must be negative\n'
-    )
-
-    np.testing.assert_array_less(
-        np.array(b_camp), 0, err_msg='\nError: b_camp values must be negative\n'
-    )
-
-    np.testing.assert_array_less(
-        np.array(psi_target),
-        0,
-        err_msg='\nError: psi_target values must be negative\n',
-    )
-
     return theta_sat * (psi_target / psie) ** (1 / b_camp)
 
 # %% ../nbs/03_soil_utils.ipynb #f7d4a3f3

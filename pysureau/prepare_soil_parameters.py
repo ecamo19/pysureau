@@ -16,8 +16,5 @@ from pysureau.soil_utils import (
     compute_theta_at_given_p_soil,
     compute_theta_at_given_p_soil_camp,
 )
-from pysureau.conversions_utils import (
-    convert_vwc_to_sws,
-    convert_f_to_v
-)
+from .conversions_utils import convert_vwc_to_sws, convert_f_to_v
 # from sureau_ecos_py.create_modeling_options import create_modeling_options
